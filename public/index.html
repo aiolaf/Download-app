@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VideoGrab - Download Social Media Videos</title>
+  <meta name="description" content="Download videos from YouTube, TikTok, Instagram, Twitter and Facebook. Free and fast.">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="48" height="48" rx="12" fill="url(#grad)"/>
+          <path d="M16 14v20l18-10L16 14z" fill="white"/>
+          <path d="M30 30l6 6" stroke="white" stroke-width="3" stroke-linecap="round"/>
+          <defs><linearGradient id="grad" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs>
+        </svg>
+        <h1>VideoGrab</h1>
+      </div>
+      <p class="tagline">Download video's van social media - snel en gratis</p>
+    </header>
+
+    <!-- Ad Banner Top -->
+    <div class="ad-slot ad-top" id="ad-top">
+      <div class="ad-placeholder">Advertentie</div>
+    </div>
+
+    <!-- URL Input -->
+    <section class="input-section">
+      <div class="input-wrapper">
+        <input
+          type="url"
+          id="url-input"
+          class="url-input"
+          placeholder="Plak hier je video link..."
+          autocomplete="off"
+        />
+        <button id="download-btn" class="btn-primary">
+          <span class="btn-text">Download</span>
+          <span class="btn-loader hidden">
+            <span class="spinner"></span>
+          </span>
+        </button>
+      </div>
+      <div class="platforms-hint">
+        <span class="platform-badge">YouTube</span>
+        <span class="platform-badge">TikTok</span>
+        <span class="platform-badge">Instagram</span>
+        <span class="platform-badge">Twitter/X</span>
+        <span class="platform-badge">Facebook</span>
+      </div>
+    </section>
+
+    <!-- Error Message -->
+    <div id="error-msg" class="error-msg hidden"></div>
+
+    <!-- Results Section -->
+    <section id="results" class="results hidden">
+      <div class="video-info">
+        <img id="video-thumb" class="video-thumbnail" src="" alt="Video thumbnail" />
+        <div class="video-details">
+          <h2 id="video-title" class="video-title"></h2>
+          <div class="video-meta">
+            <span id="video-uploader" class="meta-item"></span>
+            <span id="video-duration" class="meta-item"></span>
+            <span id="video-platform" class="meta-item platform-tag"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="formats-section">
+        <h3>Kies kwaliteit</h3>
+        <div id="formats-list" class="formats-list"></div>
+      </div>
+    </section>
+
+    <!-- Rewarded Ad Modal -->
+    <div id="ad-modal" class="modal hidden">
+      <div class="modal-overlay"></div>
+      <div class="modal-content">
+        <h3>HD Download ontgrendelen</h3>
+        <p>Bekijk een korte advertentie om HD kwaliteit te downloaden</p>
+        <div id="ad-container" class="ad-container">
+          <div class="ad-placeholder-large">Advertentie wordt geladen...</div>
+        </div>
+        <div class="modal-actions">
+          <button id="watch-ad-btn" class="btn-primary">Bekijk advertentie</button>
+          <button id="close-modal-btn" class="btn-secondary">Annuleren</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ad Banner Bottom -->
+    <div class="ad-slot ad-bottom" id="ad-bottom">
+      <div class="ad-placeholder">Advertentie</div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>VideoGrab is een gratis tool voor persoonlijk gebruik. Gebruikers zijn verantwoordelijk voor naleving van auteursrecht.</p>
+      <p class="supported">Ondersteunde platforms: YouTube, TikTok, Instagram, Twitter/X, Facebook</p>
+    </footer>
+  </div>
+
+  <!-- Toast container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="/js/ui.js"></script>
+  <script src="/js/ads.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>
