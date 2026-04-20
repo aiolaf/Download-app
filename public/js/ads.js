@@ -1,15 +1,11 @@
-// Ad management module
 const AdManager = (() => {
   let adCompleteCallback = null;
   let isAdPlaying = false;
 
   function init() {
-    // In production, initialize Google AdSense and IMA SDK here
-    // For now, we use a simulated ad flow for development
+    // In production: initialize Google AdSense / IMA SDK
   }
 
-  // Simulate watching a rewarded ad
-  // In production, this would use Google IMA SDK
   function showRewardedAd(onComplete, onCancel) {
     const modal = document.getElementById('ad-modal');
     const watchBtn = document.getElementById('watch-ad-btn');
@@ -19,7 +15,6 @@ const AdManager = (() => {
     modal.classList.remove('hidden');
     adCompleteCallback = onComplete;
 
-    // Watch ad button handler
     const handleWatch = () => {
       if (isAdPlaying) return;
       isAdPlaying = true;
@@ -28,25 +23,26 @@ const AdManager = (() => {
       watchBtn.textContent = 'Advertentie wordt afgespeeld...';
 
       adContainer.innerHTML = `
-        <div style="text-align: center; padding: 40px;">
-          <div class="spinner" style="margin: 0 auto 16px;"></div>
-          <p style="color: var(--text-muted);">Advertentie wordt afgespeeld...</p>
+        <div style="text-align: center; padding: 30px 20px; width: 100%;">
+          <div class="spinner" style="margin: 0 auto 20px; width: 32px; height: 32px; border-width: 3px;"></div>
+          <p style="color: var(--text-muted); margin-bottom: 16px;">Advertentie wordt afgespeeld...</p>
           <div class="ad-progress">
             <div class="ad-progress-bar" id="ad-progress-bar"></div>
           </div>
-          <p id="ad-countdown" style="color: var(--text-muted); margin-top: 8px;">5 seconden resterend</p>
+          <p id="ad-countdown" style="color: var(--text-dim); margin-top: 10px; font-size: 0.85rem;">5 seconden resterend</p>
         </div>
       `;
 
-      // Add progress bar styles
-      const style = document.createElement('style');
-      style.textContent = `
-        .ad-progress { width: 100%; height: 4px; background: var(--border); border-radius: 2px; margin-top: 16px; overflow: hidden; }
-        .ad-progress-bar { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); width: 0%; transition: width 1s linear; }
-      `;
-      document.head.appendChild(style);
+      if (!document.getElementById('ad-progress-style')) {
+        const style = document.createElement('style');
+        style.id = 'ad-progress-style';
+        style.textContent = `
+          .ad-progress { width: 100%; height: 6px; background: rgba(148, 163, 184, 0.15); border-radius: 3px; margin-top: 16px; overflow: hidden; }
+          .ad-progress-bar { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent-2)); width: 0%; transition: width 1s linear; border-radius: 3px; }
+        `;
+        document.head.appendChild(style);
+      }
 
-      // Simulate 5-second ad
       let remaining = 5;
       const progressBar = document.getElementById('ad-progress-bar');
       const countdown = document.getElementById('ad-countdown');
@@ -94,5 +90,4 @@ const AdManager = (() => {
   return { init, showRewardedAd };
 })();
 
-// Initialize on load
 AdManager.init();

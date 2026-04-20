@@ -1,20 +1,18 @@
-// Main application logic
 (function () {
   const urlInput = document.getElementById('url-input');
   const downloadBtn = document.getElementById('download-btn');
+  const pasteBtn = document.getElementById('paste-btn');
   const resultsSection = document.getElementById('results');
   const formatsList = document.getElementById('formats-list');
 
   let currentJob = null;
   let hdToken = null;
 
-  // Event listeners
   downloadBtn.addEventListener('click', handleExtract);
   urlInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') handleExtract();
   });
 
-  // Handle paste event for auto-extract
   urlInput.addEventListener('paste', () => {
     setTimeout(() => {
       if (urlInput.value.trim().startsWith('http')) {
@@ -22,6 +20,24 @@
       }
     }, 100);
   });
+
+  if (pasteBtn) {
+    pasteBtn.addEventListener('click', async () => {
+      try {
+        const text = await navigator.clipboard.readText();
+        if (text) {
+          urlInput.value = text;
+          urlInput.focus();
+          if (text.trim().startsWith('http')) {
+            handleExtract();
+          }
+        }
+      } catch {
+        showToast('Kan niet plakken. Klik in het invoerveld en gebruik Cmd/Ctrl+V.', 'error');
+        urlInput.focus();
+      }
+    });
+  }
 
   async function handleExtract() {
     const url = urlInput.value.trim();
@@ -60,14 +76,34 @@
   }
 
   function displayResults(data) {
-    // Set video info
-    document.getElementById('video-thumb').src = data.thumbnail || '';
+    const thumb = document.getElementById('video-thumb');
+    thumb.src = data.thumbnail || '';
+    thumb.onerror = () => {
+      thumb.style.background = 'linear-gradient(135deg, var(--primary), var(--accent-2))';
+    };
+
     document.getElementById('video-title').textContent = data.title;
-    document.getElementById('video-uploader').textContent = data.uploader || '';
-    document.getElementById('video-duration').textContent = formatDuration(data.duration);
+
+    const uploaderEl = document.getElementById('video-uploader');
+    const uploaderSpan = uploaderEl.querySelector('span');
+    if (data.uploader) {
+      uploaderSpan.textContent = data.uploader;
+      uploaderEl.style.display = 'inline-flex';
+    } else {
+      uploaderEl.style.display = 'none';
+    }
+
+    const durationBadge = document.getElementById('video-duration-badge');
+    const duration = formatDuration(data.duration);
+    if (duration) {
+      durationBadge.textContent = duration;
+      durationBadge.style.display = 'inline-block';
+    } else {
+      durationBadge.style.display = 'none';
+    }
+
     document.getElementById('video-platform').textContent = data.platform;
 
-    // Build format buttons
     formatsList.innerHTML = '';
     for (const format of data.formats) {
       const btn = document.createElement('button');
@@ -87,7 +123,6 @@
 
   function handleFormatClick(format) {
     if (format.hd && !hdToken) {
-      // Show rewarded ad for HD
       AdManager.showRewardedAd(
         () => unlockHD(format),
         () => showToast('HD download geannuleerd', 'error')
@@ -130,7 +165,6 @@
 
     showToast(`Download begint: ${format.quality}...`);
 
-    // Trigger download via hidden link
     const a = document.createElement('a');
     a.href = url;
     a.download = '';
