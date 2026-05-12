@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VideoGrab - Download video's van elk social media platform</title>
+  <meta name="description" content="Download video's van YouTube, TikTok, Instagram, Twitter/X en Facebook. Gratis, snel en zonder registratie.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+  --primary-light: rgba(99, 102, 241, 0.15);
+  --accent: #ec4899;
+  --accent-2: #a855f7;
+  --bg: #0a0a14;
+  --bg-card: rgba(26, 26, 46, 0.6);
+  --bg-card-solid: #13132a;
+  --bg-input: rgba(22, 22, 42, 0.8);
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+  --border: rgba(148, 163, 184, 0.12);
+  --border-hover: rgba(148, 163, 184, 0.24);
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-lg: 24px;
+  --shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 60px rgba(99, 102, 241, 0.3);
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.bg-gradient {
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse at top left, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at top right, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom, rgba(168, 85, 247, 0.08) 0%, transparent 60%);
+  z-index: -2;
+}
+
+.bg-orb {
+  position: fixed; border-radius: 50%; filter: blur(100px);
+  opacity: 0.35; z-index: -1; pointer-events: none;
+  animation: float 20s ease-in-out infinite;
+}
+.orb-1 { width: 500px; height: 500px; background: var(--primary); top: -100px; left: -100px; }
+.orb-2 { width: 400px; height: 400px; background: var(--accent); top: 40%; right: -100px; animation-delay: -7s; }
+.orb-3 { width: 350px; height: 350px; background: var(--accent-2); bottom: -100px; left: 30%; animation-delay: -14s; }
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(80px, -50px) scale(1.1); }
+  66% { transform: translate(-50px, 80px) scale(0.95); }
+}
+
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+/* Nav */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  background: rgba(10, 10, 20, 0.6);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1100px; margin: 0 auto; padding: 16px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; color: var(--text);
+  font-weight: 800; font-size: 1.2rem;
+}
+.logo-icon { width: 36px; height: 36px; }
+.nav-links { display: flex; gap: 32px; }
+.nav-links a {
+  color: var(--text-muted); text-decoration: none;
+  font-size: 0.95rem; font-weight: 500; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+
+/* Hero */
+.hero { padding: 80px 0 60px; text-align: center; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--bg-card); backdrop-filter: blur(10px);
+  border: 1px solid var(--border); border-radius: 100px;
+  padding: 8px 16px; font-size: 0.85rem; color: var(--text-muted);
+  margin-bottom: 24px;
+}
+.pulse-dot {
+  width: 8px; height: 8px; background: var(--success);
+  border-radius: 50%; animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  50% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+}
+.hero-title {
+  font-size: clamp(2.2rem, 5.5vw, 4rem);
+  font-weight: 800; line-height: 1.1;
+  letter-spacing: -0.02em; margin-bottom: 20px;
+}
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent-2) 50%, var(--accent) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; background-size: 200% 200%;
+  animation: gradient-shift 6s ease infinite;
+}
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.hero-subtitle {
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  color: var(--text-muted); margin-bottom: 40px; line-height: 1.6;
+}
+
+/* Input */
+.input-section { max-width: 720px; margin: 0 auto; animation: fadeUp 0.6s ease; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.input-wrapper {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg-card); backdrop-filter: blur(20px);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 8px; transition: all 0.3s; box-shadow: var(--shadow);
+}
+.input-wrapper:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--primary-light), var(--shadow-glow);
+}
+.input-icon { color: var(--text-dim); margin-left: 12px; flex-shrink: 0; }
+.url-input {
+  flex: 1; background: transparent; border: none; outline: none;
+  color: var(--text); font-family: var(--font); font-size: 1rem;
+  padding: 12px 8px; min-width: 0;
+}
+.url-input::placeholder { color: var(--text-dim); }
+.btn-icon {
+  background: transparent; border: none; color: var(--text-muted);
+  padding: 10px; border-radius: var(--radius-sm); cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+}
+.btn-icon:hover { background: rgba(148, 163, 184, 0.1); color: var(--text); }
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--accent-2));
+  color: white; border: none; padding: 12px 28px;
+  border-radius: var(--radius-sm); font-family: var(--font);
+  font-size: 0.95rem; font-weight: 600; cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.2s; white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 30px rgba(99, 102, 241, 0.5); }
+.btn-primary:active { transform: translateY(0) scale(0.98); }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.btn-secondary {
+  background: rgba(148, 163, 184, 0.1); color: var(--text);
+  border: 1px solid var(--border); padding: 12px 28px;
+  border-radius: var(--radius-sm); font-family: var(--font);
+  font-size: 0.95rem; font-weight: 500; cursor: pointer; transition: background-color 0.2s;
+}
+.btn-secondary:hover { background: rgba(148, 163, 184, 0.18); }
+.btn-text.hidden, .btn-loader.hidden { display: none; }
+.btn-loader:not(.hidden) { display: inline-flex; }
+.spinner {
+  width: 18px; height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white; border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Platforms */
+.platforms-hint { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }
+.platform-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--bg-card); backdrop-filter: blur(10px);
+  border: 1px solid var(--border); border-radius: 100px;
+  padding: 6px 14px; font-size: 0.8rem; color: var(--text-muted); font-weight: 500;
+}
+.platform-dot { width: 8px; height: 8px; border-radius: 50%; }
+.platform-dot.yt { background: #ff0033; }
+.platform-dot.tt { background: #25f4ee; }
+.platform-dot.ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+.platform-dot.tw { background: #ffffff; }
+.platform-dot.fb { background: #1877f2; }
+
+/* Error */
+.error-msg {
+  max-width: 720px; margin: 20px auto 0;
+  background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5; padding: 14px 18px; border-radius: var(--radius-sm);
+  font-size: 0.9rem; animation: shake 0.4s ease;
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+/* Results */
+.results {
+  max-width: 720px; margin: 32px auto 0;
+  background: var(--bg-card); backdrop-filter: blur(20px);
+  border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: 28px; text-align: left; animation: fadeUp 0.4s ease;
+  box-shadow: var(--shadow);
+}
+.video-info { display: flex; gap: 20px; margin-bottom: 28px; }
+.thumbnail-wrapper {
+  position: relative; width: 220px; flex-shrink: 0;
+  border-radius: var(--radius-sm); overflow: hidden;
+}
+.video-thumbnail { width: 100%; height: 124px; object-fit: cover; display: block; background: var(--bg); }
+.duration-badge {
+  position: absolute; bottom: 8px; right: 8px;
+  background: rgba(0, 0, 0, 0.8); color: white;
+  padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 500;
+}
+.video-details { flex: 1; min-width: 0; }
+.video-title {
+  font-size: 1.15rem; font-weight: 600; line-height: 1.4; margin: 8px 0 12px;
+  overflow: hidden; text-overflow: ellipsis;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+}
+.video-meta { display: flex; flex-wrap: wrap; gap: 12px; }
+.meta-item { display: inline-flex; align-items: center; gap: 6px; color: var(--text-muted); font-size: 0.85rem; }
+.platform-tag {
+  display: inline-block; background: var(--primary-light); color: #a5b4fc;
+  padding: 4px 12px; border-radius: 100px; font-weight: 600; font-size: 0.7rem;
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.formats-title {
+  font-size: 0.85rem; font-weight: 600; margin-bottom: 14px;
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em;
+}
+.formats-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.format-btn {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 16px 10px; border-radius: var(--radius-sm); border: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.2); color: var(--text); cursor: pointer;
+  transition: all 0.2s; position: relative; font-family: var(--font); overflow: hidden;
+}
+.format-btn::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--primary-light), transparent);
+  opacity: 0; transition: opacity 0.2s;
+}
+.format-btn:hover { border-color: var(--primary); transform: translateY(-2px); }
+.format-btn:hover::before { opacity: 1; }
+.format-btn .quality { font-size: 1.3rem; font-weight: 800; position: relative; z-index: 1; }
+.format-btn .size { font-size: 0.75rem; color: var(--text-dim); margin-top: 4px; position: relative; z-index: 1; }
+.format-btn .hd-badge {
+  position: absolute; top: 6px; right: 6px;
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  color: white; font-size: 0.6rem; font-weight: 800;
+  padding: 2px 7px; border-radius: 4px; letter-spacing: 0.05em;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4); z-index: 2;
+}
+.format-btn.is-hd { border-color: rgba(245, 158, 11, 0.3); }
+.format-btn.is-hd:hover { border-color: var(--warning); }
+.formats-hint-text { display: flex; align-items: center; gap: 8px; margin-top: 16px; color: var(--text-dim); font-size: 0.8rem; }
+
+/* Ad slot */
+.ad-slot { padding: 24px 0; }
+.ad-placeholder {
+  background: var(--bg-card); backdrop-filter: blur(10px);
+  border: 1px dashed var(--border); border-radius: var(--radius);
+  padding: 28px 40px; color: var(--text-dim); font-size: 0.8rem;
+  text-align: center; letter-spacing: 0.1em; text-transform: uppercase;
+}
+
+/* Sections */
+.section { padding: 80px 0; }
+.section-alt {
+  background: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+}
+.section-header { text-align: center; margin-bottom: 56px; }
+.eyebrow {
+  display: inline-block; color: var(--primary); font-size: 0.85rem;
+  font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px;
+}
+.section-title { font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 800; letter-spacing: -0.02em; }
+
+/* Steps */
+.steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+.step-card {
+  position: relative; background: var(--bg-card); backdrop-filter: blur(20px);
+  border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: 32px 28px; transition: all 0.3s;
+}
+.step-card:hover { transform: translateY(-4px); border-color: var(--border-hover); }
+.step-number {
+  position: absolute; top: -16px; left: 28px; width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--primary), var(--accent-2));
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.95rem; box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
+}
+.step-icon {
+  width: 56px; height: 56px; background: var(--primary-light);
+  border-radius: var(--radius-sm); display: flex; align-items: center;
+  justify-content: center; color: var(--primary); margin-bottom: 20px; margin-top: 8px;
+}
+.step-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; }
+.step-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+
+/* Features */
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.feature-card {
+  background: var(--bg-card); backdrop-filter: blur(20px);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 28px; transition: all 0.3s;
+}
+.feature-card:hover { transform: translateY(-3px); border-color: var(--border-hover); }
+.feature-icon {
+  width: 48px; height: 48px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(236, 72, 153, 0.2));
+  border-radius: var(--radius-sm); display: flex; align-items: center;
+  justify-content: center; color: var(--primary); margin-bottom: 18px;
+}
+.feature-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+.feature-card p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; }
+
+/* FAQ */
+.faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.faq-item {
+  background: var(--bg-card); backdrop-filter: blur(20px);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  overflow: hidden; transition: border-color 0.2s;
+}
+.faq-item:hover { border-color: var(--border-hover); }
+.faq-item summary {
+  padding: 20px 24px; cursor: pointer; display: flex; align-items: center;
+  justify-content: space-between; gap: 16px; font-weight: 600; font-size: 1rem; list-style: none;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-arrow { color: var(--text-muted); transition: transform 0.3s; flex-shrink: 0; }
+.faq-item[open] .faq-arrow { transform: rotate(180deg); color: var(--primary); }
+.faq-item p { padding: 0 24px 20px; color: var(--text-muted); line-height: 1.6; font-size: 0.95rem; }
+
+/* Modal */
+.modal {
+  position: fixed; inset: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: center;
+  animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.modal-overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); }
+.modal-content {
+  position: relative; background: var(--bg-card-solid);
+  border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: 36px; max-width: 480px; width: 90%; text-align: center;
+  box-shadow: var(--shadow); animation: modalIn 0.3s ease;
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.modal-icon {
+  width: 64px; height: 64px; margin: 0 auto 20px;
+  background: linear-gradient(135deg, var(--primary), var(--accent-2));
+  border-radius: var(--radius); display: flex; align-items: center;
+  justify-content: center; color: white; box-shadow: var(--shadow-glow);
+}
+.modal-content h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 10px; }
+.modal-content p { color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem; }
+.ad-container { margin: 20px 0; min-height: 220px; display: flex; align-items: center; justify-content: center; }
+.ad-placeholder-large {
+  background: rgba(0, 0, 0, 0.4); border: 1px dashed var(--border);
+  border-radius: var(--radius-sm); padding: 60px 40px; color: var(--text-dim);
+  font-size: 0.85rem; width: 100%;
+}
+.modal-actions { display: flex; gap: 10px; justify-content: center; }
+.ad-progress { width: 100%; height: 6px; background: rgba(148, 163, 184, 0.15); border-radius: 3px; margin-top: 16px; overflow: hidden; }
+.ad-progress-bar { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent-2)); width: 0%; transition: width 1s linear; border-radius: 3px; }
+
+/* Toast */
+.toast-container {
+  position: fixed; bottom: 24px; right: 24px; z-index: 2000;
+  display: flex; flex-direction: column; gap: 10px; max-width: calc(100% - 48px);
+}
+.toast {
+  background: var(--bg-card-solid); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 14px 20px; box-shadow: var(--shadow);
+  animation: slideIn 0.3s ease; max-width: 360px; font-size: 0.9rem;
+  display: flex; align-items: center; gap: 10px;
+}
+.toast.success { border-color: rgba(16, 185, 129, 0.3); }
+.toast.error { border-color: rgba(239, 68, 68, 0.3); color: #fca5a5; }
+@keyframes slideIn {
+  from { transform: translateX(120%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Footer */
+.footer {
+  background: rgba(0, 0, 0, 0.4); border-top: 1px solid var(--border);
+  padding: 60px 0 24px; margin-top: 40px;
+}
+.footer-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 48px; margin-bottom: 40px; }
+.footer-brand p { color: var(--text-muted); margin-top: 12px; font-size: 0.9rem; max-width: 280px; }
+.footer-links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.footer-links h4 {
+  font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--text-muted); margin-bottom: 16px; font-weight: 600;
+}
+.footer-links a { display: block; color: var(--text-dim); text-decoration: none; font-size: 0.9rem; padding: 4px 0; transition: color 0.2s; }
+.footer-links a:hover { color: var(--text); }
+.footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; text-align: center; }
+.footer-bottom p { color: var(--text-dim); font-size: 0.85rem; }
+
+.hidden { display: none !important; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hero { padding: 48px 0 40px; }
+  .input-wrapper { flex-wrap: wrap; }
+  .btn-primary { width: 100%; order: 10; padding: 14px; }
+  .url-input { min-width: 0; flex: 1; }
+  .btn-icon { order: 5; }
+  .video-info { flex-direction: column; gap: 16px; }
+  .thumbnail-wrapper { width: 100%; }
+  .video-thumbnail { height: auto; aspect-ratio: 16/9; }
+  .formats-list { grid-template-columns: repeat(2, 1fr); }
+  .modal-content { padding: 24px; }
+  .modal-actions { flex-direction: column-reverse; }
+  .modal-actions button { width: 100%; }
+  .section { padding: 56px 0; }
+  .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+  .footer-links { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .hero-badge { font-size: 0.75rem; }
+  .platforms-hint { gap: 6px; }
+  .platform-pill { font-size: 0.75rem; padding: 5px 10px; }
+  .results { padding: 20px; }
+}
+  </style>
+</head>
+<body>
+  <div class="bg-gradient"></div>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <svg class="logo-icon" viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="12" fill="url(#g1)"/><path d="M16 14v20l18-10L16 14z" fill="#fff"/><path d="M30 30l6 6" stroke="#fff" stroke-width="3" stroke-linecap="round"/><defs><linearGradient id="g1" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#ec4899"/></linearGradient></defs></svg>
+        <span>VideoGrab</span>
+      </a>
+      <div class="nav-links">
+        <a href="#how-it-works">Hoe het werkt</a>
+        <a href="#features">Features</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-badge"><span class="pulse-dot"></span><span>100% gratis &amp; zonder registratie</span></div>
+        <h1 class="hero-title">Download elke video<br><span class="gradient-text">in seconden</span></h1>
+        <p class="hero-subtitle">Plak een link van YouTube, TikTok, Instagram, Twitter/X of Facebook<br>en download de video direct naar je apparaat.</p>
+
+        <div class="input-section">
+          <div class="input-wrapper">
+            <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            <input type="url" id="url-input" class="url-input" placeholder="Plak hier je video link..." autocomplete="off" spellcheck="false">
+            <button id="paste-btn" class="btn-icon" title="Plakken"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg></button>
+            <button id="download-btn" class="btn-primary"><span class="btn-text">Download</span><span class="btn-loader hidden"><span class="spinner"></span></span></button>
+          </div>
+          <div class="platforms-hint">
+            <span class="platform-pill"><span class="platform-dot yt"></span>YouTube</span>
+            <span class="platform-pill"><span class="platform-dot tt"></span>TikTok</span>
+            <span class="platform-pill"><span class="platform-dot ig"></span>Instagram</span>
+            <span class="platform-pill"><span class="platform-dot tw"></span>X / Twitter</span>
+            <span class="platform-pill"><span class="platform-dot fb"></span>Facebook</span>
+          </div>
+        </div>
+
+        <div id="error-msg" class="error-msg hidden"></div>
+
+        <section id="results" class="results hidden">
+          <div class="video-info">
+            <div class="thumbnail-wrapper">
+              <img id="video-thumb" class="video-thumbnail" src="" alt="Video thumbnail">
+              <span id="video-duration-badge" class="duration-badge"></span>
+            </div>
+            <div class="video-details">
+              <span id="video-platform" class="platform-tag"></span>
+              <h2 id="video-title" class="video-title"></h2>
+              <div class="video-meta">
+                <span id="video-uploader" class="meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span></span></span>
+              </div>
+            </div>
+          </div>
+          <div class="formats-section">
+            <h3 class="formats-title">Kies kwaliteit</h3>
+            <div id="formats-list" class="formats-list"></div>
+            <p class="formats-hint-text"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>HD kwaliteit ontgrendelen door een korte advertentie te bekijken</p>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <div class="ad-slot"><div class="container"><div class="ad-placeholder"><span>Advertentie</span></div></div></div>
+
+    <section id="how-it-works" class="section">
+      <div class="container">
+        <div class="section-header"><span class="eyebrow">Zo werkt het</span><h2 class="section-title">In drie simpele stappen</h2></div>
+        <div class="steps-grid">
+          <div class="step-card"><div class="step-number">1</div><div class="step-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg></div><h3>Kopieer de link</h3><p>Kopieer de URL van de video die je wilt downloaden, van elk ondersteund platform.</p></div>
+          <div class="step-card"><div class="step-number">2</div><div class="step-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h3>Plak &amp; kies kwaliteit</h3><p>Plak de link in VideoGrab en selecteer de gewenste video-kwaliteit.</p></div>
+          <div class="step-card"><div class="step-number">3</div><div class="step-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div><h3>Download direct</h3><p>Je video wordt onmiddellijk opgeslagen naar je apparaat. Geen registratie nodig.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="section section-alt">
+      <div class="container">
+        <div class="section-header"><span class="eyebrow">Waarom VideoGrab</span><h2 class="section-title">Alles wat je nodig hebt</h2></div>
+        <div class="features-grid">
+          <div class="feature-card"><div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg></div><h3>Bliksemsnel</h3><p>Geoptimaliseerde servers zorgen voor razendsnelle downloads zonder wachttijd.</p></div>
+          <div class="feature-card"><div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Veilig &amp; anoniem</h3><p>Geen registratie, geen tracking. Je URL en video worden automatisch verwijderd.</p></div>
+          <div class="feature-card"><div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><h3>HD kwaliteit</h3><p>Download in resoluties tot 1080p en hoger, inclusief volledige audio.</p></div>
+          <div class="feature-card"><div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div><h3>Werkt overal</h3><p>Desktop, tablet of mobiel — VideoGrab werkt naadloos op elk apparaat.</p></div>
+          <div class="feature-card"><div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h3>100% gratis</h3><p>Onbeperkt downloaden, zonder abonnement of verborgen kosten.</p></div>
+          <div class="feature-card"><div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div><h3>Dark mode</h3><p>Prachtig donker ontwerp dat rustig is voor je ogen, dag en nacht.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section">
+      <div class="container">
+        <div class="section-header"><span class="eyebrow">Veelgestelde vragen</span><h2 class="section-title">Heb je een vraag?</h2></div>
+        <div class="faq-list">
+          <details class="faq-item"><summary><span>Is VideoGrab gratis?</span><svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><p>Ja, VideoGrab is volledig gratis. We worden ondersteund door advertenties, dus je kunt onbeperkt video's downloaden zonder abonnement.</p></details>
+          <details class="faq-item"><summary><span>Welke platforms worden ondersteund?</span><svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><p>We ondersteunen YouTube, TikTok, Instagram (Reels, Posts), Twitter/X en Facebook. Plak gewoon de link en wij regelen de rest.</p></details>
+          <details class="faq-item"><summary><span>Waarom moet ik een advertentie bekijken voor HD?</span><svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><p>HD downloads verbruiken meer bandbreedte en serverkracht. Door kort een advertentie te bekijken help je ons de service gratis te houden voor iedereen.</p></details>
+          <details class="faq-item"><summary><span>Worden mijn downloads opgeslagen?</span><svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><p>Nee. We verwijderen automatisch alle bestanden na 30 minuten van onze servers. We loggen geen URLs of persoonlijke gegevens.</p></details>
+          <details class="faq-item"><summary><span>Mag ik deze video's gebruiken?</span><svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><p>VideoGrab is bedoeld voor persoonlijk gebruik. Je bent zelf verantwoordelijk voor het respecteren van auteursrecht en de voorwaarden van het oorspronkelijke platform.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <div id="ad-modal" class="modal hidden">
+      <div class="modal-overlay"></div>
+      <div class="modal-content">
+        <div class="modal-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div>
+        <h3>HD Download ontgrendelen</h3>
+        <p>Bekijk een korte advertentie om HD kwaliteit te downloaden</p>
+        <div id="ad-container" class="ad-container"><div class="ad-placeholder-large">Advertentie wordt geladen...</div></div>
+        <div class="modal-actions">
+          <button id="close-modal-btn" class="btn-secondary">Annuleren</button>
+          <button id="watch-ad-btn" class="btn-primary">Bekijk advertentie</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="nav-logo"><svg class="logo-icon" viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="12" fill="url(#g2)"/><path d="M16 14v20l18-10L16 14z" fill="#fff"/><path d="M30 30l6 6" stroke="#fff" stroke-width="3" stroke-linecap="round"/><defs><linearGradient id="g2" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#ec4899"/></linearGradient></defs></svg><span>VideoGrab</span></div>
+          <p>De snelste manier om video's te downloaden van social media.</p>
+        </div>
+        <div class="footer-links">
+          <div><h4>Product</h4><a href="#how-it-works">Hoe het werkt</a><a href="#features">Features</a><a href="#faq">FAQ</a></div>
+          <div><h4>Platforms</h4><a href="#">YouTube</a><a href="#">TikTok</a><a href="#">Instagram</a><a href="#">X / Twitter</a><a href="#">Facebook</a></div>
+          <div><h4>Juridisch</h4><a href="#">Voorwaarden</a><a href="#">Privacy</a><a href="#">Disclaimer</a></div>
+        </div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2026 VideoGrab. Tool voor persoonlijk gebruik. Respecteer auteursrecht.</p></div>
+    </div>
+  </footer>
+
+  <div id="toast-container" class="toast-container"></div>
+
+<script>
+// ——— UI Helpers ———
+function showError(msg) { const e = document.getElementById('error-msg'); e.textContent = msg; e.classList.remove('hidden'); }
+function hideError() { document.getElementById('error-msg').classList.add('hidden'); }
+function showLoading(b) { b.disabled = true; b.querySelector('.btn-text').classList.add('hidden'); b.querySelector('.btn-loader').classList.remove('hidden'); }
+function hideLoading(b) { b.disabled = false; b.querySelector('.btn-text').classList.remove('hidden'); b.querySelector('.btn-loader').classList.add('hidden'); }
+function showToast(msg, type = 'success') {
+  const c = document.getElementById('toast-container'), t = document.createElement('div');
+  t.className = 'toast ' + type;
+  const ico = type === 'success'
+    ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>'
+    : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>';
+  t.innerHTML = ico + '<span>' + msg + '</span>';
+  c.appendChild(t);
+  setTimeout(() => { t.style.transition = 'opacity .3s, transform .3s'; t.style.opacity = '0'; t.style.transform = 'translateX(120%)'; setTimeout(() => t.remove(), 300); }, 4000);
+}
+function formatDuration(s) {
+  if (!s) return '';
+  const h = Math.floor(s/3600), m = Math.floor((s%3600)/60), sec = Math.floor(s%60);
+  return h > 0 ? h+':'+String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0') : m+':'+String(sec).padStart(2,'0');
+}
+function formatFileSize(b) {
+  if (!b) return '';
+  if (b < 1048576) return (b/1024).toFixed(0)+' KB';
+  if (b < 1073741824) return (b/1048576).toFixed(1)+' MB';
+  return (b/1073741824).toFixed(2)+' GB';
+}
+
+// ——— Demo Backend ———
+const API_BASE = (location.protocol === 'file:') ? null : '';
+
+async function apiExtract(url) {
+  if (API_BASE !== null) {
+    const r = await fetch(API_BASE + '/api/extract', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({url}) });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || 'Fout');
+    return d;
+  }
+  await new Promise(r => setTimeout(r, 1200));
+  const u = url.toLowerCase();
+  let platform = 'youtube';
+  if (u.includes('tiktok')) platform = 'tiktok';
+  else if (u.includes('instagram')) platform = 'instagram';
+  else if (u.includes('twitter') || u.includes('x.com')) platform = 'twitter';
+  else if (u.includes('facebook') || u.includes('fb.watch')) platform = 'facebook';
+  return {
+    id: 'demo' + Date.now().toString(36),
+    platform,
+    title: 'Prachtige natuur drone beelden — berglandschap bij zonsondergang in 4K',
+    thumbnail: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&auto=format&fit=crop&q=80',
+    duration: 212,
+    uploader: 'NatuurFilms NL',
+    formats: [
+      { quality:'360p', format_id:'demo360', ext:'mp4', filesize:15000000, hd:false },
+      { quality:'480p', format_id:'demo480', ext:'mp4', filesize:28000000, hd:false },
+      { quality:'720p', format_id:'demo720', ext:'mp4', filesize:65000000, hd:true },
+      { quality:'1080p', format_id:'demo1080', ext:'mp4', filesize:120000000, hd:true }
+    ]
+  };
+}
+
+async function apiUnlockHD(id) {
+  if (API_BASE !== null) {
+    const r = await fetch(API_BASE + '/api/unlock-hd', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({id}) });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || 'Fout');
+    return d;
+  }
+  await new Promise(r => setTimeout(r, 300));
+  return { hdToken:'demo-token' };
+}
+
+// ——— Ad Manager ———
+const AdManager = (() => {
+  let cb = null, playing = false;
+  function showRewardedAd(onComplete, onCancel) {
+    const modal = document.getElementById('ad-modal'), watchBtn = document.getElementById('watch-ad-btn'),
+          closeBtn = document.getElementById('close-modal-btn'), adC = document.getElementById('ad-container');
+    modal.classList.remove('hidden'); cb = onComplete;
+    watchBtn.onclick = () => {
+      if (playing) return; playing = true;
+      watchBtn.disabled = true; watchBtn.textContent = 'Advertentie wordt afgespeeld...';
+      adC.innerHTML = '<div style="text-align:center;padding:30px 20px;width:100%"><div class="spinner" style="margin:0 auto 20px;width:32px;height:32px;border-width:3px"></div><p style="color:var(--text-muted);margin-bottom:16px">Advertentie wordt afgespeeld...</p><div class="ad-progress"><div class="ad-progress-bar" id="ad-progress-bar"></div></div><p id="ad-countdown" style="color:var(--text-dim);margin-top:10px;font-size:.85rem">5 seconden resterend</p></div>';
+      let rem = 5;
+      const t = setInterval(() => { rem--; const p = ((5-rem)/5)*100; const bar = document.getElementById('ad-progress-bar'); const cd = document.getElementById('ad-countdown'); if(bar)bar.style.width=p+'%'; if(cd)cd.textContent=rem+' seconden resterend'; if(rem<=0){clearInterval(t);playing=false;close();if(cb){cb();cb=null;}} }, 1000);
+    };
+    closeBtn.onclick = () => { if(playing)return; close(); if(onCancel)onCancel(); };
+    function close() {
+      modal.classList.add('hidden'); playing=false; watchBtn.disabled=false; watchBtn.textContent='Bekijk advertentie';
+      adC.innerHTML='<div class="ad-placeholder-large">Advertentie wordt geladen...</div>';
+    }
+  }
+  return { showRewardedAd };
+})();
+
+// ——— App ———
+(function() {
+  const urlInput = document.getElementById('url-input'), dlBtn = document.getElementById('download-btn'),
+        pasteBtn = document.getElementById('paste-btn'), results = document.getElementById('results'),
+        fmtList = document.getElementById('formats-list');
+  let job = null, hdToken = null;
+
+  dlBtn.addEventListener('click', extract);
+  urlInput.addEventListener('keydown', e => { if(e.key==='Enter') extract(); });
+  urlInput.addEventListener('paste', () => setTimeout(() => { if(urlInput.value.trim().startsWith('http')) extract(); }, 100));
+  if(pasteBtn) pasteBtn.addEventListener('click', async () => {
+    try { const t = await navigator.clipboard.readText(); if(t){urlInput.value=t;urlInput.focus();if(t.trim().startsWith('http'))extract();} }
+    catch { showToast('Plak handmatig met Cmd+V','error'); urlInput.focus(); }
+  });
+
+  async function extract() {
+    const url = urlInput.value.trim();
+    if(!url){showError('Plak een video link om te beginnen');return;}
+    hideError(); results.classList.add('hidden'); job=null; hdToken=null; showLoading(dlBtn);
+    try { job = await apiExtract(url); show(job); }
+    catch(e) { showError(e.message || 'Er is iets misgegaan'); }
+    finally { hideLoading(dlBtn); }
+  }
+
+  function show(d) {
+    const thumb = document.getElementById('video-thumb');
+    thumb.src = d.thumbnail||''; thumb.onerror = () => { thumb.style.background='linear-gradient(135deg,var(--primary),var(--accent-2))'; };
+    document.getElementById('video-title').textContent = d.title;
+    const up = document.getElementById('video-uploader'), sp = up.querySelector('span');
+    if(d.uploader){sp.textContent=d.uploader;up.style.display='inline-flex';}else{up.style.display='none';}
+    const dur = document.getElementById('video-duration-badge'), ds = formatDuration(d.duration);
+    if(ds){dur.textContent=ds;dur.style.display='inline-block';}else{dur.style.display='none';}
+    document.getElementById('video-platform').textContent = d.platform;
+    fmtList.innerHTML = '';
+    d.formats.forEach(f => {
+      const b = document.createElement('button');
+      b.className = 'format-btn' + (f.hd?' is-hd':'');
+      b.innerHTML = '<span class="quality">'+f.quality+'</span>'
+        + (f.filesize?'<span class="size">'+formatFileSize(f.filesize)+'</span>':'')
+        + (f.hd?'<span class="hd-badge">HD</span>':'');
+      b.onclick = () => pick(f);
+      fmtList.appendChild(b);
+    });
+    results.classList.remove('hidden');
+    results.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+
+  function pick(f) {
+    if(f.hd && !hdToken) { AdManager.showRewardedAd(() => unlock(f), () => showToast('HD download geannuleerd','error')); }
+    else dl(f);
+  }
+
+  async function unlock(f) {
+    try { const d = await apiUnlockHD(job.id); hdToken=d.hdToken; showToast('HD ontgrendeld! Download begint...'); dl(f); }
+    catch { showToast('Er is iets misgegaan','error'); }
+  }
+
+  function dl(f) {
+    if(!job) return;
+    if(API_BASE === null) { showToast('Demo: '+f.quality+' download zou nu starten'); return; }
+    let u = '/api/download/'+job.id+'?format_id='+encodeURIComponent(f.format_id);
+    if(f.hd&&hdToken) u += '&token='+encodeURIComponent(hdToken);
+    showToast('Download begint: '+f.quality+'...');
+    const a = document.createElement('a'); a.href=u; a.download=''; document.body.appendChild(a); a.click(); a.remove();
+  }
+})();
+</script>
+</body>
+</html>
