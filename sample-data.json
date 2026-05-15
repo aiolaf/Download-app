@@ -1,62 +1,262 @@
 {
-  "EMAIL_TITLE": "Welkom bij NinA AI — laat ons je workflow automatiseren",
-  "PREHEADER": "Een nieuw tijdperk van AI-gedreven groei begint vandaag.",
+  "EMAIL_TITLE": "NinA AI — De staat van AI in NL · Q2 2026",
+  "PREHEADER": "Onze impact in cijfers + 3 nieuwe inzichten van het lab — open binnen 30 sec.",
 
   "SHOW_HEADER": true,
   "LOGO_URL": "https://nina-ai.nl/logo.png",
   "LOGO_ALT": "NinA AI logo",
   "LOGO_HREF": "https://nina-ai.nl",
-  "TAGLINE": "AI AGENCY · AMSTERDAM",
+  "TAGLINE": "AI AGENCY · AMSTERDAM · EST. 2024",
+
+  "SHOW_PRESS_BAR": true,
+  "PRESS_BAR_LABEL": "FEATURED IN",
+  "PRESS_LOGOS": [
+    { "URL": "https://via.placeholder.com/120x32/0c0e18/a6a6a6?text=Forbes", "ALT": "Forbes", "HREF": "" },
+    { "URL": "https://via.placeholder.com/120x32/0c0e18/a6a6a6?text=TechCrunch", "ALT": "TechCrunch", "HREF": "" },
+    { "URL": "https://via.placeholder.com/120x32/0c0e18/a6a6a6?text=FD", "ALT": "Financieele Dagblad", "HREF": "" },
+    { "URL": "https://via.placeholder.com/120x32/0c0e18/a6a6a6?text=NRC", "ALT": "NRC", "HREF": "" }
+  ],
 
   "SHOW_HERO": true,
-  "HERO_TITLE": "AI die voor jouw business werkt.",
-  "HERO_BODY": "Wij bouwen op maat gemaakte AI-agents die je sales, support en operations naar een hoger niveau tillen. Geen hype, alleen meetbare resultaten.",
+  "HERO_EYEBROW": "ISSUE #07 · DE TOEKOMST VAN AI",
+  "HERO_GRADIENT_TITLE": true,
+  "HERO_TITLE": "AI is geen tool. Het is je nieuwe besturingssysteem.",
+  "HERO_GREETING": "Hoi {{FIRST_NAME}},",
+  "HERO_BODY": "Vorige maand schreven we over agents die je workflow overnemen. Deze maand laten we zien <strong>welke bedrijven het al doen</strong>, en — belangrijker — hoeveel ze ermee verdienen. Pak een koffie, dit is de meest gelezen editie tot nu toe.",
   "HERO_IMAGE_URL": "",
   "HERO_IMAGE_ALT": "Dashboard van een NinA AI agent",
 
+  "SHOW_STATS": true,
+  "STATS_HEADING": "Onze impact in cijfers",
+  "STATS_SUBHEADING": "Gemiddelden over 48 klanten · laatste 12 maanden",
+  "STATS": [
+    { "VALUE": "312%", "LABEL": "Gem. ROI binnen 6 maanden" },
+    { "VALUE": "30d", "LABEL": "Van kick-off tot productie" },
+    { "VALUE": "48", "LABEL": "Klanten in 9 landen" }
+  ],
+
+  "SHOW_MANIFESTO": true,
+  "MANIFESTO_LABEL": "ONZE OVERTUIGING",
+  "MANIFESTO_TEXT": "De winnaars van het volgende decennium worden niet bepaald door wie het meeste model traint, maar door wie ze het beste inzet.",
+  "MANIFESTO_ATTRIBUTION": "Nina Smit, Founder",
+
   "SHOW_CONTENT": true,
+  "CONTENT_NUMBERED": true,
   "CONTENT_BLOCKS": [
     {
-      "HEADING": "Waarom NinA?",
-      "BODY": "We combineren strategie, engineering en design in één team. Binnen 30 dagen draait er een werkende AI-pilot in jouw stack — geconnect met je CRM, je data en je tone of voice."
+      "HEADING": "Agents nemen het over",
+      "BODY": "Wat begon als chatbots is geëvolueerd naar autonome agents die zelf taken plannen, tools aanroepen en code uitvoeren. <strong>43% van onze klanten</strong> heeft inmiddels een agent live die zonder menselijke goedkeuring tot €5K per transactie mag handelen."
     },
     {
-      "HEADING": "Wat krijg je?",
-      "BODY": "Een dedicated AI-agent, volledige integratie, training van je team en een dashboard waarin je elke euro ROI ziet terugkomen."
+      "HEADING": "De moat zit in je data",
+      "BODY": "Iedereen heeft toegang tot dezelfde modellen. Het verschil maak je met je eigen, schone, gestructureerde data. Wij bouwen die pipeline en de retrieval-laag erbovenop — vanaf dag één van je traject."
+    },
+    {
+      "HEADING": "Compliance is geen blocker",
+      "BODY": "EU AI Act, AVG, ISO 42001. We hebben de templates klaar liggen. Een AI-deployment in een gereguleerde sector hoeft geen halfjaar te duren — in <strong>6 weken</strong> heb je een werkende, audit-ready opzet."
     }
   ],
 
+  "SHOW_CASE_STUDY": true,
+  "CASE_STUDY_LABEL": "CASE STUDY",
+  "CASE_STUDY_CLIENT": "Lumen B.V.",
+  "CASE_STUDY_IMAGE_URL": "https://via.placeholder.com/600x300/151828/9952e0?text=Lumen+%C3%97+NinA",
+  "CASE_STUDY_IMAGE_ALT": "Lumen kantoor dashboard",
+  "CASE_STUDY_TITLE": "Hoe Lumen 40 uur per week bespaarde met een custom agent",
+  "CASE_STUDY_BODY": "Lumen's support team handelde 1.200 tickets per week. Binnen 6 weken bouwden we een agent die 70% van de eerste-lijn vragen volautomatisch afhandelt — mét toon-of-voice die niet van een mens te onderscheiden is.",
+  "CASE_STUDY_METRICS": [
+    { "VALUE": "40u", "LABEL": "Bespaard / week" },
+    { "VALUE": "6w", "LABEL": "Van pilot tot live" },
+    { "VALUE": "94%", "LABEL": "CSAT score" },
+    { "VALUE": "€280K", "LABEL": "Jaarlijkse besparing" }
+  ],
+  "CASE_STUDY_CTA_TEXT": "Lees de volledige case",
+  "CASE_STUDY_CTA_URL": "https://nina-ai.nl/cases/lumen",
+
   "SHOW_QUOTE": true,
-  "QUOTE_TEXT": "Binnen zes weken bespaarde onze support afdeling 40 uur per week. NinA bouwde precies wat we nodig hadden — niet meer, niet minder.",
-  "QUOTE_AUTHOR": "Mark de Vries, COO bij Lumen B.V.",
+  "QUOTE_TEXT": "NinA leverde wat drie andere bureaus in een jaar niet voor elkaar kregen — in zes weken. Dit is het meest serieuze AI-team in Nederland.",
+  "QUOTE_AUTHOR": "Mark de Vries, COO Lumen B.V.",
 
   "SHOW_CTA": true,
   "CTA_TEXT": "Plan een strategiegesprek",
   "CTA_URL": "https://nina-ai.nl/contact",
   "CTA_SUBTEXT": "30 minuten · gratis · geen verplichtingen",
 
+  "SHOW_ARTICLES": true,
+  "ARTICLES_EYEBROW": "VERS UIT HET LAB",
+  "ARTICLES_HEADING": "Drie artikelen die je deze maand niet wilt missen",
+  "ARTICLES": [
+    {
+      "IMAGE_URL": "https://via.placeholder.com/180x120/151828/bf80ff?text=Insight",
+      "IMAGE_ALT": "Insight artikel cover",
+      "TAG": "INSIGHT · 6 MIN",
+      "HEADING": "De 4 agents die elk bedrijf in 2026 nodig heeft",
+      "EXCERPT": "Van sales-qualifier tot finance-bot — een praktische gids met code-templates.",
+      "URL": "https://nina-ai.nl/blog/4-agents-2026"
+    },
+    {
+      "IMAGE_URL": "https://via.placeholder.com/180x120/151828/fde68b?text=Playbook",
+      "IMAGE_ALT": "Playbook cover",
+      "TAG": "PLAYBOOK · 12 MIN",
+      "HEADING": "RAG vs Fine-tuning: wat kies je wanneer?",
+      "EXCERPT": "Een beslisboom op basis van 48 implementaties. Spoiler: het is bijna nooit fine-tuning.",
+      "URL": "https://nina-ai.nl/blog/rag-vs-finetune"
+    },
+    {
+      "IMAGE_URL": "https://via.placeholder.com/180x120/151828/9952e0?text=Report",
+      "IMAGE_ALT": "Report cover",
+      "TAG": "REPORT · GRATIS",
+      "HEADING": "State of AI in NL — Q2 2026 rapport",
+      "EXCERPT": "47 pagina's data over AI-adoptie bij Nederlandse mid-market bedrijven.",
+      "URL": "https://nina-ai.nl/report-q2-2026"
+    }
+  ],
+
+  "SHOW_SERVICES": true,
+  "SERVICES_EYEBROW": "ONZE DIENSTEN",
+  "SERVICES_HEADING": "Van strategie tot uitvoering — onder één dak",
+  "SERVICES_SUBHEADING": "Geen handoffs. Geen miscommunicatie. Eén team van strategie tot deploy.",
+  "SERVICES": [
+    {
+      "ICON_URL": "https://via.placeholder.com/48x48/9952e0/ffffff?text=AI",
+      "ICON_ALT": "AI strategy icon",
+      "TITLE": "AI Strategy",
+      "BODY": "Een roadmap met meetbare KPI's, gevalideerd met je leadership team binnen 2 weken."
+    },
+    {
+      "ICON_URL": "https://via.placeholder.com/48x48/bf80ff/ffffff?text=ENG",
+      "ICON_ALT": "Engineering icon",
+      "TITLE": "AI Engineering",
+      "BODY": "Custom agents, RAG-pipelines en evaluaties. Production-ready, niet alleen een POC."
+    },
+    {
+      "ICON_URL": "https://via.placeholder.com/48x48/fde68b/0c0e18?text=OPS",
+      "ICON_ALT": "Operations icon",
+      "TITLE": "AI Operations",
+      "BODY": "Monitoring, retraining en kostenbeheer. We blijven bij je tot het echt zelfdraaiend is."
+    },
+    {
+      "ICON_URL": "https://via.placeholder.com/48x48/9952e0/ffffff?text=GOV",
+      "ICON_ALT": "Governance icon",
+      "TITLE": "AI Governance",
+      "BODY": "EU AI Act, AVG en ISO 42001 compliant. Audit-ready vanaf de eerste deploy."
+    }
+  ],
+
+  "SHOW_TEAM": true,
+  "TEAM_EYEBROW": "HET TEAM",
+  "TEAM_HEADING": "Mensen die deze emails schrijven",
+  "TEAM": [
+    {
+      "PHOTO_URL": "https://via.placeholder.com/96x96/151828/bf80ff?text=NS",
+      "ALT": "Nina Smit",
+      "NAME": "Nina Smit",
+      "ROLE": "Founder & CEO",
+      "LINK_URL": "https://linkedin.com/in/ninasmit"
+    },
+    {
+      "PHOTO_URL": "https://via.placeholder.com/96x96/151828/fde68b?text=TJ",
+      "ALT": "Thomas Jansen",
+      "NAME": "Thomas Jansen",
+      "ROLE": "Head of Engineering",
+      "LINK_URL": "https://linkedin.com/in/tjansen"
+    },
+    {
+      "PHOTO_URL": "https://via.placeholder.com/96x96/151828/9952e0?text=SD",
+      "ALT": "Sophie de Vries",
+      "NAME": "Sophie de Vries",
+      "ROLE": "AI Strategy Lead",
+      "LINK_URL": "https://linkedin.com/in/sdevries"
+    }
+  ],
+
+  "SHOW_EVENT": true,
+  "EVENT_LABEL": "UPCOMING",
+  "EVENT_DATE_DAY": "21",
+  "EVENT_DATE_MONTH": "MEI 2026",
+  "EVENT_TIME": "14:00 CET",
+  "EVENT_TITLE": "AI for Enterprise — live webinar",
+  "EVENT_BODY": "Een uur over hoe je in 2026 je eerste agent in productie krijgt zonder je IT-afdeling gek te maken. Met live demo.",
+  "EVENT_LOCATION": "Online · Zoom",
+  "EVENT_CTA_TEXT": "Reserveer je plek",
+  "EVENT_CTA_URL": "https://nina-ai.nl/webinar/may-2026",
+
+  "SHOW_LOGO_WALL": true,
+  "LOGO_WALL_LABEL": "TRUSTED BY 50+ AMBITIEUZE TEAMS",
+  "LOGO_WALL": [
+    { "URL": "https://via.placeholder.com/100x32/0c0e18/a6a6a6?text=Lumen", "ALT": "Lumen" },
+    { "URL": "https://via.placeholder.com/100x32/0c0e18/a6a6a6?text=Bloom", "ALT": "Bloom" },
+    { "URL": "https://via.placeholder.com/100x32/0c0e18/a6a6a6?text=Helix", "ALT": "Helix" },
+    { "URL": "https://via.placeholder.com/100x32/0c0e18/a6a6a6?text=Northwind", "ALT": "Northwind" },
+    { "URL": "https://via.placeholder.com/100x32/0c0e18/a6a6a6?text=Atlas", "ALT": "Atlas" }
+  ],
+
   "SHOW_IMAGE": false,
   "IMAGE_URL": "",
   "IMAGE_ALT": "",
   "IMAGE_CAPTION": "",
 
-  "SHOW_DIVIDER": true,
-
-  "SHOW_TWO_COLUMN": true,
+  "SHOW_TWO_COLUMN": false,
   "COL1_IMAGE_URL": "",
   "COL1_IMAGE_ALT": "",
-  "COL1_TITLE": "Snel live",
-  "COL1_BODY": "Van kick-off tot productie in 30 dagen. Geen pilot purgatorium — direct waarde leveren.",
+  "COL1_TITLE": "",
+  "COL1_BODY": "",
   "COL2_IMAGE_URL": "",
   "COL2_IMAGE_ALT": "",
-  "COL2_TITLE": "Eigenaarschap",
-  "COL2_BODY": "Code, prompts en data blijven van jou. Vendor lock-in is wat ons betreft een vies woord.",
+  "COL2_TITLE": "",
+  "COL2_BODY": "",
+
+  "SHOW_DIVIDER": true,
+
+  "SHOW_SIGNATURE": true,
+  "SIGNATURE_TEXT": "Tot snel,",
+  "SIGNATURE_PHOTO_URL": "https://via.placeholder.com/72x72/151828/bf80ff?text=NS",
+  "SIGNATURE_PHOTO_ALT": "Nina Smit",
+  "SIGNATURE_SCRIPT_URL": "",
+  "SIGNATURE_NAME": "Nina Smit",
+  "SIGNATURE_ROLE": "Founder, NinA AI",
+
+  "SHOW_FOOTER_LINKS": true,
+  "FOOTER_LINK_GROUPS": [
+    {
+      "TITLE": "DIENSTEN",
+      "LINKS": [
+        { "TEXT": "AI Strategy", "URL": "https://nina-ai.nl/strategy" },
+        { "TEXT": "AI Engineering", "URL": "https://nina-ai.nl/engineering" },
+        { "TEXT": "AI Operations", "URL": "https://nina-ai.nl/ops" },
+        { "TEXT": "Governance", "URL": "https://nina-ai.nl/governance" }
+      ]
+    },
+    {
+      "TITLE": "BEDRIJF",
+      "LINKS": [
+        { "TEXT": "Over ons", "URL": "https://nina-ai.nl/about" },
+        { "TEXT": "Cases", "URL": "https://nina-ai.nl/cases" },
+        { "TEXT": "Vacatures", "URL": "https://nina-ai.nl/careers" },
+        { "TEXT": "Pers", "URL": "https://nina-ai.nl/press" }
+      ]
+    },
+    {
+      "TITLE": "RESOURCES",
+      "LINKS": [
+        { "TEXT": "Blog", "URL": "https://nina-ai.nl/blog" },
+        { "TEXT": "Rapporten", "URL": "https://nina-ai.nl/reports" },
+        { "TEXT": "Newsletter", "URL": "https://nina-ai.nl/newsletter" },
+        { "TEXT": "Podcast", "URL": "https://nina-ai.nl/podcast" }
+      ]
+    }
+  ],
 
   "SHOW_FOOTER": true,
   "FOOTER_COMPANY": "NinA AI",
-  "FOOTER_ADDRESS": "Herengracht 100, 1015 BS Amsterdam",
+  "FOOTER_TAGLINE": "Building the operating system of modern business.",
+  "FOOTER_ADDRESS": "Herengracht 100, 1015 BS Amsterdam · KvK 87654321",
   "LINKEDIN_URL": "https://linkedin.com/company/nina-ai",
   "TIKTOK_URL": "https://tiktok.com/@nina.ai",
+  "INSTAGRAM_URL": "https://instagram.com/nina.ai.agency",
+  "X_URL": "https://x.com/ninaai_nl",
   "UNSUBSCRIBE_URL": "https://nina-ai.nl/unsubscribe?token=%%TOKEN%%",
+  "PREFERENCES_URL": "https://nina-ai.nl/preferences",
+  "VIEW_IN_BROWSER_URL": "https://nina-ai.nl/email/view/%%MSG_ID%%",
   "COPYRIGHT_YEAR": "2026"
 }

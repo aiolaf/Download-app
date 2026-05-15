@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="und" dir="auto" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
   <head>
-    <title>Welkom bij NinA AI — laat ons je workflow automatiseren</title>
+    <title>NinA AI — De staat van AI in NL · Q2 2026</title>
     <!--[if !mso]><!-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!--<![endif]-->
@@ -37,6 +37,10 @@
 .mj-column-per-40 { width:40% !important; max-width: 40%; }
 .mj-column-per-100 { width:100% !important; max-width: 100%; }
 .mj-column-per-50 { width:50% !important; max-width: 50%; }
+.mj-column-per-30 { width:30% !important; max-width: 30%; }
+.mj-column-per-70 { width:70% !important; max-width: 70%; }
+.mj-column-per-25 { width:25% !important; max-width: 25%; }
+.mj-column-per-75 { width:75% !important; max-width: 75%; }
       }
     </style>
     <style media="screen and (min-width:480px)">
@@ -44,6 +48,10 @@
 .moz-text-html .mj-column-per-40 { width:40% !important; max-width: 40%; }
 .moz-text-html .mj-column-per-100 { width:100% !important; max-width: 100%; }
 .moz-text-html .mj-column-per-50 { width:50% !important; max-width: 50%; }
+.moz-text-html .mj-column-per-30 { width:30% !important; max-width: 30%; }
+.moz-text-html .mj-column-per-70 { width:70% !important; max-width: 70%; }
+.moz-text-html .mj-column-per-25 { width:25% !important; max-width: 25%; }
+.moz-text-html .mj-column-per-75 { width:75% !important; max-width: 75%; }
     </style>
     
     
@@ -59,24 +67,92 @@
     </style>
      
     <style type="text/css">
-/* Force consistent dark background even when clients try to remap. */
+/* Lock body to brand dark, override Gmail/Outlook auto-remap. */
       body, .body-bg { background-color: #0c0e18 !important; }
 
-      /* Outlook.com / Office 365 colour-scheme attribute targeting. */
+      /* Outlook.com / Office 365 dark-mode targeting. */
       [data-ogsc] body, [data-ogsc] .body-bg { background-color: #0c0e18 !important; }
       [data-ogsc] .card-bg { background-color: #151828 !important; }
       [data-ogsc] .text-main, [data-ogsc] .text-main * { color: #f2f2f2 !important; }
       [data-ogsc] .text-muted, [data-ogsc] .text-muted * { color: #a6a6a6 !important; }
+      [data-ogsc] .text-gold, [data-ogsc] .text-gold * { color: #fde68b !important; }
+      [data-ogsc] .text-accent, [data-ogsc] .text-accent * { color: #bf80ff !important; }
 
-      /* Mobile breakpoint: stack columns, tighten typography. */
+      /* Apple Mail / iOS / Gmail web: gradient text on hero + manifesto.
+         Outlook ignores -webkit-background-clip and falls back to the
+         flat color attribute set on the &lt;mj-text&gt; — by design. */
+      .gradient-text, .gradient-text div, .gradient-text span {
+        background: linear-gradient(90deg, #9952e0 0%, #bf80ff 55%, #fde68b 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent !important;
+      }
+
+      /* Subtle border gradient for premium cards (renders in modern
+         clients only — Outlook gets a solid border).                  */
+      .premium-card {
+        background-image:
+          linear-gradient(#151828, #151828),
+          linear-gradient(135deg, #9952e0 0%, #fde68b 100%);
+        background-origin: border-box;
+        background-clip: padding-box, border-box;
+        border: 1px solid transparent !important;
+      }
+
+      /* Metric pills used in case study + event date pill */
+      .pill {
+        display: inline-block;
+        background: rgba(153, 82, 224, 0.15);
+        color: #bf80ff;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        margin: 0 6px 6px 0;
+        line-height: 1.2;
+      }
+      .pill-gold {
+        background: rgba(253, 230, 139, 0.12);
+        color: #fde68b;
+      }
+
+      /* Eyebrow label above titles */
+      .eyebrow {
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 11px;
+        color: #bf80ff;
+        font-weight: 600;
+      }
+
+      /* Numbered content badges (1, 2, 3 …) */
+      .number-badge {
+        display: inline-block;
+        width: 28px;
+        height: 28px;
+        line-height: 28px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #9952e0, #bf80ff);
+        color: #fff;
+        font-weight: 700;
+        text-align: center;
+        font-size: 13px;
+        margin-right: 10px;
+        vertical-align: middle;
+      }
+
+      /* Mobile breakpoint: tighten typography, stack lighter */
       @media only screen and (max-width: 480px) {
-        .h1-mobile div { font-size: 26px !important; line-height: 1.25 !important; }
+        .h1-mobile div { font-size: 26px !important; line-height: 1.2 !important; }
         .h2-mobile div { font-size: 20px !important; line-height: 1.3 !important; }
+        .stat-num-mobile div { font-size: 32px !important; }
+        .manifesto-mobile div { font-size: 22px !important; line-height: 1.25 !important; }
         .hide-mobile { display: none !important; }
         .pad-mobile { padding-left: 20px !important; padding-right: 20px !important; }
       }
 
-      /* prefers-color-scheme: dark — already dark, but lock it down. */
       @media (prefers-color-scheme: dark) {
         body, .body-bg { background-color: #0c0e18 !important; }
         .card-bg { background-color: #151828 !important; }
@@ -87,10 +163,10 @@
   </head>
   <body style="word-spacing:normal;background-color:#0c0e18;">
     
-    <div style="display:none;font-size:1px;color:#ffffff;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;">Een nieuw tijdperk van AI-gedreven groei begint vandaag.</div>
+    <div style="display:none;font-size:1px;color:#ffffff;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;">Onze impact in cijfers + 3 nieuwe inzichten van het lab — open binnen 30 sec.</div>
   
     
-      <div aria-label="Welkom bij NinA AI — laat ons je workflow automatiseren" aria-roledescription="email" class="body-bg" style="background-color:#0c0e18;" role="article" lang="und" dir="auto">
+      <div aria-label="NinA AI — De staat van AI in NL · Q2 2026" aria-roledescription="email" class="body-bg" style="background-color:#0c0e18;" role="article" lang="und" dir="auto">
       
       <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" bgcolor="#0c0e18" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
     
@@ -100,7 +176,7 @@
         <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#0c0e18;background-color:#0c0e18;width:100%;">
           <tbody>
             <tr>
-              <td style="direction:ltr;font-size:0px;padding:32px 24px 16px 24px;text-align:center;">
+              <td style="direction:ltr;font-size:0px;padding:32px 24px 8px 24px;text-align:center;">
                 <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:middle;width:331.2px;" ><![endif]-->
             
       <div class="mj-column-per-60 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:middle;width:100%;">
@@ -146,11 +222,237 @@
               <tr>
                 <td align="right" style="font-size:0px;padding:0;word-break:break-word;">
                   
-      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;letter-spacing:0.5px;line-height:1.4;text-align:right;color:#a6a6a6;">AI AGENCY · AMSTERDAM</div>
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:12px;letter-spacing:1.5px;line-height:1.4;text-align:right;color:#a6a6a6;">AI AGENCY · AMSTERDAM · EST. 2024</div>
     
                 </td>
               </tr>
             
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td><![endif]-->
+
+      <!--[if mso | IE]></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><![endif]-->
+    
+    
+      
+      <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="pad-mobile-outlook" role="presentation" style="width:600px;" width="600" bgcolor="#0c0e18" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div class="pad-mobile" style="background:#0c0e18;background-color:#0c0e18;margin:0px auto;max-width:600px;">
+        
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#0c0e18;background-color:#0c0e18;width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:16px 24px 24px 24px;text-align:center;">
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:552px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="center" class="text-muted" style="font-size:0px;padding:0 0 12px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:11px;letter-spacing:1.5px;line-height:1.4;text-align:center;color:#a6a6a6;">FEATURED IN</div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="pad-mobile-outlook" role="presentation" style="width:600px;" width="600" bgcolor="#0c0e18" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div class="pad-mobile" style="background:#0c0e18;background-color:#0c0e18;margin:0px auto;max-width:600px;">
+        
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#0c0e18;background-color:#0c0e18;width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:0 24px 12px 24px;text-align:center;">
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><![endif]-->
+          <!--[if mso | IE]><td class="" style="vertical-align:middle;width:552px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:middle;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+        <tbody>
+          <tr>
+            <td style="vertical-align:middle;padding:0 6px;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="center" style="font-size:0px;padding:6px 0;word-break:break-word;">
+                  
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+        <tbody>
+          <tr>
+            <td style="width:80px;">
+              
+      <img alt="Forbes" src="https://via.placeholder.com/120x32/0c0e18/a6a6a6?text&#x3D;Forbes" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="80" height="auto">
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td><![endif]-->
+          <!--[if mso | IE]><td class="" style="vertical-align:middle;width:552px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:middle;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+        <tbody>
+          <tr>
+            <td style="vertical-align:middle;padding:0 6px;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="center" style="font-size:0px;padding:6px 0;word-break:break-word;">
+                  
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+        <tbody>
+          <tr>
+            <td style="width:80px;">
+              
+      <img alt="TechCrunch" src="https://via.placeholder.com/120x32/0c0e18/a6a6a6?text&#x3D;TechCrunch" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="80" height="auto">
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td><![endif]-->
+          <!--[if mso | IE]><td class="" style="vertical-align:middle;width:552px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:middle;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+        <tbody>
+          <tr>
+            <td style="vertical-align:middle;padding:0 6px;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="center" style="font-size:0px;padding:6px 0;word-break:break-word;">
+                  
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+        <tbody>
+          <tr>
+            <td style="width:80px;">
+              
+      <img alt="Financieele Dagblad" src="https://via.placeholder.com/120x32/0c0e18/a6a6a6?text&#x3D;FD" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="80" height="auto">
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td><![endif]-->
+          <!--[if mso | IE]><td class="" style="vertical-align:middle;width:552px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:middle;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+        <tbody>
+          <tr>
+            <td style="vertical-align:middle;padding:0 6px;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="center" style="font-size:0px;padding:6px 0;word-break:break-word;">
+                  
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+        <tbody>
+          <tr>
+            <td style="width:80px;">
+              
+      <img alt="NRC" src="https://via.placeholder.com/120x32/0c0e18/a6a6a6?text&#x3D;NRC" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="80" height="auto">
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
         </tbody>
       </table>
     
@@ -179,7 +481,68 @@
         <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#151828;background-color:#151828;width:100%;border-collapse:separate;">
           <tbody>
             <tr>
-              <td style="border-radius:12px;direction:ltr;font-size:0px;padding:40px 32px 32px 32px;text-align:center;">
+              <td style="border-radius:12px;direction:ltr;font-size:0px;padding:44px 36px 36px 36px;text-align:center;">
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:528px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+        <tbody>
+              <tr>
+                <td align="left" class="eyebrow text-accent" style="font-size:0px;padding:0 0 14px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;line-height:1.4;text-align:left;color:#bf80ff;">ISSUE #07 · DE TOEKOMST VAN AI</div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="left" class="text-main h1-mobile gradient-text" style="font-size:0px;padding:0 0 18px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:34px;font-weight:700;letter-spacing:-0.5px;line-height:1.15;text-align:left;color:#f2f2f2;">AI is geen tool. Het is je nieuwe besturingssysteem.</div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="left" class="text-main" style="font-size:0px;padding:0 0 12px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:17px;font-weight:500;line-height:1.5;text-align:left;color:#f2f2f2;">Hoi {{FIRST_NAME}},</div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="left" class="text-main" style="font-size:0px;padding:0 0 24px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:17px;line-height:1.55;text-align:left;color:#f2f2f2;">Vorige maand schreven we over agents die je workflow overnemen. Deze maand laten we zien <strong>welke bedrijven het al doen</strong>, en — belangrijker — hoeveel ze ermee verdienen. Pak een koffie, dit is de meest gelezen editie tot nu toe.</div>
+    
+                </td>
+              </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><![endif]-->
+    
+    
+      
+      <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="pad-mobile-outlook" role="presentation" style="width:600px;" width="600" bgcolor="#0c0e18" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div class="pad-mobile" style="background:#0c0e18;background-color:#0c0e18;margin:0px auto;max-width:600px;">
+        
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#0c0e18;background-color:#0c0e18;width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:40px 32px 0 32px;text-align:center;">
                 <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:536px;" ><![endif]-->
             
       <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
@@ -188,17 +551,210 @@
         <tbody>
           
               <tr>
-                <td align="left" class="text-main h1-mobile" style="font-size:0px;padding:0 0 16px 0;word-break:break-word;">
+                <td align="center" class="text-main h2-mobile" style="font-size:0px;padding:0 0 6px 0;word-break:break-word;">
                   
-      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:32px;font-weight:700;line-height:1.2;text-align:left;color:#f2f2f2;">AI die voor jouw business werkt.</div>
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:22px;font-weight:600;line-height:1.25;text-align:center;color:#f2f2f2;">Onze impact in cijfers</div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="center" class="text-muted" style="font-size:0px;padding:0 0 24px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:14px;line-height:1.5;text-align:center;color:#a6a6a6;">Gemiddelden over 48 klanten · laatste 12 maanden</div>
+    
+                </td>
+              </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><![endif]-->
+    
+      
+      <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="pad-mobile-outlook" role="presentation" style="width:600px;" width="600" bgcolor="#0c0e18" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div class="pad-mobile" style="background:#0c0e18;background-color:#0c0e18;margin:0px auto;max-width:600px;">
+        
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#0c0e18;background-color:#0c0e18;width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:16px 24px 24px 24px;text-align:center;">
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><![endif]-->
+          <!--[if mso | IE]><td class="card-bg-outlook" style="vertical-align:top;width:552px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix card-bg" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%" style="border-collapse:separate;">
+        <tbody>
+          <tr>
+            <td style="background-color:#151828;border-radius:10px;vertical-align:top;border-collapse:separate;padding:12px 8px;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="center" class="text-main stat-num-mobile" style="font-size:0px;padding:6px 0 4px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:40px;font-weight:700;letter-spacing:-1px;line-height:1.05;text-align:center;color:#f2f2f2;">312%</div>
     
                 </td>
               </tr>
             
               <tr>
-                <td align="left" class="text-main" style="font-size:0px;padding:0 0 24px 0;word-break:break-word;">
+                <td align="center" class="text-muted" style="font-size:0px;padding:0 8px 8px 8px;word-break:break-word;">
                   
-      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:16px;line-height:1.5;text-align:left;color:#f2f2f2;">Wij bouwen op maat gemaakte AI-agents die je sales, support en operations naar een hoger niveau tillen. Geen hype, alleen meetbare resultaten.</div>
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:12px;line-height:1.4;text-align:center;color:#a6a6a6;">Gem. ROI binnen 6 maanden</div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td><![endif]-->
+          <!--[if mso | IE]><td class="card-bg-outlook" style="vertical-align:top;width:552px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix card-bg" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%" style="border-collapse:separate;">
+        <tbody>
+          <tr>
+            <td style="background-color:#151828;border-radius:10px;vertical-align:top;border-collapse:separate;padding:12px 8px;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="center" class="text-main stat-num-mobile" style="font-size:0px;padding:6px 0 4px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:40px;font-weight:700;letter-spacing:-1px;line-height:1.05;text-align:center;color:#f2f2f2;">30d</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="center" class="text-muted" style="font-size:0px;padding:0 8px 8px 8px;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:12px;line-height:1.4;text-align:center;color:#a6a6a6;">Van kick-off tot productie</div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td><![endif]-->
+          <!--[if mso | IE]><td class="card-bg-outlook" style="vertical-align:top;width:552px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix card-bg" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%" style="border-collapse:separate;">
+        <tbody>
+          <tr>
+            <td style="background-color:#151828;border-radius:10px;vertical-align:top;border-collapse:separate;padding:12px 8px;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="center" class="text-main stat-num-mobile" style="font-size:0px;padding:6px 0 4px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:40px;font-weight:700;letter-spacing:-1px;line-height:1.05;text-align:center;color:#f2f2f2;">48</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="center" class="text-muted" style="font-size:0px;padding:0 8px 8px 8px;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:12px;line-height:1.4;text-align:center;color:#a6a6a6;">Klanten in 9 landen</div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td><![endif]-->
+
+      <!--[if mso | IE]></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><![endif]-->
+    
+    
+      
+      <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="pad-mobile-outlook" role="presentation" style="width:600px;" width="600" bgcolor="#0c0e18" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div class="pad-mobile" style="background:#0c0e18;background-color:#0c0e18;margin:0px auto;max-width:600px;">
+        
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#0c0e18;background-color:#0c0e18;width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:40px 32px 24px 32px;text-align:center;">
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:536px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+        <tbody>
+              <tr>
+                <td align="center" class="eyebrow text-gold" style="font-size:0px;padding:0 0 14px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;line-height:1.5;text-align:center;color:#fde68b;">ONZE OVERTUIGING</div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="center" class="text-main manifesto-mobile gradient-text" style="font-size:0px;padding:0 0 8px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:28px;font-weight:700;letter-spacing:-0.5px;line-height:1.25;text-align:center;color:#f2f2f2;">De winnaars van het volgende decennium worden niet bepaald door wie het meeste model traint, maar door wie ze het beste inzet.</div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="center" class="text-muted" style="font-size:0px;padding:12px 0 0 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.5;text-align:center;color:#a6a6a6;">— Nina Smit, Founder</div>
     
                 </td>
               </tr>
@@ -238,14 +794,14 @@
               <tr>
                 <td align="left" class="text-main h2-mobile" style="font-size:0px;padding:0 0 12px 0;word-break:break-word;">
                   
-      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:22px;font-weight:600;line-height:1.25;text-align:left;color:#f2f2f2;">Waarom NinA?</div>
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:22px;font-weight:600;line-height:1.25;text-align:left;color:#f2f2f2;"><mj-raw></mj-raw><span class="number-badge">1</span><mj-raw></mj-raw>Agents nemen het over</div>
     
                 </td>
               </tr>
               <tr>
                 <td align="left" class="text-main" style="font-size:0px;padding:0;word-break:break-word;">
                   
-      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:16px;line-height:1.5;text-align:left;color:#f2f2f2;">We combineren strategie, engineering en design in één team. Binnen 30 dagen draait er een werkende AI-pilot in jouw stack — geconnect met je CRM, je data en je tone of voice.</div>
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:16px;line-height:1.5;text-align:left;color:#f2f2f2;">Wat begon als chatbots is geëvolueerd naar autonome agents die zelf taken plannen, tools aanroepen en code uitvoeren. <strong>43% van onze klanten</strong> heeft inmiddels een agent live die zonder menselijke goedkeuring tot €5K per transactie mag handelen.</div>
     
                 </td>
               </tr>
@@ -286,14 +842,14 @@
               <tr>
                 <td align="left" class="text-main h2-mobile" style="font-size:0px;padding:0 0 12px 0;word-break:break-word;">
                   
-      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:22px;font-weight:600;line-height:1.25;text-align:left;color:#f2f2f2;">Wat krijg je?</div>
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:22px;font-weight:600;line-height:1.25;text-align:left;color:#f2f2f2;"><mj-raw></mj-raw><span class="number-badge">2</span><mj-raw></mj-raw>De moat zit in je data</div>
     
                 </td>
               </tr>
               <tr>
                 <td align="left" class="text-main" style="font-size:0px;padding:0;word-break:break-word;">
                   
-      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:16px;line-height:1.5;text-align:left;color:#f2f2f2;">Een dedicated AI-agent, volledige integratie, training van je team en een dashboard waarin je elke euro ROI ziet terugkomen.</div>
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:16px;line-height:1.5;text-align:left;color:#f2f2f2;">Iedereen heeft toegang tot dezelfde modellen. Het verschil maak je met je eigen, schone, gestructureerde data. Wij bouwen die pipeline en de retrieval-laag erbovenop — vanaf dag één van je traject.</div>
     
                 </td>
               </tr>
@@ -324,7 +880,55 @@
         <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#0c0e18;background-color:#0c0e18;width:100%;">
           <tbody>
             <tr>
-              <td style="direction:ltr;font-size:0px;padding:32px 32px 8px 32px;text-align:center;">
+              <td style="direction:ltr;font-size:0px;padding:24px 32px 0 32px;text-align:center;">
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:536px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+        <tbody>
+              <tr>
+                <td align="left" class="text-main h2-mobile" style="font-size:0px;padding:0 0 12px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:22px;font-weight:600;line-height:1.25;text-align:left;color:#f2f2f2;"><mj-raw></mj-raw><span class="number-badge">3</span><mj-raw></mj-raw>Compliance is geen blocker</div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="left" class="text-main" style="font-size:0px;padding:0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:16px;line-height:1.5;text-align:left;color:#f2f2f2;">EU AI Act, AVG, ISO 42001. We hebben de templates klaar liggen. Een AI-deployment in een gereguleerde sector hoeft geen halfjaar te duren — in <strong>6 weken</strong> heb je een werkende, audit-ready opzet.</div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><![endif]-->
+    
+    
+      
+      <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="pad-mobile-outlook" role="presentation" style="width:600px;" width="600" bgcolor="#0c0e18" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div class="pad-mobile" style="background:#0c0e18;background-color:#0c0e18;margin:0px auto;max-width:600px;">
+        
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#0c0e18;background-color:#0c0e18;width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:40px 32px 0 32px;text-align:center;">
                 <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="card-bg-outlook" style="vertical-align:top;width:536px;" ><![endif]-->
             
       <div class="mj-column-per-100 mj-outlook-group-fix card-bg" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
@@ -332,22 +936,72 @@
       <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%" style="border-collapse:separate;">
         <tbody>
           <tr>
-            <td style="background-color:#151828;border-left:4px solid #9952e0;border-radius:0 8px 8px 0;vertical-align:top;border-collapse:separate;padding:20px 24px;">
+            <td style="background-color:#151828;border-radius:14px;vertical-align:top;border-collapse:separate;padding:0;">
               
       <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
         <tbody>
-          
               <tr>
-                <td align="left" class="text-main" style="font-size:0px;padding:0 0 8px 0;word-break:break-word;">
+                <td align="center" style="font-size:0px;padding:0;word-break:break-word;">
                   
-      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:17px;font-style:italic;line-height:1.5;text-align:left;color:#f2f2f2;">&ldquo;Binnen zes weken bespaarde onze support afdeling 40 uur per week. NinA bouwde precies wat we nodig hadden — niet meer, niet minder.&rdquo;</div>
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+        <tbody>
+          <tr>
+            <td style="width:536px;">
+              
+      <img alt="Lumen kantoor dashboard" src="https://via.placeholder.com/600x300/151828/9952e0?text&#x3D;Lumen+%C3%97+NinA" style="border:0;border-radius:14px 14px 0 0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="536" height="auto">
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
     
                 </td>
               </tr>
               <tr>
-                <td align="left" class="text-muted" style="font-size:0px;padding:0;word-break:break-word;">
+                <td align="left" class="eyebrow text-accent" style="font-size:0px;padding:28px 28px 8px 28px;word-break:break-word;">
                   
-      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:14px;line-height:1.5;text-align:left;color:#a6a6a6;">— Mark de Vries, COO bij Lumen B.V.</div>
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;line-height:1.5;text-align:left;color:#bf80ff;">CASE STUDY · Lumen B.V.</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="left" class="text-main h2-mobile" style="font-size:0px;padding:0 28px 12px 28px;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:24px;font-weight:600;line-height:1.25;text-align:left;color:#f2f2f2;">Hoe Lumen 40 uur per week bespaarde met een custom agent</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="left" class="text-main" style="font-size:0px;padding:0 28px 18px 28px;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:16px;line-height:1.5;text-align:left;color:#f2f2f2;">Lumen's support team handelde 1.200 tickets per week. Binnen 6 weken bouwden we een agent die 70% van de eerste-lijn vragen volautomatisch afhandelt — mét toon-of-voice die niet van een mens te onderscheiden is.</div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="left" style="font-size:0px;padding:0 28px 18px 28px;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.4;text-align:left;color:#bf80ff;"><mj-raw></mj-raw>
+          <span class="pill"><strong style="color:#f2f2f2;">40u</strong> &nbsp;Bespaard / week</span>
+          <mj-raw></mj-raw>
+          <span class="pill"><strong style="color:#f2f2f2;">6w</strong> &nbsp;Van pilot tot live</span>
+          <mj-raw></mj-raw>
+          <span class="pill"><strong style="color:#f2f2f2;">94%</strong> &nbsp;CSAT score</span>
+          <mj-raw></mj-raw>
+          <span class="pill"><strong style="color:#f2f2f2;">€280K</strong> &nbsp;Jaarlijkse besparing</span>
+          <mj-raw></mj-raw></div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="left" style="font-size:0px;padding:0 28px 28px 28px;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:16px;line-height:1.5;text-align:left;color:#f2f2f2;"><a href="https://nina-ai.nl/cases/lumen" style="text-decoration: none; color: #bf80ff; font-weight: 600; font-size: 14px; letter-spacing: 0.3px;">
+            Lees de volledige case &rarr;
+          </a></div>
     
                 </td>
               </tr>
@@ -382,7 +1036,65 @@
         <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#0c0e18;background-color:#0c0e18;width:100%;">
           <tbody>
             <tr>
-              <td style="direction:ltr;font-size:0px;padding:32px 32px 16px 32px;text-align:center;">
+              <td style="direction:ltr;font-size:0px;padding:40px 32px 8px 32px;text-align:center;">
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="card-bg-outlook" style="vertical-align:top;width:536px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix card-bg" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%" style="border-collapse:separate;">
+        <tbody>
+          <tr>
+            <td style="background-color:#151828;border-left:4px solid #9952e0;border-radius:0 8px 8px 0;vertical-align:top;border-collapse:separate;padding:22px 26px;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="left" class="text-main" style="font-size:0px;padding:0 0 10px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:18px;font-style:italic;line-height:1.5;text-align:left;color:#f2f2f2;">&ldquo;NinA leverde wat drie andere bureaus in een jaar niet voor elkaar kregen — in zes weken. Dit is het meest serieuze AI-team in Nederland.&rdquo;</div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="left" class="text-muted" style="font-size:0px;padding:0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:14px;line-height:1.5;text-align:left;color:#a6a6a6;">— Mark de Vries, COO Lumen B.V.</div>
+    
+                </td>
+              </tr>
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><![endif]-->
+    
+    
+      
+      <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="pad-mobile-outlook" role="presentation" style="width:600px;" width="600" bgcolor="#0c0e18" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div class="pad-mobile" style="background:#0c0e18;background-color:#0c0e18;margin:0px auto;max-width:600px;">
+        
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#0c0e18;background-color:#0c0e18;width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:40px 32px 16px 32px;text-align:center;">
                 <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:536px;" ><![endif]-->
             
       <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
@@ -408,7 +1120,7 @@
                 </td>
               </tr>
               <tr>
-                <td align="center" class="text-muted" style="font-size:0px;padding:12px 0 0 0;word-break:break-word;">
+                <td align="center" class="text-muted" style="font-size:0px;padding:14px 0 0 0;word-break:break-word;">
                   
       <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:14px;line-height:1.5;text-align:center;color:#a6a6a6;">30 minuten · gratis · geen verplichtingen</div>
     
@@ -420,6 +1132,1289 @@
       </div>
     
           <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><![endif]-->
+    
+    
+      
+      <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="pad-mobile-outlook" role="presentation" style="width:600px;" width="600" bgcolor="#0c0e18" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div class="pad-mobile" style="background:#0c0e18;background-color:#0c0e18;margin:0px auto;max-width:600px;">
+        
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#0c0e18;background-color:#0c0e18;width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:40px 24px 8px 24px;text-align:center;">
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:552px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+        <tbody>
+              <tr>
+                <td align="center" class="eyebrow text-gold" style="font-size:0px;padding:0 0 10px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;line-height:1.5;text-align:center;color:#fde68b;">VERS UIT HET LAB</div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="center" class="text-main h2-mobile" style="font-size:0px;padding:0 0 24px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:22px;font-weight:600;line-height:1.25;text-align:center;color:#f2f2f2;">Drie artikelen die je deze maand niet wilt missen</div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="pad-mobile-outlook" role="presentation" style="width:600px;" width="600" bgcolor="#0c0e18" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div class="pad-mobile" style="background:#0c0e18;background-color:#0c0e18;margin:0px auto;max-width:600px;">
+        
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#0c0e18;background-color:#0c0e18;width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:0 16px 16px 16px;text-align:center;">
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><![endif]-->
+          <!--[if mso | IE]><td class="" style="vertical-align:top;width:568px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+        <tbody>
+          <tr>
+            <td style="vertical-align:top;padding:0 8px;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="center" style="font-size:0px;padding:0 0 10px 0;word-break:break-word;">
+                  
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+        <tbody>
+          <tr>
+            <td style="width:552px;">
+              
+      <img alt="Insight artikel cover" src="https://via.placeholder.com/180x120/151828/bf80ff?text&#x3D;Insight" style="border:0;border-radius:8px;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="552" height="auto">
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="left" class="eyebrow text-accent" style="font-size:0px;padding:0 0 6px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:10px;font-weight:600;letter-spacing:1.5px;line-height:1.5;text-align:left;color:#bf80ff;">INSIGHT · 6 MIN</div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="left" class="text-main" style="font-size:0px;padding:0 0 8px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:16px;font-weight:600;line-height:1.3;text-align:left;color:#f2f2f2;">De 4 agents die elk bedrijf in 2026 nodig heeft</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="left" class="text-muted" style="font-size:0px;padding:0 0 10px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.5;text-align:left;color:#a6a6a6;">Van sales-qualifier tot finance-bot — een praktische gids met code-templates.</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="left" style="font-size:0px;padding:0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:16px;line-height:1.5;text-align:left;color:#f2f2f2;"><a href="https://nina-ai.nl/blog/4-agents-2026" style="text-decoration: none; color: #bf80ff; font-weight: 600; font-size: 13px;">
+            Lees verder &rarr;
+          </a></div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td><![endif]-->
+          <!--[if mso | IE]><td class="" style="vertical-align:top;width:568px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+        <tbody>
+          <tr>
+            <td style="vertical-align:top;padding:0 8px;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="center" style="font-size:0px;padding:0 0 10px 0;word-break:break-word;">
+                  
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+        <tbody>
+          <tr>
+            <td style="width:552px;">
+              
+      <img alt="Playbook cover" src="https://via.placeholder.com/180x120/151828/fde68b?text&#x3D;Playbook" style="border:0;border-radius:8px;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="552" height="auto">
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="left" class="eyebrow text-accent" style="font-size:0px;padding:0 0 6px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:10px;font-weight:600;letter-spacing:1.5px;line-height:1.5;text-align:left;color:#bf80ff;">PLAYBOOK · 12 MIN</div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="left" class="text-main" style="font-size:0px;padding:0 0 8px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:16px;font-weight:600;line-height:1.3;text-align:left;color:#f2f2f2;">RAG vs Fine-tuning: wat kies je wanneer?</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="left" class="text-muted" style="font-size:0px;padding:0 0 10px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.5;text-align:left;color:#a6a6a6;">Een beslisboom op basis van 48 implementaties. Spoiler: het is bijna nooit fine-tuning.</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="left" style="font-size:0px;padding:0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:16px;line-height:1.5;text-align:left;color:#f2f2f2;"><a href="https://nina-ai.nl/blog/rag-vs-finetune" style="text-decoration: none; color: #bf80ff; font-weight: 600; font-size: 13px;">
+            Lees verder &rarr;
+          </a></div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td><![endif]-->
+          <!--[if mso | IE]><td class="" style="vertical-align:top;width:568px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+        <tbody>
+          <tr>
+            <td style="vertical-align:top;padding:0 8px;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="center" style="font-size:0px;padding:0 0 10px 0;word-break:break-word;">
+                  
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+        <tbody>
+          <tr>
+            <td style="width:552px;">
+              
+      <img alt="Report cover" src="https://via.placeholder.com/180x120/151828/9952e0?text&#x3D;Report" style="border:0;border-radius:8px;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="552" height="auto">
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="left" class="eyebrow text-accent" style="font-size:0px;padding:0 0 6px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:10px;font-weight:600;letter-spacing:1.5px;line-height:1.5;text-align:left;color:#bf80ff;">REPORT · GRATIS</div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="left" class="text-main" style="font-size:0px;padding:0 0 8px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:16px;font-weight:600;line-height:1.3;text-align:left;color:#f2f2f2;">State of AI in NL — Q2 2026 rapport</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="left" class="text-muted" style="font-size:0px;padding:0 0 10px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.5;text-align:left;color:#a6a6a6;">47 pagina&#x27;s data over AI-adoptie bij Nederlandse mid-market bedrijven.</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="left" style="font-size:0px;padding:0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:16px;line-height:1.5;text-align:left;color:#f2f2f2;"><a href="https://nina-ai.nl/report-q2-2026" style="text-decoration: none; color: #bf80ff; font-weight: 600; font-size: 13px;">
+            Lees verder &rarr;
+          </a></div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td><![endif]-->
+
+      <!--[if mso | IE]></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><![endif]-->
+    
+    
+      
+      <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="pad-mobile-outlook" role="presentation" style="width:600px;" width="600" bgcolor="#0c0e18" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div class="pad-mobile" style="background:#0c0e18;background-color:#0c0e18;margin:0px auto;max-width:600px;">
+        
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#0c0e18;background-color:#0c0e18;width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:40px 32px 12px 32px;text-align:center;">
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:536px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+        <tbody>
+              <tr>
+                <td align="center" class="eyebrow text-accent" style="font-size:0px;padding:0 0 10px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;line-height:1.5;text-align:center;color:#bf80ff;">ONZE DIENSTEN</div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="center" class="text-main h2-mobile" style="font-size:0px;padding:0 0 6px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:22px;font-weight:600;line-height:1.25;text-align:center;color:#f2f2f2;">Van strategie tot uitvoering — onder één dak</div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="center" class="text-muted" style="font-size:0px;padding:0 0 18px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:14px;line-height:1.5;text-align:center;color:#a6a6a6;">Geen handoffs. Geen miscommunicatie. Eén team van strategie tot deploy.</div>
+    
+                </td>
+              </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="pad-mobile-outlook" role="presentation" style="width:600px;" width="600" bgcolor="#0c0e18" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div class="pad-mobile" style="background:#0c0e18;background-color:#0c0e18;margin:0px auto;max-width:600px;">
+        
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#0c0e18;background-color:#0c0e18;width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:6px 24px;text-align:center;">
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="card-bg-outlook" style="vertical-align:top;width:276px;" ><![endif]-->
+            
+      <div class="mj-column-per-50 mj-outlook-group-fix card-bg" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%" style="border-collapse:separate;">
+        <tbody>
+          <tr>
+            <td style="background-color:#151828;border-radius:10px;vertical-align:top;border-collapse:separate;padding:8px;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="left" style="font-size:0px;padding:12px 12px 8px 12px;word-break:break-word;">
+                  
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+        <tbody>
+          <tr>
+            <td style="width:36px;">
+              
+      <img alt="AI strategy icon" src="https://via.placeholder.com/48x48/9952e0/ffffff?text&#x3D;AI" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="36" height="auto">
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="left" class="text-main" style="font-size:0px;padding:4px 16px 6px 16px;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:18px;font-weight:600;line-height:1.3;text-align:left;color:#f2f2f2;">AI Strategy</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="left" class="text-muted" style="font-size:0px;padding:0 16px 16px 16px;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.5;text-align:left;color:#a6a6a6;">Een roadmap met meetbare KPI&#x27;s, gevalideerd met je leadership team binnen 2 weken.</div>
+    
+                </td>
+              </tr>
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td><td class="card-bg-outlook" style="vertical-align:top;width:276px;" ><![endif]-->
+            
+      <div class="mj-column-per-50 mj-outlook-group-fix card-bg" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%" style="border-collapse:separate;">
+        <tbody>
+          <tr>
+            <td style="background-color:#151828;border-radius:10px;vertical-align:top;border-collapse:separate;padding:8px;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="left" style="font-size:0px;padding:12px 12px 8px 12px;word-break:break-word;">
+                  
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+        <tbody>
+          <tr>
+            <td style="width:36px;">
+              
+      <img alt="Engineering icon" src="https://via.placeholder.com/48x48/bf80ff/ffffff?text&#x3D;ENG" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="36" height="auto">
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="left" class="text-main" style="font-size:0px;padding:4px 16px 6px 16px;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:18px;font-weight:600;line-height:1.3;text-align:left;color:#f2f2f2;">AI Engineering</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="left" class="text-muted" style="font-size:0px;padding:0 16px 16px 16px;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.5;text-align:left;color:#a6a6a6;">Custom agents, RAG-pipelines en evaluaties. Production-ready, niet alleen een POC.</div>
+    
+                </td>
+              </tr>
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="pad-mobile-outlook" role="presentation" style="width:600px;" width="600" bgcolor="#0c0e18" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div class="pad-mobile" style="background:#0c0e18;background-color:#0c0e18;margin:0px auto;max-width:600px;">
+        
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#0c0e18;background-color:#0c0e18;width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:6px 24px;text-align:center;">
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="card-bg-outlook" style="vertical-align:top;width:276px;" ><![endif]-->
+            
+      <div class="mj-column-per-50 mj-outlook-group-fix card-bg" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%" style="border-collapse:separate;">
+        <tbody>
+          <tr>
+            <td style="background-color:#151828;border-radius:10px;vertical-align:top;border-collapse:separate;padding:8px;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="left" style="font-size:0px;padding:12px 12px 8px 12px;word-break:break-word;">
+                  
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+        <tbody>
+          <tr>
+            <td style="width:36px;">
+              
+      <img alt="Operations icon" src="https://via.placeholder.com/48x48/fde68b/0c0e18?text&#x3D;OPS" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="36" height="auto">
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="left" class="text-main" style="font-size:0px;padding:4px 16px 6px 16px;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:18px;font-weight:600;line-height:1.3;text-align:left;color:#f2f2f2;">AI Operations</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="left" class="text-muted" style="font-size:0px;padding:0 16px 16px 16px;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.5;text-align:left;color:#a6a6a6;">Monitoring, retraining en kostenbeheer. We blijven bij je tot het echt zelfdraaiend is.</div>
+    
+                </td>
+              </tr>
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td><td class="card-bg-outlook" style="vertical-align:top;width:276px;" ><![endif]-->
+            
+      <div class="mj-column-per-50 mj-outlook-group-fix card-bg" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%" style="border-collapse:separate;">
+        <tbody>
+          <tr>
+            <td style="background-color:#151828;border-radius:10px;vertical-align:top;border-collapse:separate;padding:8px;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="left" style="font-size:0px;padding:12px 12px 8px 12px;word-break:break-word;">
+                  
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+        <tbody>
+          <tr>
+            <td style="width:36px;">
+              
+      <img alt="Governance icon" src="https://via.placeholder.com/48x48/9952e0/ffffff?text&#x3D;GOV" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="36" height="auto">
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="left" class="text-main" style="font-size:0px;padding:4px 16px 6px 16px;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:18px;font-weight:600;line-height:1.3;text-align:left;color:#f2f2f2;">AI Governance</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="left" class="text-muted" style="font-size:0px;padding:0 16px 16px 16px;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.5;text-align:left;color:#a6a6a6;">EU AI Act, AVG en ISO 42001 compliant. Audit-ready vanaf de eerste deploy.</div>
+    
+                </td>
+              </tr>
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><![endif]-->
+    
+    
+      
+      <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="pad-mobile-outlook" role="presentation" style="width:600px;" width="600" bgcolor="#0c0e18" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div class="pad-mobile" style="background:#0c0e18;background-color:#0c0e18;margin:0px auto;max-width:600px;">
+        
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#0c0e18;background-color:#0c0e18;width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:40px 32px 0 32px;text-align:center;">
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:536px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="center" class="eyebrow text-gold" style="font-size:0px;padding:0 0 10px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;line-height:1.5;text-align:center;color:#fde68b;">HET TEAM</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="center" class="text-main h2-mobile" style="font-size:0px;padding:0 0 24px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:22px;font-weight:600;line-height:1.25;text-align:center;color:#f2f2f2;">Mensen die deze emails schrijven</div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="pad-mobile-outlook" role="presentation" style="width:600px;" width="600" bgcolor="#0c0e18" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div class="pad-mobile" style="background:#0c0e18;background-color:#0c0e18;margin:0px auto;max-width:600px;">
+        
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#0c0e18;background-color:#0c0e18;width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:0 24px 16px 24px;text-align:center;">
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><![endif]-->
+          <!--[if mso | IE]><td class="" style="vertical-align:top;width:552px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+        <tbody>
+          <tr>
+            <td style="vertical-align:top;padding:0 8px;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="center" style="font-size:0px;padding:0 0 12px 0;word-break:break-word;">
+                  
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+        <tbody>
+          <tr>
+            <td style="width:96px;">
+              
+      <img alt="Nina Smit" src="https://via.placeholder.com/96x96/151828/bf80ff?text&#x3D;NS" style="border:0;border-radius:999px;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="96" height="auto">
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="center" class="text-main" style="font-size:0px;padding:0 0 4px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:16px;font-weight:600;line-height:1.3;text-align:center;color:#f2f2f2;">Nina Smit</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="center" class="text-muted" style="font-size:0px;padding:0 0 8px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.5;text-align:center;color:#a6a6a6;">Founder &amp; CEO</div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="center" style="font-size:0px;padding:0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:16px;line-height:1.5;text-align:center;color:#f2f2f2;"><a href="https://linkedin.com/in/ninasmit" style="text-decoration: none; color: #bf80ff; font-size: 12px; letter-spacing: 0.5px; text-transform: uppercase; font-weight: 600;">
+            LinkedIn &rarr;
+          </a></div>
+    
+                </td>
+              </tr>
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td><![endif]-->
+          <!--[if mso | IE]><td class="" style="vertical-align:top;width:552px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+        <tbody>
+          <tr>
+            <td style="vertical-align:top;padding:0 8px;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="center" style="font-size:0px;padding:0 0 12px 0;word-break:break-word;">
+                  
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+        <tbody>
+          <tr>
+            <td style="width:96px;">
+              
+      <img alt="Thomas Jansen" src="https://via.placeholder.com/96x96/151828/fde68b?text&#x3D;TJ" style="border:0;border-radius:999px;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="96" height="auto">
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="center" class="text-main" style="font-size:0px;padding:0 0 4px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:16px;font-weight:600;line-height:1.3;text-align:center;color:#f2f2f2;">Thomas Jansen</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="center" class="text-muted" style="font-size:0px;padding:0 0 8px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.5;text-align:center;color:#a6a6a6;">Head of Engineering</div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="center" style="font-size:0px;padding:0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:16px;line-height:1.5;text-align:center;color:#f2f2f2;"><a href="https://linkedin.com/in/tjansen" style="text-decoration: none; color: #bf80ff; font-size: 12px; letter-spacing: 0.5px; text-transform: uppercase; font-weight: 600;">
+            LinkedIn &rarr;
+          </a></div>
+    
+                </td>
+              </tr>
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td><![endif]-->
+          <!--[if mso | IE]><td class="" style="vertical-align:top;width:552px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+        <tbody>
+          <tr>
+            <td style="vertical-align:top;padding:0 8px;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="center" style="font-size:0px;padding:0 0 12px 0;word-break:break-word;">
+                  
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+        <tbody>
+          <tr>
+            <td style="width:96px;">
+              
+      <img alt="Sophie de Vries" src="https://via.placeholder.com/96x96/151828/9952e0?text&#x3D;SD" style="border:0;border-radius:999px;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="96" height="auto">
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="center" class="text-main" style="font-size:0px;padding:0 0 4px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:16px;font-weight:600;line-height:1.3;text-align:center;color:#f2f2f2;">Sophie de Vries</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="center" class="text-muted" style="font-size:0px;padding:0 0 8px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.5;text-align:center;color:#a6a6a6;">AI Strategy Lead</div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="center" style="font-size:0px;padding:0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:16px;line-height:1.5;text-align:center;color:#f2f2f2;"><a href="https://linkedin.com/in/sdevries" style="text-decoration: none; color: #bf80ff; font-size: 12px; letter-spacing: 0.5px; text-transform: uppercase; font-weight: 600;">
+            LinkedIn &rarr;
+          </a></div>
+    
+                </td>
+              </tr>
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td><![endif]-->
+
+      <!--[if mso | IE]></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><![endif]-->
+    
+    
+      
+      <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="pad-mobile-outlook" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div class="pad-mobile" style="margin:0px auto;max-width:600px;border-radius:14px;overflow:hidden;">
+        
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;border-collapse:separate;">
+          <tbody>
+            <tr>
+              <td style="border-radius:14px;direction:ltr;font-size:0px;padding:40px 32px 8px 32px;text-align:center;">
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="card-bg-outlook" width="600px" ><table align="center" border="0" cellpadding="0" cellspacing="0" class="card-bg-outlook" role="presentation" style="width:536px;" width="536" bgcolor="#151828" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div class="card-bg" style="background:#151828;background-color:#151828;margin:0px auto;max-width:536px;border-radius:14px;overflow:hidden;">
+        
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#151828;background-color:#151828;width:100%;border-collapse:separate;">
+          <tbody>
+            <tr>
+              <td style="border-radius:14px;direction:ltr;font-size:0px;padding:24px 20px 12px 20px;text-align:center;">
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:148.8px;" ><![endif]-->
+            
+      <div class="mj-column-per-30 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+        <tbody>
+          <tr>
+            <td style="vertical-align:top;padding:0;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="left" class="text-gold" style="font-size:0px;padding:0 0 10px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;line-height:1.5;text-align:left;color:#fde68b;">UPCOMING</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="left" class="text-main" style="font-size:0px;padding:0 0 4px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:36px;font-weight:700;letter-spacing:-1px;line-height:1.1;text-align:left;color:#f2f2f2;">21</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="left" class="text-accent" style="font-size:0px;padding:0 0 4px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;line-height:1.5;text-align:left;color:#bf80ff;">MEI 2026</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="left" class="text-muted" style="font-size:0px;padding:0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:12px;line-height:1.5;text-align:left;color:#a6a6a6;">14:00 CET</div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td><td class="" style="vertical-align:top;width:347.2px;" ><![endif]-->
+            
+      <div class="mj-column-per-70 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+        <tbody>
+          <tr>
+            <td style="vertical-align:top;padding:0;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="left" class="text-main" style="font-size:0px;padding:0 0 8px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:18px;font-weight:600;line-height:1.3;text-align:left;color:#f2f2f2;">AI for Enterprise — live webinar</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="left" class="text-main" style="font-size:0px;padding:0 0 10px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:14px;line-height:1.5;text-align:left;color:#f2f2f2;">Een uur over hoe je in 2026 je eerste agent in productie krijgt zonder je IT-afdeling gek te maken. Met live demo.</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="left" class="text-muted" style="font-size:0px;padding:0 0 14px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:12px;letter-spacing:0.3px;line-height:1.5;text-align:left;color:#a6a6a6;">Online · Zoom</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                  
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;">
+        <tbody>
+          <tr>
+            <td align="center" bgcolor="#9952e0" role="presentation" style="border:none;border-radius:6px;cursor:auto;mso-padding-alt:12px 20px;background:#9952e0;" valign="middle">
+              <a href="https://nina-ai.nl/webinar/may-2026" style="display: inline-block; background: #9952e0; color: #ffffff; font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 600; line-height: 1.2; margin: 0; text-decoration: none; text-transform: none; padding: 12px 20px; mso-padding-alt: 0px; border-radius: 6px;" target="_blank">
+                Reserveer je plek
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><![endif]-->
+    
+    
+      
+      <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="pad-mobile-outlook" role="presentation" style="width:600px;" width="600" bgcolor="#0c0e18" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div class="pad-mobile" style="background:#0c0e18;background-color:#0c0e18;margin:0px auto;max-width:600px;">
+        
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#0c0e18;background-color:#0c0e18;width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:44px 24px 8px 24px;text-align:center;">
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:552px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="center" class="text-muted" style="font-size:0px;padding:0 0 16px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:11px;letter-spacing:1.5px;line-height:1.4;text-align:center;color:#a6a6a6;">TRUSTED BY 50+ AMBITIEUZE TEAMS</div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="pad-mobile-outlook" role="presentation" style="width:600px;" width="600" bgcolor="#0c0e18" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div class="pad-mobile" style="background:#0c0e18;background-color:#0c0e18;margin:0px auto;max-width:600px;">
+        
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#0c0e18;background-color:#0c0e18;width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:0 24px 32px 24px;text-align:center;">
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><![endif]-->
+          <!--[if mso | IE]><td class="" style="vertical-align:middle;width:552px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:middle;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+        <tbody>
+          <tr>
+            <td style="vertical-align:middle;padding:6px;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="center" style="font-size:0px;padding:6px 0;word-break:break-word;">
+                  
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+        <tbody>
+          <tr>
+            <td style="width:80px;">
+              
+      <img alt="Lumen" src="https://via.placeholder.com/100x32/0c0e18/a6a6a6?text&#x3D;Lumen" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="80" height="auto">
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td><![endif]-->
+          <!--[if mso | IE]><td class="" style="vertical-align:middle;width:552px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:middle;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+        <tbody>
+          <tr>
+            <td style="vertical-align:middle;padding:6px;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="center" style="font-size:0px;padding:6px 0;word-break:break-word;">
+                  
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+        <tbody>
+          <tr>
+            <td style="width:80px;">
+              
+      <img alt="Bloom" src="https://via.placeholder.com/100x32/0c0e18/a6a6a6?text&#x3D;Bloom" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="80" height="auto">
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td><![endif]-->
+          <!--[if mso | IE]><td class="" style="vertical-align:middle;width:552px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:middle;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+        <tbody>
+          <tr>
+            <td style="vertical-align:middle;padding:6px;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="center" style="font-size:0px;padding:6px 0;word-break:break-word;">
+                  
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+        <tbody>
+          <tr>
+            <td style="width:80px;">
+              
+      <img alt="Helix" src="https://via.placeholder.com/100x32/0c0e18/a6a6a6?text&#x3D;Helix" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="80" height="auto">
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td><![endif]-->
+          <!--[if mso | IE]><td class="" style="vertical-align:middle;width:552px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:middle;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+        <tbody>
+          <tr>
+            <td style="vertical-align:middle;padding:6px;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="center" style="font-size:0px;padding:6px 0;word-break:break-word;">
+                  
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+        <tbody>
+          <tr>
+            <td style="width:80px;">
+              
+      <img alt="Northwind" src="https://via.placeholder.com/100x32/0c0e18/a6a6a6?text&#x3D;Northwind" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="80" height="auto">
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td><![endif]-->
+          <!--[if mso | IE]><td class="" style="vertical-align:middle;width:552px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:middle;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+        <tbody>
+          <tr>
+            <td style="vertical-align:middle;padding:6px;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="center" style="font-size:0px;padding:6px 0;word-break:break-word;">
+                  
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+        <tbody>
+          <tr>
+            <td style="width:80px;">
+              
+      <img alt="Atlas" src="https://via.placeholder.com/100x32/0c0e18/a6a6a6?text&#x3D;Atlas" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="80" height="auto">
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td><![endif]-->
+
+      <!--[if mso | IE]></tr></table><![endif]-->
               </td>
             </tr>
           </tbody>
@@ -487,59 +2482,53 @@
         <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#0c0e18;background-color:#0c0e18;width:100%;">
           <tbody>
             <tr>
-              <td style="direction:ltr;font-size:0px;padding:8px 24px 24px 24px;text-align:center;">
-                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:276px;" ><![endif]-->
+              <td style="direction:ltr;font-size:0px;padding:24px 32px 24px 32px;text-align:center;">
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:134px;" ><![endif]-->
             
-      <div class="mj-column-per-50 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+      <div class="mj-column-per-25 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
         
-      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+        <tbody>
+              <tr>
+                <td align="left" style="font-size:0px;padding:0;word-break:break-word;">
+                  
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
         <tbody>
           <tr>
-            <td style="vertical-align:top;padding:0 8px;">
+            <td style="width:72px;">
               
-      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
-        <tbody>
-              <tr>
-                <td align="left" class="text-main h2-mobile" style="font-size:0px;padding:0 0 8px 0;word-break:break-word;">
-                  
-      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:18px;font-weight:600;line-height:1.25;text-align:left;color:#f2f2f2;">Snel live</div>
-    
-                </td>
-              </tr>
-            
-              <tr>
-                <td align="left" class="text-muted" style="font-size:0px;padding:0;word-break:break-word;">
-                  
-      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:14px;line-height:1.5;text-align:left;color:#a6a6a6;">Van kick-off tot productie in 30 dagen. Geen pilot purgatorium — direct waarde leveren.</div>
-    
-                </td>
-              </tr>
-            
-        </tbody>
-      </table>
+      <img alt="Nina Smit" src="https://via.placeholder.com/72x72/151828/bf80ff?text&#x3D;NS" style="border:0;border-radius:999px;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="72" height="auto">
     
             </td>
           </tr>
+        </tbody>
+      </table>
+    
+                </td>
+              </tr>
         </tbody>
       </table>
     
       </div>
     
-          <!--[if mso | IE]></td><td class="" style="vertical-align:top;width:276px;" ><![endif]-->
+          <!--[if mso | IE]></td><td class="" style="vertical-align:middle;width:402px;" ><![endif]-->
             
-      <div class="mj-column-per-50 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+      <div class="mj-column-per-75 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:middle;width:100%;">
         
-      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:middle;" width="100%">
         <tbody>
-          <tr>
-            <td style="vertical-align:top;padding:0 8px;">
-              
-      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
-        <tbody>
+          
               <tr>
-                <td align="left" class="text-main h2-mobile" style="font-size:0px;padding:0 0 8px 0;word-break:break-word;">
+                <td align="left" class="text-main" style="font-size:0px;padding:0 0 8px 0;word-break:break-word;">
                   
-      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:18px;font-weight:600;line-height:1.25;text-align:left;color:#f2f2f2;">Eigenaarschap</div>
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:15px;line-height:1.5;text-align:left;color:#f2f2f2;">Tot snel,</div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="left" class="text-main" style="font-size:0px;padding:0 0 2px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:15px;font-weight:600;line-height:1.5;text-align:left;color:#f2f2f2;">Nina Smit</div>
     
                 </td>
               </tr>
@@ -547,22 +2536,258 @@
               <tr>
                 <td align="left" class="text-muted" style="font-size:0px;padding:0;word-break:break-word;">
                   
-      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:14px;line-height:1.5;text-align:left;color:#a6a6a6;">Code, prompts en data blijven van jou. Vendor lock-in is wat ons betreft een vies woord.</div>
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.5;text-align:left;color:#a6a6a6;">Founder, NinA AI</div>
     
                 </td>
               </tr>
             
-        </tbody>
-      </table>
-    
-            </td>
-          </tr>
         </tbody>
       </table>
     
       </div>
     
           <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><![endif]-->
+    
+    
+      
+      <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="pad-mobile-outlook" role="presentation" style="width:600px;" width="600" bgcolor="#0c0e18" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div class="pad-mobile" style="background:#0c0e18;background-color:#0c0e18;margin:0px auto;max-width:600px;">
+        
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#0c0e18;background-color:#0c0e18;width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:16px 24px 8px 24px;text-align:center;">
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:552px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="center" style="font-size:0px;padding:0 0 24px 0;word-break:break-word;">
+                  
+      <p style="border-top:solid 1px #33374d;font-size:1px;margin:0px auto;width:100%;">
+      </p>
+      
+      <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" style="border-top:solid 1px #33374d;font-size:1px;margin:0px auto;width:552px;" role="presentation" width="552px" ><tr><td style="height:0;line-height:0;"> &nbsp;
+</td></tr></table><![endif]-->
+    
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="pad-mobile-outlook" role="presentation" style="width:600px;" width="600" bgcolor="#0c0e18" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div class="pad-mobile" style="background:#0c0e18;background-color:#0c0e18;margin:0px auto;max-width:600px;">
+        
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#0c0e18;background-color:#0c0e18;width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:0 24px 16px 24px;text-align:center;">
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><![endif]-->
+          <!--[if mso | IE]><td class="" style="vertical-align:top;width:552px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+        <tbody>
+          <tr>
+            <td style="vertical-align:top;padding:0 8px;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="left" class="eyebrow text-accent" style="font-size:0px;padding:0 0 10px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;line-height:1.5;text-align:left;color:#bf80ff;">DIENSTEN</div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="left" class="text-muted" style="font-size:0px;padding:0 0 6px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.5;text-align:left;color:#a6a6a6;"><a href="https://nina-ai.nl/strategy" style="color: #a6a6a6; text-decoration: none;">AI Strategy</a></div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="left" class="text-muted" style="font-size:0px;padding:0 0 6px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.5;text-align:left;color:#a6a6a6;"><a href="https://nina-ai.nl/engineering" style="color: #a6a6a6; text-decoration: none;">AI Engineering</a></div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="left" class="text-muted" style="font-size:0px;padding:0 0 6px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.5;text-align:left;color:#a6a6a6;"><a href="https://nina-ai.nl/ops" style="color: #a6a6a6; text-decoration: none;">AI Operations</a></div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="left" class="text-muted" style="font-size:0px;padding:0 0 6px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.5;text-align:left;color:#a6a6a6;"><a href="https://nina-ai.nl/governance" style="color: #a6a6a6; text-decoration: none;">Governance</a></div>
+    
+                </td>
+              </tr>
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td><![endif]-->
+          <!--[if mso | IE]><td class="" style="vertical-align:top;width:552px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+        <tbody>
+          <tr>
+            <td style="vertical-align:top;padding:0 8px;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="left" class="eyebrow text-accent" style="font-size:0px;padding:0 0 10px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;line-height:1.5;text-align:left;color:#bf80ff;">BEDRIJF</div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="left" class="text-muted" style="font-size:0px;padding:0 0 6px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.5;text-align:left;color:#a6a6a6;"><a href="https://nina-ai.nl/about" style="color: #a6a6a6; text-decoration: none;">Over ons</a></div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="left" class="text-muted" style="font-size:0px;padding:0 0 6px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.5;text-align:left;color:#a6a6a6;"><a href="https://nina-ai.nl/cases" style="color: #a6a6a6; text-decoration: none;">Cases</a></div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="left" class="text-muted" style="font-size:0px;padding:0 0 6px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.5;text-align:left;color:#a6a6a6;"><a href="https://nina-ai.nl/careers" style="color: #a6a6a6; text-decoration: none;">Vacatures</a></div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="left" class="text-muted" style="font-size:0px;padding:0 0 6px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.5;text-align:left;color:#a6a6a6;"><a href="https://nina-ai.nl/press" style="color: #a6a6a6; text-decoration: none;">Pers</a></div>
+    
+                </td>
+              </tr>
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td><![endif]-->
+          <!--[if mso | IE]><td class="" style="vertical-align:top;width:552px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+        <tbody>
+          <tr>
+            <td style="vertical-align:top;padding:0 8px;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="left" class="eyebrow text-accent" style="font-size:0px;padding:0 0 10px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;line-height:1.5;text-align:left;color:#bf80ff;">RESOURCES</div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="left" class="text-muted" style="font-size:0px;padding:0 0 6px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.5;text-align:left;color:#a6a6a6;"><a href="https://nina-ai.nl/blog" style="color: #a6a6a6; text-decoration: none;">Blog</a></div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="left" class="text-muted" style="font-size:0px;padding:0 0 6px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.5;text-align:left;color:#a6a6a6;"><a href="https://nina-ai.nl/reports" style="color: #a6a6a6; text-decoration: none;">Rapporten</a></div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="left" class="text-muted" style="font-size:0px;padding:0 0 6px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.5;text-align:left;color:#a6a6a6;"><a href="https://nina-ai.nl/newsletter" style="color: #a6a6a6; text-decoration: none;">Newsletter</a></div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="left" class="text-muted" style="font-size:0px;padding:0 0 6px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.5;text-align:left;color:#a6a6a6;"><a href="https://nina-ai.nl/podcast" style="color: #a6a6a6; text-decoration: none;">Podcast</a></div>
+    
+                </td>
+              </tr>
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td><![endif]-->
+
+      <!--[if mso | IE]></tr></table><![endif]-->
               </td>
             </tr>
           </tbody>
@@ -607,25 +2832,39 @@
               <tr>
                 <td align="center" class="text-muted" style="font-size:0px;padding:0 0 6px 0;word-break:break-word;">
                   
-      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:14px;font-weight:600;line-height:1.5;text-align:center;color:#f2f2f2;">NinA AI</div>
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:15px;font-weight:600;line-height:1.5;text-align:center;color:#f2f2f2;">NinA AI</div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="center" class="text-muted" style="font-size:0px;padding:0 0 12px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.5;text-align:center;color:#a6a6a6;">Building the operating system of modern business.</div>
+    
+                </td>
+              </tr>
+              <tr>
+                <td align="center" class="text-muted" style="font-size:0px;padding:0 0 14px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:14px;line-height:1.5;text-align:center;color:#a6a6a6;">Herengracht 100, 1015 BS Amsterdam · KvK 87654321</div>
     
                 </td>
               </tr>
             
               <tr>
-                <td align="center" class="text-muted" style="font-size:0px;padding:0 0 12px 0;word-break:break-word;">
+                <td align="center" class="text-muted" style="font-size:0px;padding:0 0 14px 0;word-break:break-word;">
                   
-      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:14px;line-height:1.5;text-align:center;color:#a6a6a6;">Herengracht 100, 1015 BS Amsterdam</div>
-    
-                </td>
-              </tr>
-            
-              <tr>
-                <td align="center" class="text-muted" style="font-size:0px;padding:0 0 12px 0;word-break:break-word;">
-                  
-      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:14px;line-height:1.5;text-align:center;color:#a6a6a6;"><a href="https://linkedin.com/company/nina-ai" style="color: #9952e0; text-decoration: none; margin: 0 8px;">LinkedIn</a>
-          <span style="color:#33374d;">&bull;</span>
-          <a href="https://tiktok.com/@nina.ai" style="color: #9952e0; text-decoration: none; margin: 0 8px;">TikTok</a></div>
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:14px;line-height:1.5;text-align:center;color:#a6a6a6;"><a href="https://linkedin.com/company/nina-ai" style="color: #9952e0; text-decoration: none; margin: 0 10px; font-weight: 600;">LinkedIn</a>
+          <span style="color:#33374d;">·</span>
+          <a href="https://tiktok.com/@nina.ai" style="color: #9952e0; text-decoration: none; margin: 0 10px; font-weight: 600;">TikTok</a>
+          <mj-raw></mj-raw>
+          <span style="color:#33374d;">·</span>
+          <a href="https://instagram.com/nina.ai.agency" style="color: #9952e0; text-decoration: none; margin: 0 10px; font-weight: 600;">Instagram</a>
+          <mj-raw></mj-raw>
+          <mj-raw></mj-raw>
+          <span style="color:#33374d;">·</span>
+          <a href="https://x.com/ninaai_nl" style="color: #9952e0; text-decoration: none; margin: 0 10px; font-weight: 600;">X</a>
+          <mj-raw></mj-raw></div>
     
                 </td>
               </tr>
@@ -633,13 +2872,21 @@
               <tr>
                 <td align="center" class="text-muted" style="font-size:0px;padding:0 0 4px 0;word-break:break-word;">
                   
-      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:12px;line-height:1.5;text-align:center;color:#a6a6a6;"><a href="https://nina-ai.nl/unsubscribe?token&#x3D;%%TOKEN%%" style="color: #a6a6a6; text-decoration: underline;">Uitschrijven</a></div>
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:12px;line-height:1.5;text-align:center;color:#a6a6a6;"><a href="https://nina-ai.nl/unsubscribe?token&#x3D;%%TOKEN%%" style="color: #a6a6a6; text-decoration: underline;">Uitschrijven</a>
+          <mj-raw></mj-raw>
+          &nbsp;·&nbsp;
+          <a href="https://nina-ai.nl/preferences" style="color: #a6a6a6; text-decoration: underline;">Voorkeuren</a>
+          <mj-raw></mj-raw>
+          <mj-raw></mj-raw>
+          &nbsp;·&nbsp;
+          <a href="https://nina-ai.nl/email/view/%%MSG_ID%%" style="color: #a6a6a6; text-decoration: underline;">Bekijk in browser</a>
+          <mj-raw></mj-raw></div>
     
                 </td>
               </tr>
             
               <tr>
-                <td align="center" class="text-muted" style="font-size:0px;padding:0 0 24px 0;word-break:break-word;">
+                <td align="center" class="text-muted" style="font-size:0px;padding:0 0 28px 0;word-break:break-word;">
                   
       <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:12px;line-height:1.5;text-align:center;color:#a6a6a6;">&copy; 2026 NinA AI. Alle rechten voorbehouden.</div>
     

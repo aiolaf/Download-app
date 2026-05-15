@@ -1,24 +1,50 @@
 <!--
-  NinA AI — Reusable email template (MJML source)
-  =====================================================================
-  Compiles to bulletproof HTML via `node build.js`.
-  All placeholders use Handlebars syntax: {{VARIABLE_NAME}}.
-  Each module is wrapped with {{#if SHOW_X}}...{{/if}} so individual
-  blocks can be toggled on/off from the data file.
-  =====================================================================
+  ════════════════════════════════════════════════════════════════════
+  NinA AI — flagship email template (MJML source)
+  ════════════════════════════════════════════════════════════════════
+  Premium agency-grade modules — same kind of building blocks you see
+  in emails from H&M, KPMG, PwC, Stripe, The Information, NYT.
+  Every block is opt-in via {{#if SHOW_*}} flags in the data file.
+
+  Build:    node build.js
+  Preview:  node build.js --data sample-data.json
+  Editor:   open editor.html in your browser
+
+  Module overview (in render order)
+  ----------------------------------
+   1. HEADER            logo + tagline
+   2. PRESS_BAR         "As featured in" mini logo strip
+   3. HERO              eyebrow + gradient H1 + intro + optional image
+   4. STATS             3-up KPI row (huge numbers + labels)
+   5. MANIFESTO         oversized gradient pull-quote
+   6. CONTENT           numbered editorial paragraphs (repeatable)
+   7. CASE_STUDY        hero image + metric pills + CTA link
+   8. QUOTE             classic testimonial with purple accent
+   9. CTA               bulletproof primary button
+  10. ARTICLES          3-column newsletter roundup
+  11. SERVICES          2x2 service grid with icons
+  12. TEAM              founder/team spotlight cards
+  13. EVENT             webinar / talk announcement card
+  14. LOGO_WALL         "trusted by" client logo strip
+  15. IMAGE             full-width image with caption
+  16. TWO_COLUMN        two features side by side
+  17. DIVIDER           thin border line
+  18. SIGNATURE         photo + name + role + handwritten signature
+  19. FOOTER_LINKS      multi-column nav (Services / Company / etc.)
+  20. FOOTER            brand block, address, socials, unsubscribe
+  ════════════════════════════════════════════════════════════════════
 -->
 <mjml>
   <mj-head>
     <mj-title>{{EMAIL_TITLE}}</mj-title>
     <mj-preview>{{PREHEADER}}</mj-preview>
 
-    <!-- Hint clients that this email is designed for dark surfaces. -->
     <mj-raw>
       <meta name="color-scheme" content="dark light">
       <meta name="supported-color-schemes" content="dark light">
     </mj-raw>
 
-    <!-- Global defaults — system font stack only (no webfonts). -->
+    <!-- Global typography & component defaults -->
     <mj-attributes>
       <mj-all font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" />
       <mj-text color="#f2f2f2" font-size="16px" line-height="1.5" padding="0" />
@@ -27,36 +53,108 @@
       <mj-divider border-color="#33374d" border-width="1px" padding="0" />
       <mj-class name="card" background-color="#151828" border-radius="12px" />
       <mj-class name="muted" color="#a6a6a6" font-size="14px" line-height="1.5" />
-      <mj-class name="h1" color="#f2f2f2" font-size="32px" line-height="1.2" font-weight="700" />
+      <mj-class name="micro" color="#a6a6a6" font-size="11px" line-height="1.4" letter-spacing="1.5px" />
+      <mj-class name="h1" color="#f2f2f2" font-size="34px" line-height="1.15" font-weight="700" letter-spacing="-0.5px" />
       <mj-class name="h2" color="#f2f2f2" font-size="22px" line-height="1.25" font-weight="600" />
-      <mj-class name="tagline" color="#a6a6a6" font-size="13px" line-height="1.4" letter-spacing="0.5px" />
+      <mj-class name="h3" color="#f2f2f2" font-size="18px" line-height="1.3" font-weight="600" />
+      <mj-class name="stat-num" color="#f2f2f2" font-size="40px" line-height="1.05" font-weight="700" letter-spacing="-1px" />
+      <mj-class name="tagline" color="#a6a6a6" font-size="12px" line-height="1.4" letter-spacing="1.5px" />
     </mj-attributes>
 
+    <!-- Inline styles (survive most clients including Outlook) -->
     <mj-style inline="inline">
       a { color: #9952e0; text-decoration: none; }
       a:hover { color: #bf80ff !important; }
     </mj-style>
 
-    <!-- Non-inlined styles: responsive tweaks + dark-mode hardening. -->
+    <!-- Head <style> block — used by clients that support media queries -->
     <mj-style>
-      /* Force consistent dark background even when clients try to remap. */
+      /* Lock body to brand dark, override Gmail/Outlook auto-remap. */
       body, .body-bg { background-color: #0c0e18 !important; }
 
-      /* Outlook.com / Office 365 colour-scheme attribute targeting. */
+      /* Outlook.com / Office 365 dark-mode targeting. */
       [data-ogsc] body, [data-ogsc] .body-bg { background-color: #0c0e18 !important; }
       [data-ogsc] .card-bg { background-color: #151828 !important; }
       [data-ogsc] .text-main, [data-ogsc] .text-main * { color: #f2f2f2 !important; }
       [data-ogsc] .text-muted, [data-ogsc] .text-muted * { color: #a6a6a6 !important; }
+      [data-ogsc] .text-gold, [data-ogsc] .text-gold * { color: #fde68b !important; }
+      [data-ogsc] .text-accent, [data-ogsc] .text-accent * { color: #bf80ff !important; }
 
-      /* Mobile breakpoint: stack columns, tighten typography. */
+      /* Apple Mail / iOS / Gmail web: gradient text on hero + manifesto.
+         Outlook ignores -webkit-background-clip and falls back to the
+         flat color attribute set on the &lt;mj-text&gt; — by design. */
+      .gradient-text, .gradient-text div, .gradient-text span {
+        background: linear-gradient(90deg, #9952e0 0%, #bf80ff 55%, #fde68b 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent !important;
+      }
+
+      /* Subtle border gradient for premium cards (renders in modern
+         clients only — Outlook gets a solid border).                  */
+      .premium-card {
+        background-image:
+          linear-gradient(#151828, #151828),
+          linear-gradient(135deg, #9952e0 0%, #fde68b 100%);
+        background-origin: border-box;
+        background-clip: padding-box, border-box;
+        border: 1px solid transparent !important;
+      }
+
+      /* Metric pills used in case study + event date pill */
+      .pill {
+        display: inline-block;
+        background: rgba(153, 82, 224, 0.15);
+        color: #bf80ff;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        margin: 0 6px 6px 0;
+        line-height: 1.2;
+      }
+      .pill-gold {
+        background: rgba(253, 230, 139, 0.12);
+        color: #fde68b;
+      }
+
+      /* Eyebrow label above titles */
+      .eyebrow {
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 11px;
+        color: #bf80ff;
+        font-weight: 600;
+      }
+
+      /* Numbered content badges (1, 2, 3 …) */
+      .number-badge {
+        display: inline-block;
+        width: 28px;
+        height: 28px;
+        line-height: 28px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #9952e0, #bf80ff);
+        color: #fff;
+        font-weight: 700;
+        text-align: center;
+        font-size: 13px;
+        margin-right: 10px;
+        vertical-align: middle;
+      }
+
+      /* Mobile breakpoint: tighten typography, stack lighter */
       @media only screen and (max-width: 480px) {
-        .h1-mobile div { font-size: 26px !important; line-height: 1.25 !important; }
+        .h1-mobile div { font-size: 26px !important; line-height: 1.2 !important; }
         .h2-mobile div { font-size: 20px !important; line-height: 1.3 !important; }
+        .stat-num-mobile div { font-size: 32px !important; }
+        .manifesto-mobile div { font-size: 22px !important; line-height: 1.25 !important; }
         .hide-mobile { display: none !important; }
         .pad-mobile { padding-left: 20px !important; padding-right: 20px !important; }
       }
 
-      /* prefers-color-scheme: dark — already dark, but lock it down. */
       @media (prefers-color-scheme: dark) {
         body, .body-bg { background-color: #0c0e18 !important; }
         .card-bg { background-color: #151828 !important; }
@@ -66,11 +164,9 @@
 
   <mj-body background-color="#0c0e18" css-class="body-bg" width="600px">
 
-    <!-- ====================================================== -->
-    <!-- 1. HEADER  (logo + optional tagline)                    -->
-    <!-- ====================================================== -->
+    <!-- ░░ 1. HEADER ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
     <mj-raw>{{#if SHOW_HEADER}}</mj-raw>
-    <mj-section padding="32px 24px 16px 24px">
+    <mj-section padding="32px 24px 8px 24px">
       <mj-column vertical-align="middle" width="60%">
         <mj-image
           src="{{LOGO_URL}}"
@@ -88,52 +184,182 @@
     </mj-section>
     <mj-raw>{{/if}}</mj-raw>
 
-    <!-- ====================================================== -->
-    <!-- 2. HERO  (H1 + intro + optional image)                  -->
-    <!-- ====================================================== -->
-    <mj-raw>{{#if SHOW_HERO}}</mj-raw>
-    <mj-section mj-class="card" css-class="card-bg pad-mobile" padding="40px 32px 32px 32px">
+    <!-- ░░ 2. PRESS BAR — "As featured in" ░░░░░░░░░░░░░░░░░░░░░░░ -->
+    <mj-raw>{{#if SHOW_PRESS_BAR}}</mj-raw>
+    <mj-section padding="16px 24px 24px 24px" css-class="pad-mobile">
       <mj-column>
-        <mj-text mj-class="h1" css-class="text-main h1-mobile" padding="0 0 16px 0">{{HERO_TITLE}}</mj-text>
-        <mj-text css-class="text-main" padding="0 0 24px 0">{{HERO_BODY}}</mj-text>
+        <mj-text mj-class="micro" align="center" css-class="text-muted" padding="0 0 12px 0">
+          {{PRESS_BAR_LABEL}}
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section padding="0 24px 12px 24px" css-class="pad-mobile">
+      <mj-raw>{{#each PRESS_LOGOS}}</mj-raw>
+      <mj-column vertical-align="middle" padding="0 6px">
+        <mj-image src="{{this.URL}}" alt="{{this.ALT}}" width="80px" padding="6px 0" align="center" />
+      </mj-column>
+      <mj-raw>{{/each}}</mj-raw>
+    </mj-section>
+    <mj-raw>{{/if}}</mj-raw>
+
+    <!-- ░░ 3. HERO ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+    <mj-raw>{{#if SHOW_HERO}}</mj-raw>
+    <mj-section mj-class="card" css-class="card-bg pad-mobile" padding="44px 36px 36px 36px">
+      <mj-column>
+        <mj-raw>{{#if HERO_EYEBROW}}</mj-raw>
+        <mj-text css-class="eyebrow text-accent" color="#bf80ff" font-size="11px" line-height="1.4" letter-spacing="2px" font-weight="600" padding="0 0 14px 0">
+          {{HERO_EYEBROW}}
+        </mj-text>
+        <mj-raw>{{/if}}</mj-raw>
+
+        <mj-text
+          mj-class="h1"
+          css-class="text-main h1-mobile {{#if HERO_GRADIENT_TITLE}}gradient-text{{/if}}"
+          padding="0 0 18px 0">
+          {{HERO_TITLE}}
+        </mj-text>
+
+        <mj-raw>{{#if HERO_GREETING}}</mj-raw>
+        <mj-text css-class="text-main" font-size="17px" font-weight="500" padding="0 0 12px 0">
+          {{HERO_GREETING}}
+        </mj-text>
+        <mj-raw>{{/if}}</mj-raw>
+
+        <mj-text css-class="text-main" font-size="17px" line-height="1.55" padding="0 0 24px 0">
+          {{{HERO_BODY}}}
+        </mj-text>
 
         <mj-raw>{{#if HERO_IMAGE_URL}}</mj-raw>
-        <mj-image
-          src="{{HERO_IMAGE_URL}}"
-          alt="{{HERO_IMAGE_ALT}}"
-          border-radius="8px"
-          padding="8px 0 0 0" />
+        <mj-image src="{{HERO_IMAGE_URL}}" alt="{{HERO_IMAGE_ALT}}" border-radius="10px" padding="8px 0 0 0" />
         <mj-raw>{{/if}}</mj-raw>
       </mj-column>
     </mj-section>
     <mj-raw>{{/if}}</mj-raw>
 
-    <!-- ====================================================== -->
-    <!-- 3. CONTENT  (H2 + paragraph, repeatable via CONTENT_BLOCKS) -->
-    <!-- ====================================================== -->
+    <!-- ░░ 4. STATS — 3-up KPI row ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+    <mj-raw>{{#if SHOW_STATS}}</mj-raw>
+    <mj-raw>{{#if STATS_HEADING}}</mj-raw>
+    <mj-section padding="40px 32px 0 32px" css-class="pad-mobile">
+      <mj-column>
+        <mj-text mj-class="h2" css-class="text-main h2-mobile" align="center" padding="0 0 6px 0">
+          {{STATS_HEADING}}
+        </mj-text>
+        <mj-raw>{{#if STATS_SUBHEADING}}</mj-raw>
+        <mj-text mj-class="muted" css-class="text-muted" align="center" padding="0 0 24px 0">
+          {{STATS_SUBHEADING}}
+        </mj-text>
+        <mj-raw>{{/if}}</mj-raw>
+      </mj-column>
+    </mj-section>
+    <mj-raw>{{/if}}</mj-raw>
+
+    <mj-section padding="16px 24px 24px 24px" css-class="pad-mobile">
+      <mj-raw>{{#each STATS}}</mj-raw>
+      <mj-column padding="12px 8px" background-color="#151828" border-radius="10px" css-class="card-bg">
+        <mj-text mj-class="stat-num" css-class="text-main stat-num-mobile" align="center" padding="6px 0 4px 0">
+          {{this.VALUE}}
+        </mj-text>
+        <mj-text mj-class="muted" css-class="text-muted" align="center" font-size="12px" line-height="1.4" padding="0 8px 8px 8px">
+          {{this.LABEL}}
+        </mj-text>
+      </mj-column>
+      <mj-raw>{{/each}}</mj-raw>
+    </mj-section>
+    <mj-raw>{{/if}}</mj-raw>
+
+    <!-- ░░ 5. MANIFESTO — gradient pull-quote ░░░░░░░░░░░░░░░░░░░ -->
+    <mj-raw>{{#if SHOW_MANIFESTO}}</mj-raw>
+    <mj-section padding="40px 32px 24px 32px" css-class="pad-mobile">
+      <mj-column>
+        <mj-raw>{{#if MANIFESTO_LABEL}}</mj-raw>
+        <mj-text css-class="eyebrow text-gold" color="#fde68b" font-size="11px" letter-spacing="2px" font-weight="600" align="center" padding="0 0 14px 0">
+          {{MANIFESTO_LABEL}}
+        </mj-text>
+        <mj-raw>{{/if}}</mj-raw>
+        <mj-text
+          css-class="text-main manifesto-mobile gradient-text"
+          font-size="28px"
+          line-height="1.25"
+          font-weight="700"
+          letter-spacing="-0.5px"
+          align="center"
+          padding="0 0 8px 0">
+          {{MANIFESTO_TEXT}}
+        </mj-text>
+        <mj-raw>{{#if MANIFESTO_ATTRIBUTION}}</mj-raw>
+        <mj-text mj-class="muted" css-class="text-muted" align="center" font-size="13px" padding="12px 0 0 0">
+          — {{MANIFESTO_ATTRIBUTION}}
+        </mj-text>
+        <mj-raw>{{/if}}</mj-raw>
+      </mj-column>
+    </mj-section>
+    <mj-raw>{{/if}}</mj-raw>
+
+    <!-- ░░ 6. CONTENT — numbered editorial paragraphs ░░░░░░░░░░░ -->
     <mj-raw>{{#if SHOW_CONTENT}}{{#each CONTENT_BLOCKS}}</mj-raw>
     <mj-section background-color="#0c0e18" padding="24px 32px 0 32px" css-class="pad-mobile">
       <mj-column>
         <mj-raw>{{#if this.HEADING}}</mj-raw>
-        <mj-text mj-class="h2" css-class="text-main h2-mobile" padding="0 0 12px 0">{{this.HEADING}}</mj-text>
+        <mj-text mj-class="h2" css-class="text-main h2-mobile" padding="0 0 12px 0">
+          <mj-raw>{{#if ../CONTENT_NUMBERED}}</mj-raw><span class="number-badge">{{add @index 1}}</span><mj-raw>{{/if}}</mj-raw>{{this.HEADING}}
+        </mj-text>
         <mj-raw>{{/if}}</mj-raw>
         <mj-text css-class="text-main" padding="0">{{{this.BODY}}}</mj-text>
       </mj-column>
     </mj-section>
     <mj-raw>{{/each}}{{/if}}</mj-raw>
 
-    <!-- ====================================================== -->
-    <!-- 4. QUOTE / HIGHLIGHT (purple left border)               -->
-    <!-- ====================================================== -->
+    <!-- ░░ 7. CASE STUDY card ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+    <mj-raw>{{#if SHOW_CASE_STUDY}}</mj-raw>
+    <mj-section padding="40px 32px 0 32px" css-class="pad-mobile">
+      <mj-column mj-class="card" css-class="card-bg" padding="0" border-radius="14px">
+        <mj-raw>{{#if CASE_STUDY_IMAGE_URL}}</mj-raw>
+        <mj-image
+          src="{{CASE_STUDY_IMAGE_URL}}"
+          alt="{{CASE_STUDY_IMAGE_ALT}}"
+          border-radius="14px 14px 0 0"
+          padding="0" />
+        <mj-raw>{{/if}}</mj-raw>
+
+        <mj-text css-class="eyebrow text-accent" color="#bf80ff" font-size="11px" letter-spacing="2px" font-weight="600" padding="28px 28px 8px 28px">
+          {{CASE_STUDY_LABEL}}{{#if CASE_STUDY_CLIENT}} · {{CASE_STUDY_CLIENT}}{{/if}}
+        </mj-text>
+        <mj-text mj-class="h2" css-class="text-main h2-mobile" font-size="24px" padding="0 28px 12px 28px">
+          {{CASE_STUDY_TITLE}}
+        </mj-text>
+        <mj-text css-class="text-main" padding="0 28px 18px 28px">
+          {{{CASE_STUDY_BODY}}}
+        </mj-text>
+
+        <mj-raw>{{#if CASE_STUDY_METRICS}}</mj-raw>
+        <mj-text padding="0 28px 18px 28px" line-height="1.4" color="#bf80ff" font-size="13px">
+          <mj-raw>{{#each CASE_STUDY_METRICS}}</mj-raw>
+          <span class="pill"><strong style="color:#f2f2f2;">{{this.VALUE}}</strong> &nbsp;{{this.LABEL}}</span>
+          <mj-raw>{{/each}}</mj-raw>
+        </mj-text>
+        <mj-raw>{{/if}}</mj-raw>
+
+        <mj-raw>{{#if CASE_STUDY_CTA_URL}}</mj-raw>
+        <mj-text padding="0 28px 28px 28px">
+          <a href="{{CASE_STUDY_CTA_URL}}" style="color:#bf80ff;font-weight:600;font-size:14px;letter-spacing:0.3px;">
+            {{CASE_STUDY_CTA_TEXT}} &rarr;
+          </a>
+        </mj-text>
+        <mj-raw>{{/if}}</mj-raw>
+      </mj-column>
+    </mj-section>
+    <mj-raw>{{/if}}</mj-raw>
+
+    <!-- ░░ 8. QUOTE — testimonial with purple left accent ░░░░░░░ -->
     <mj-raw>{{#if SHOW_QUOTE}}</mj-raw>
-    <mj-section padding="32px 32px 8px 32px" css-class="pad-mobile">
+    <mj-section padding="40px 32px 8px 32px" css-class="pad-mobile">
       <mj-column
         background-color="#151828"
         border-left="4px solid #9952e0"
         border-radius="0 8px 8px 0"
-        padding="20px 24px"
+        padding="22px 26px"
         css-class="card-bg">
-        <mj-text css-class="text-main" font-size="17px" font-style="italic" line-height="1.5" padding="0 0 8px 0">
+        <mj-text css-class="text-main" font-size="18px" font-style="italic" line-height="1.5" padding="0 0 10px 0">
           &ldquo;{{QUOTE_TEXT}}&rdquo;
         </mj-text>
         <mj-raw>{{#if QUOTE_AUTHOR}}</mj-raw>
@@ -143,11 +369,9 @@
     </mj-section>
     <mj-raw>{{/if}}</mj-raw>
 
-    <!-- ====================================================== -->
-    <!-- 5. CTA  (bulletproof button, VML fallback via MJML)     -->
-    <!-- ====================================================== -->
+    <!-- ░░ 9. CTA — bulletproof primary button ░░░░░░░░░░░░░░░░░░ -->
     <mj-raw>{{#if SHOW_CTA}}</mj-raw>
-    <mj-section padding="32px 32px 16px 32px" css-class="pad-mobile">
+    <mj-section padding="40px 32px 16px 32px" css-class="pad-mobile">
       <mj-column>
         <mj-button
           href="{{CTA_URL}}"
@@ -163,33 +387,247 @@
           {{CTA_TEXT}}
         </mj-button>
         <mj-raw>{{#if CTA_SUBTEXT}}</mj-raw>
-        <mj-text mj-class="muted" css-class="text-muted" align="center" padding="12px 0 0 0">{{CTA_SUBTEXT}}</mj-text>
+        <mj-text mj-class="muted" css-class="text-muted" align="center" padding="14px 0 0 0">
+          {{CTA_SUBTEXT}}
+        </mj-text>
         <mj-raw>{{/if}}</mj-raw>
       </mj-column>
     </mj-section>
     <mj-raw>{{/if}}</mj-raw>
 
-    <!-- ====================================================== -->
-    <!-- 6. IMAGE  (full-width with optional caption)            -->
-    <!-- ====================================================== -->
+    <!-- ░░ 10. ARTICLES — 3-up newsletter roundup ░░░░░░░░░░░░░░░ -->
+    <mj-raw>{{#if SHOW_ARTICLES}}</mj-raw>
+    <mj-section padding="40px 24px 8px 24px" css-class="pad-mobile">
+      <mj-column>
+        <mj-raw>{{#if ARTICLES_EYEBROW}}</mj-raw>
+        <mj-text css-class="eyebrow text-gold" color="#fde68b" align="center" font-size="11px" letter-spacing="2px" font-weight="600" padding="0 0 10px 0">
+          {{ARTICLES_EYEBROW}}
+        </mj-text>
+        <mj-raw>{{/if}}</mj-raw>
+        <mj-text mj-class="h2" css-class="text-main h2-mobile" align="center" padding="0 0 24px 0">
+          {{ARTICLES_HEADING}}
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section padding="0 16px 16px 16px" css-class="pad-mobile">
+      <mj-raw>{{#each ARTICLES}}</mj-raw>
+      <mj-column padding="0 8px" vertical-align="top">
+        <mj-image src="{{this.IMAGE_URL}}" alt="{{this.IMAGE_ALT}}" border-radius="8px" padding="0 0 10px 0" />
+        <mj-raw>{{#if this.TAG}}</mj-raw>
+        <mj-text css-class="eyebrow text-accent" color="#bf80ff" font-size="10px" letter-spacing="1.5px" font-weight="600" padding="0 0 6px 0">
+          {{this.TAG}}
+        </mj-text>
+        <mj-raw>{{/if}}</mj-raw>
+        <mj-text mj-class="h3" css-class="text-main" font-size="16px" line-height="1.3" padding="0 0 8px 0">
+          {{this.HEADING}}
+        </mj-text>
+        <mj-text mj-class="muted" css-class="text-muted" font-size="13px" line-height="1.5" padding="0 0 10px 0">
+          {{this.EXCERPT}}
+        </mj-text>
+        <mj-text padding="0">
+          <a href="{{this.URL}}" style="color:#bf80ff;font-weight:600;font-size:13px;">
+            Lees verder &rarr;
+          </a>
+        </mj-text>
+      </mj-column>
+      <mj-raw>{{/each}}</mj-raw>
+    </mj-section>
+    <mj-raw>{{/if}}</mj-raw>
+
+    <!-- ░░ 11. SERVICES — 2x2 grid ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+    <mj-raw>{{#if SHOW_SERVICES}}</mj-raw>
+    <mj-section padding="40px 32px 12px 32px" css-class="pad-mobile">
+      <mj-column>
+        <mj-raw>{{#if SERVICES_EYEBROW}}</mj-raw>
+        <mj-text css-class="eyebrow text-accent" color="#bf80ff" align="center" font-size="11px" letter-spacing="2px" font-weight="600" padding="0 0 10px 0">
+          {{SERVICES_EYEBROW}}
+        </mj-text>
+        <mj-raw>{{/if}}</mj-raw>
+        <mj-text mj-class="h2" css-class="text-main h2-mobile" align="center" padding="0 0 6px 0">
+          {{SERVICES_HEADING}}
+        </mj-text>
+        <mj-raw>{{#if SERVICES_SUBHEADING}}</mj-raw>
+        <mj-text mj-class="muted" css-class="text-muted" align="center" padding="0 0 18px 0">
+          {{SERVICES_SUBHEADING}}
+        </mj-text>
+        <mj-raw>{{/if}}</mj-raw>
+      </mj-column>
+    </mj-section>
+
+    <!-- Row 1: services 0 + 1 -->
+    <mj-section padding="6px 24px" css-class="pad-mobile">
+      <mj-column width="50%" padding="8px" background-color="#151828" border-radius="10px" css-class="card-bg" vertical-align="top">
+        <mj-raw>{{#with SERVICES.[0]}}</mj-raw>
+        <mj-raw>{{#if this.ICON_URL}}</mj-raw>
+        <mj-image src="{{this.ICON_URL}}" alt="{{this.ICON_ALT}}" width="36px" align="left" padding="12px 12px 8px 12px" />
+        <mj-raw>{{/if}}</mj-raw>
+        <mj-text mj-class="h3" css-class="text-main" padding="4px 16px 6px 16px">{{this.TITLE}}</mj-text>
+        <mj-text mj-class="muted" css-class="text-muted" font-size="13px" padding="0 16px 16px 16px">{{this.BODY}}</mj-text>
+        <mj-raw>{{/with}}</mj-raw>
+      </mj-column>
+      <mj-column width="50%" padding="8px" background-color="#151828" border-radius="10px" css-class="card-bg" vertical-align="top">
+        <mj-raw>{{#with SERVICES.[1]}}</mj-raw>
+        <mj-raw>{{#if this.ICON_URL}}</mj-raw>
+        <mj-image src="{{this.ICON_URL}}" alt="{{this.ICON_ALT}}" width="36px" align="left" padding="12px 12px 8px 12px" />
+        <mj-raw>{{/if}}</mj-raw>
+        <mj-text mj-class="h3" css-class="text-main" padding="4px 16px 6px 16px">{{this.TITLE}}</mj-text>
+        <mj-text mj-class="muted" css-class="text-muted" font-size="13px" padding="0 16px 16px 16px">{{this.BODY}}</mj-text>
+        <mj-raw>{{/with}}</mj-raw>
+      </mj-column>
+    </mj-section>
+    <!-- Row 2: services 2 + 3 -->
+    <mj-section padding="6px 24px" css-class="pad-mobile">
+      <mj-column width="50%" padding="8px" background-color="#151828" border-radius="10px" css-class="card-bg" vertical-align="top">
+        <mj-raw>{{#with SERVICES.[2]}}</mj-raw>
+        <mj-raw>{{#if this.ICON_URL}}</mj-raw>
+        <mj-image src="{{this.ICON_URL}}" alt="{{this.ICON_ALT}}" width="36px" align="left" padding="12px 12px 8px 12px" />
+        <mj-raw>{{/if}}</mj-raw>
+        <mj-text mj-class="h3" css-class="text-main" padding="4px 16px 6px 16px">{{this.TITLE}}</mj-text>
+        <mj-text mj-class="muted" css-class="text-muted" font-size="13px" padding="0 16px 16px 16px">{{this.BODY}}</mj-text>
+        <mj-raw>{{/with}}</mj-raw>
+      </mj-column>
+      <mj-column width="50%" padding="8px" background-color="#151828" border-radius="10px" css-class="card-bg" vertical-align="top">
+        <mj-raw>{{#with SERVICES.[3]}}</mj-raw>
+        <mj-raw>{{#if this.ICON_URL}}</mj-raw>
+        <mj-image src="{{this.ICON_URL}}" alt="{{this.ICON_ALT}}" width="36px" align="left" padding="12px 12px 8px 12px" />
+        <mj-raw>{{/if}}</mj-raw>
+        <mj-text mj-class="h3" css-class="text-main" padding="4px 16px 6px 16px">{{this.TITLE}}</mj-text>
+        <mj-text mj-class="muted" css-class="text-muted" font-size="13px" padding="0 16px 16px 16px">{{this.BODY}}</mj-text>
+        <mj-raw>{{/with}}</mj-raw>
+      </mj-column>
+    </mj-section>
+    <mj-raw>{{/if}}</mj-raw>
+
+    <!-- ░░ 12. TEAM ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+    <mj-raw>{{#if SHOW_TEAM}}</mj-raw>
+    <mj-section padding="40px 32px 0 32px" css-class="pad-mobile">
+      <mj-column>
+        <mj-text css-class="eyebrow text-gold" color="#fde68b" align="center" font-size="11px" letter-spacing="2px" font-weight="600" padding="0 0 10px 0">
+          {{TEAM_EYEBROW}}
+        </mj-text>
+        <mj-text mj-class="h2" css-class="text-main h2-mobile" align="center" padding="0 0 24px 0">
+          {{TEAM_HEADING}}
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section padding="0 24px 16px 24px" css-class="pad-mobile">
+      <mj-raw>{{#each TEAM}}</mj-raw>
+      <mj-column padding="0 8px" vertical-align="top">
+        <mj-image src="{{this.PHOTO_URL}}" alt="{{this.ALT}}" border-radius="999px" width="96px" padding="0 0 12px 0" />
+        <mj-text mj-class="h3" css-class="text-main" font-size="16px" align="center" padding="0 0 4px 0">
+          {{this.NAME}}
+        </mj-text>
+        <mj-text mj-class="muted" css-class="text-muted" font-size="13px" align="center" padding="0 0 8px 0">
+          {{this.ROLE}}
+        </mj-text>
+        <mj-raw>{{#if this.LINK_URL}}</mj-raw>
+        <mj-text align="center" padding="0">
+          <a href="{{this.LINK_URL}}" style="color:#bf80ff;font-size:12px;letter-spacing:0.5px;text-transform:uppercase;font-weight:600;">
+            LinkedIn &rarr;
+          </a>
+        </mj-text>
+        <mj-raw>{{/if}}</mj-raw>
+      </mj-column>
+      <mj-raw>{{/each}}</mj-raw>
+    </mj-section>
+    <mj-raw>{{/if}}</mj-raw>
+
+    <!-- ░░ 13. EVENT — webinar / talk card ░░░░░░░░░░░░░░░░░░░░░░ -->
+    <mj-raw>{{#if SHOW_EVENT}}</mj-raw>
+    <mj-wrapper padding="40px 32px 8px 32px" border-radius="14px" css-class="pad-mobile">
+      <mj-section background-color="#151828" border-radius="14px" padding="24px 20px 12px 20px" css-class="card-bg">
+        <mj-column width="30%" vertical-align="top" padding="0">
+          <mj-text css-class="text-gold" font-size="11px" letter-spacing="1.5px" font-weight="700" color="#fde68b" padding="0 0 10px 0">
+            {{EVENT_LABEL}}
+          </mj-text>
+          <mj-text css-class="text-main" font-size="36px" line-height="1.1" font-weight="700" color="#f2f2f2" padding="0 0 4px 0" letter-spacing="-1px">
+            {{EVENT_DATE_DAY}}
+          </mj-text>
+          <mj-text css-class="text-accent" color="#bf80ff" font-size="13px" font-weight="600" letter-spacing="1px" padding="0 0 4px 0">
+            {{EVENT_DATE_MONTH}}
+          </mj-text>
+          <mj-text mj-class="muted" css-class="text-muted" font-size="12px" padding="0">
+            {{EVENT_TIME}}
+          </mj-text>
+        </mj-column>
+        <mj-column width="70%" vertical-align="top" padding="0">
+          <mj-text mj-class="h3" css-class="text-main" font-size="18px" padding="0 0 8px 0">
+            {{EVENT_TITLE}}
+          </mj-text>
+          <mj-text css-class="text-main" font-size="14px" line-height="1.5" padding="0 0 10px 0">
+            {{EVENT_BODY}}
+          </mj-text>
+          <mj-text mj-class="muted" css-class="text-muted" font-size="12px" letter-spacing="0.3px" padding="0 0 14px 0">
+            {{EVENT_LOCATION}}
+          </mj-text>
+          <mj-button
+            href="{{EVENT_CTA_URL}}"
+            background-color="#9952e0"
+            color="#ffffff"
+            border-radius="6px"
+            font-size="14px"
+            inner-padding="12px 20px"
+            align="left">
+            {{EVENT_CTA_TEXT}}
+          </mj-button>
+        </mj-column>
+      </mj-section>
+    </mj-wrapper>
+    <mj-raw>{{/if}}</mj-raw>
+
+    <!-- ░░ 14. LOGO WALL — "Trusted by" ░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+    <mj-raw>{{#if SHOW_LOGO_WALL}}</mj-raw>
+    <mj-section padding="44px 24px 8px 24px" css-class="pad-mobile">
+      <mj-column>
+        <mj-text mj-class="micro" css-class="text-muted" align="center" padding="0 0 16px 0">
+          {{LOGO_WALL_LABEL}}
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section padding="0 24px 32px 24px" css-class="pad-mobile">
+      <mj-raw>{{#each LOGO_WALL}}</mj-raw>
+      <mj-column vertical-align="middle" padding="6px">
+        <mj-image src="{{this.URL}}" alt="{{this.ALT}}" width="80px" padding="6px 0" align="center" />
+      </mj-column>
+      <mj-raw>{{/each}}</mj-raw>
+    </mj-section>
+    <mj-raw>{{/if}}</mj-raw>
+
+    <!-- ░░ 15. IMAGE — full-width with caption ░░░░░░░░░░░░░░░░░░ -->
     <mj-raw>{{#if SHOW_IMAGE}}</mj-raw>
     <mj-section padding="24px 32px 0 32px" css-class="pad-mobile">
       <mj-column>
-        <mj-image
-          src="{{IMAGE_URL}}"
-          alt="{{IMAGE_ALT}}"
-          border-radius="8px"
-          padding="0" />
+        <mj-image src="{{IMAGE_URL}}" alt="{{IMAGE_ALT}}" border-radius="10px" padding="0" />
         <mj-raw>{{#if IMAGE_CAPTION}}</mj-raw>
-        <mj-text mj-class="muted" css-class="text-muted" align="center" padding="10px 0 0 0">{{IMAGE_CAPTION}}</mj-text>
+        <mj-text mj-class="muted" css-class="text-muted" align="center" padding="10px 0 0 0">
+          {{IMAGE_CAPTION}}
+        </mj-text>
         <mj-raw>{{/if}}</mj-raw>
       </mj-column>
     </mj-section>
     <mj-raw>{{/if}}</mj-raw>
 
-    <!-- ====================================================== -->
-    <!-- 7. DIVIDER                                              -->
-    <!-- ====================================================== -->
+    <!-- ░░ 16. TWO-COLUMN ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+    <mj-raw>{{#if SHOW_TWO_COLUMN}}</mj-raw>
+    <mj-section padding="8px 24px 24px 24px" css-class="pad-mobile">
+      <mj-column width="50%" padding="0 8px">
+        <mj-raw>{{#if COL1_IMAGE_URL}}</mj-raw>
+        <mj-image src="{{COL1_IMAGE_URL}}" alt="{{COL1_IMAGE_ALT}}" border-radius="8px" padding="0 0 12px 0" />
+        <mj-raw>{{/if}}</mj-raw>
+        <mj-text mj-class="h3" css-class="text-main" font-size="18px" padding="0 0 8px 0">{{COL1_TITLE}}</mj-text>
+        <mj-text mj-class="muted" css-class="text-muted" padding="0">{{COL1_BODY}}</mj-text>
+      </mj-column>
+      <mj-column width="50%" padding="0 8px">
+        <mj-raw>{{#if COL2_IMAGE_URL}}</mj-raw>
+        <mj-image src="{{COL2_IMAGE_URL}}" alt="{{COL2_IMAGE_ALT}}" border-radius="8px" padding="0 0 12px 0" />
+        <mj-raw>{{/if}}</mj-raw>
+        <mj-text mj-class="h3" css-class="text-main" font-size="18px" padding="0 0 8px 0">{{COL2_TITLE}}</mj-text>
+        <mj-text mj-class="muted" css-class="text-muted" padding="0">{{COL2_BODY}}</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-raw>{{/if}}</mj-raw>
+
+    <!-- ░░ 17. DIVIDER ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
     <mj-raw>{{#if SHOW_DIVIDER}}</mj-raw>
     <mj-section padding="32px 32px" css-class="pad-mobile">
       <mj-column>
@@ -198,53 +636,97 @@
     </mj-section>
     <mj-raw>{{/if}}</mj-raw>
 
-    <!-- ====================================================== -->
-    <!-- 8. TWO-COLUMN (stacks on mobile via MJML defaults)      -->
-    <!-- ====================================================== -->
-    <mj-raw>{{#if SHOW_TWO_COLUMN}}</mj-raw>
-    <mj-section padding="8px 24px 24px 24px" css-class="pad-mobile">
-      <mj-column width="50%" padding="0 8px">
-        <mj-raw>{{#if COL1_IMAGE_URL}}</mj-raw>
-        <mj-image src="{{COL1_IMAGE_URL}}" alt="{{COL1_IMAGE_ALT}}" border-radius="8px" padding="0 0 12px 0" />
+    <!-- ░░ 18. SIGNATURE ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+    <mj-raw>{{#if SHOW_SIGNATURE}}</mj-raw>
+    <mj-section padding="24px 32px 24px 32px" css-class="pad-mobile">
+      <mj-column width="25%" vertical-align="top">
+        <mj-raw>{{#if SIGNATURE_PHOTO_URL}}</mj-raw>
+        <mj-image src="{{SIGNATURE_PHOTO_URL}}" alt="{{SIGNATURE_PHOTO_ALT}}" width="72px" border-radius="999px" align="left" padding="0" />
         <mj-raw>{{/if}}</mj-raw>
-        <mj-text mj-class="h2" css-class="text-main h2-mobile" font-size="18px" padding="0 0 8px 0">{{COL1_TITLE}}</mj-text>
-        <mj-text mj-class="muted" css-class="text-muted" padding="0">{{COL1_BODY}}</mj-text>
       </mj-column>
-      <mj-column width="50%" padding="0 8px">
-        <mj-raw>{{#if COL2_IMAGE_URL}}</mj-raw>
-        <mj-image src="{{COL2_IMAGE_URL}}" alt="{{COL2_IMAGE_ALT}}" border-radius="8px" padding="0 0 12px 0" />
+      <mj-column width="75%" vertical-align="middle">
+        <mj-text css-class="text-main" font-size="15px" padding="0 0 8px 0">
+          {{SIGNATURE_TEXT}}
+        </mj-text>
+        <mj-raw>{{#if SIGNATURE_SCRIPT_URL}}</mj-raw>
+        <mj-image src="{{SIGNATURE_SCRIPT_URL}}" alt="{{SIGNATURE_NAME}}" width="120px" align="left" padding="0 0 6px 0" />
         <mj-raw>{{/if}}</mj-raw>
-        <mj-text mj-class="h2" css-class="text-main h2-mobile" font-size="18px" padding="0 0 8px 0">{{COL2_TITLE}}</mj-text>
-        <mj-text mj-class="muted" css-class="text-muted" padding="0">{{COL2_BODY}}</mj-text>
+        <mj-text css-class="text-main" font-weight="600" font-size="15px" padding="0 0 2px 0">
+          {{SIGNATURE_NAME}}
+        </mj-text>
+        <mj-text mj-class="muted" css-class="text-muted" font-size="13px" padding="0">
+          {{SIGNATURE_ROLE}}
+        </mj-text>
       </mj-column>
     </mj-section>
     <mj-raw>{{/if}}</mj-raw>
 
-    <!-- ====================================================== -->
-    <!-- 9. FOOTER (brand, address, socials, unsubscribe)        -->
-    <!-- ====================================================== -->
+    <!-- ░░ 19. FOOTER LINKS — multi-column nav ░░░░░░░░░░░░░░░░░░ -->
+    <mj-raw>{{#if SHOW_FOOTER_LINKS}}</mj-raw>
+    <mj-section padding="16px 24px 8px 24px" css-class="pad-mobile">
+      <mj-column>
+        <mj-divider border-color="#33374d" border-width="1px" padding="0 0 24px 0" />
+      </mj-column>
+    </mj-section>
+    <mj-section padding="0 24px 16px 24px" css-class="pad-mobile">
+      <mj-raw>{{#each FOOTER_LINK_GROUPS}}</mj-raw>
+      <mj-column vertical-align="top" padding="0 8px">
+        <mj-text css-class="eyebrow text-accent" color="#bf80ff" font-size="11px" letter-spacing="1.5px" font-weight="700" padding="0 0 10px 0">
+          {{this.TITLE}}
+        </mj-text>
+        <mj-raw>{{#each this.LINKS}}</mj-raw>
+        <mj-text mj-class="muted" css-class="text-muted" font-size="13px" padding="0 0 6px 0">
+          <a href="{{this.URL}}" style="color:#a6a6a6;text-decoration:none;">{{this.TEXT}}</a>
+        </mj-text>
+        <mj-raw>{{/each}}</mj-raw>
+      </mj-column>
+      <mj-raw>{{/each}}</mj-raw>
+    </mj-section>
+    <mj-raw>{{/if}}</mj-raw>
+
+    <!-- ░░ 20. FOOTER — brand block + socials + legal ░░░░░░░░░░░ -->
     <mj-raw>{{#if SHOW_FOOTER}}</mj-raw>
     <mj-section padding="16px 32px 8px 32px" css-class="pad-mobile">
       <mj-column>
         <mj-divider border-color="#33374d" border-width="1px" padding="0 0 24px 0" />
-        <mj-text mj-class="muted" css-class="text-muted" align="center" padding="0 0 6px 0" color="#f2f2f2" font-weight="600" font-size="14px">
+        <mj-text mj-class="muted" css-class="text-muted" align="center" padding="0 0 6px 0" color="#f2f2f2" font-weight="600" font-size="15px">
           {{FOOTER_COMPANY}}
         </mj-text>
-        <mj-text mj-class="muted" css-class="text-muted" align="center" padding="0 0 12px 0">
+        <mj-raw>{{#if FOOTER_TAGLINE}}</mj-raw>
+        <mj-text mj-class="muted" css-class="text-muted" align="center" font-size="13px" padding="0 0 12px 0">
+          {{FOOTER_TAGLINE}}
+        </mj-text>
+        <mj-raw>{{/if}}</mj-raw>
+        <mj-text mj-class="muted" css-class="text-muted" align="center" padding="0 0 14px 0">
           {{FOOTER_ADDRESS}}
         </mj-text>
 
-        <!-- Social links — small text links, no heavy icons (icons require hosted images). -->
-        <mj-text mj-class="muted" css-class="text-muted" align="center" padding="0 0 12px 0">
-          <a href="{{LINKEDIN_URL}}" style="color:#9952e0;text-decoration:none;margin:0 8px;">LinkedIn</a>
-          <span style="color:#33374d;">&bull;</span>
-          <a href="{{TIKTOK_URL}}" style="color:#9952e0;text-decoration:none;margin:0 8px;">TikTok</a>
+        <mj-text mj-class="muted" css-class="text-muted" align="center" padding="0 0 14px 0">
+          <a href="{{LINKEDIN_URL}}" style="color:#9952e0;text-decoration:none;margin:0 10px;font-weight:600;">LinkedIn</a>
+          <span style="color:#33374d;">·</span>
+          <a href="{{TIKTOK_URL}}" style="color:#9952e0;text-decoration:none;margin:0 10px;font-weight:600;">TikTok</a>
+          <mj-raw>{{#if INSTAGRAM_URL}}</mj-raw>
+          <span style="color:#33374d;">·</span>
+          <a href="{{INSTAGRAM_URL}}" style="color:#9952e0;text-decoration:none;margin:0 10px;font-weight:600;">Instagram</a>
+          <mj-raw>{{/if}}</mj-raw>
+          <mj-raw>{{#if X_URL}}</mj-raw>
+          <span style="color:#33374d;">·</span>
+          <a href="{{X_URL}}" style="color:#9952e0;text-decoration:none;margin:0 10px;font-weight:600;">X</a>
+          <mj-raw>{{/if}}</mj-raw>
         </mj-text>
 
         <mj-text mj-class="muted" css-class="text-muted" align="center" font-size="12px" padding="0 0 4px 0">
           <a href="{{UNSUBSCRIBE_URL}}" style="color:#a6a6a6;text-decoration:underline;">Uitschrijven</a>
+          <mj-raw>{{#if PREFERENCES_URL}}</mj-raw>
+          &nbsp;·&nbsp;
+          <a href="{{PREFERENCES_URL}}" style="color:#a6a6a6;text-decoration:underline;">Voorkeuren</a>
+          <mj-raw>{{/if}}</mj-raw>
+          <mj-raw>{{#if VIEW_IN_BROWSER_URL}}</mj-raw>
+          &nbsp;·&nbsp;
+          <a href="{{VIEW_IN_BROWSER_URL}}" style="color:#a6a6a6;text-decoration:underline;">Bekijk in browser</a>
+          <mj-raw>{{/if}}</mj-raw>
         </mj-text>
-        <mj-text mj-class="muted" css-class="text-muted" align="center" font-size="12px" padding="0 0 24px 0">
+        <mj-text mj-class="muted" css-class="text-muted" align="center" font-size="12px" padding="0 0 28px 0">
           &copy; {{COPYRIGHT_YEAR}} {{FOOTER_COMPANY}}. Alle rechten voorbehouden.
         </mj-text>
       </mj-column>

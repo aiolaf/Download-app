@@ -1,171 +1,173 @@
-# NinA AI — herbruikbare email template
+# NinA AI — Flagship email template
 
-Een MJML-gebaseerde, donkere, premium email template (denk Stripe / Linear /
-Notion) voor NinA AI Agency. Mobile-first, dark-mode aware, en getest in
-de gangbare clients: Gmail, Apple Mail, Outlook (Win/Mac/Web/.com),
-Yahoo en iOS/Android.
+Een MJML-gebaseerde, donkere, premium agency email template. Premium
+modules van het kaliber dat je in mails van **Stripe, Linear, Notion,
+H&M, KPMG, PwC, NYT en The Information** ziet — maar dan in jouw merk.
+Mobile-first, dark-mode aware, en getest in alle gangbare clients.
 
 ## Bestanden
 
 | Pad | Wat het is |
 |---|---|
-| `src/template.mjml` | MJML source met alle modulaire blokken en `{{placeholders}}` |
-| `build.js` | Node-script dat MJML compileert en optioneel Handlebars data invult |
-| `dist/template.html` | Gecompileerde bulletproof HTML met `{{placeholders}}` intact — dit upload je naar je ESP/CRM |
-| `dist/template-filled.html` | Volledig ingevulde voorbeeldmail (alleen bij gebruik van `--data`) |
-| `sample-data.json` | Voorbeeld-data met dummy content voor lokale preview |
+| `src/template.mjml` | MJML source met 20 modulaire blokken |
+| `build.js` | Node script: compileert MJML + (optioneel) merget data |
+| `dist/template.html` | Bulletproof gecompileerde HTML met `{{placeholders}}` intact — upload naar je ESP |
+| `dist/template.js` | Auto-gegenereerde JS bundle voor de browser-editor |
+| `dist/template-filled.html` | Volledige preview met sample data, opent direct in browser |
+| `dist/vendor.handlebars.min.js` | Gevendoorde Handlebars voor offline editor |
+| `sample-data.json` | Dummy content die alle modules toont |
+| `editor.html` | Visuele in-browser editor — vul velden in, live preview + code |
 
-## Builden
+## Snel starten
 
 ```bash
-# 1. dependencies (eenmalig)
+# 1. install (eenmalig)
 npm install
 
-# 2. alleen compileren — placeholders blijven staan
-node build.js
-# of via npm:
-npm run build:email
-
-# 3. compileren + sample data invullen — open in browser om te previewen
+# 2. compile + render sample data
 node build.js --data sample-data.json
-# of:
-npm run build:email:sample
+# of: npm run build:email:sample
+
+# 3. open editor.html in je browser (file:// werkt prima)
+#    → vul velden in, switch tussen Preview en Code, klik Copy HTML
 ```
 
-Na stap 3 opent `dist/template-filled.html` netjes in elke browser. Sleep
-hem ook gerust in een test-tool zoals Litmus of Email on Acid voor
-client-screenshots.
+## De 20 modulaire blokken
 
-## Modulaire blokken
+Elk blok is opt-in via `SHOW_*` flag. Volgorde in de email:
 
-Elk blok is onafhankelijk aan/uit te zetten via `SHOW_*` flags in je
-data file:
+| # | Module | Toggle | Wat het is |
+|---|---|---|---|
+| 1 | Header | `SHOW_HEADER` | Logo links, optionele tagline rechts |
+| 2 | Press bar | `SHOW_PRESS_BAR` | "Featured in" + 3–5 media logo's |
+| 3 | Hero | `SHOW_HERO` | Eyebrow label + (gradient) H1 + groet + intro + optionele image |
+| 4 | Stats | `SHOW_STATS` | 3-up KPI row (huge numbers + labels) |
+| 5 | Manifesto | `SHOW_MANIFESTO` | Oversized gradient pull-quote met attributie |
+| 6 | Content | `SHOW_CONTENT` | Numbered editorial paragraphs (repeatable) |
+| 7 | Case study | `SHOW_CASE_STUDY` | Cover image + metric pills + CTA link |
+| 8 | Quote | `SHOW_QUOTE` | Klassiek testimonial blok met paars accent |
+| 9 | CTA | `SHOW_CTA` | Bulletproof primary button (VML voor Outlook) |
+| 10 | Articles | `SHOW_ARTICLES` | 3-column newsletter roundup |
+| 11 | Services | `SHOW_SERVICES` | 2×2 service grid met icons |
+| 12 | Team | `SHOW_TEAM` | Team spotlight met ronde avatars |
+| 13 | Event | `SHOW_EVENT` | Webinar/talk card met datum-pijl + RSVP |
+| 14 | Logo wall | `SHOW_LOGO_WALL` | "Trusted by" client logo strip |
+| 15 | Image | `SHOW_IMAGE` | Full-width image + caption |
+| 16 | Two-column | `SHOW_TWO_COLUMN` | Twee features naast elkaar (stackt mobile) |
+| 17 | Divider | `SHOW_DIVIDER` | Dunne lijn |
+| 18 | Signature | `SHOW_SIGNATURE` | Foto + naam + rol + optionele handgeschreven sig |
+| 19 | Footer links | `SHOW_FOOTER_LINKS` | Multi-column nav (Diensten / Bedrijf / Resources) |
+| 20 | Footer | `SHOW_FOOTER` | Bedrijf, adres, socials, unsubscribe, copyright |
 
-| Flag | Blok |
-|---|---|
-| `SHOW_HEADER` | Logo + optionele tagline |
-| `SHOW_HERO` | Grote H1 + intro + optionele hero-afbeelding |
-| `SHOW_CONTENT` | Herhaalbare H2 + paragraaf blokken (zie `CONTENT_BLOCKS`) |
-| `SHOW_QUOTE` | Quote/highlight blok met paars accent |
-| `SHOW_CTA` | Bulletproof button (VML fallback inbegrepen) |
-| `SHOW_IMAGE` | Full-width afbeelding met optionele caption |
-| `SHOW_DIVIDER` | Dunne lijn (#33374d) |
-| `SHOW_TWO_COLUMN` | Twee features naast elkaar, stackt < 480px |
-| `SHOW_FOOTER` | Brand, adres, socials, unsubscribe, copyright |
+## Editor — workflow
 
-Zet een flag op `false` en het blok wordt uit de HTML weggelaten.
+`editor.html` is een complete in-browser editor:
+- **Live preview** rechts (desktop + mobile switch)
+- **Code tab** met copy-button
+- **Download .html** voor offline gebruik
+- **Load sample** om alles direct gevuld te zien
+- **Persist** naar localStorage (refresh-safe)
+- Elke section heeft een **toggle** om hem aan/uit te zetten in de mail
+- Arrays (content blocks, stats, articles, services, team, links, logo's)
+  zijn vrij toe te voegen of te verwijderen
 
-## Alle placeholders
+## Repeatable arrays — JSON formaat
 
-### Header / meta
-| Variabele | Voorbeeld | Verplicht |
-|---|---|---|
-| `EMAIL_TITLE` | `"Welkom bij NinA AI"` | ja (HTML `<title>`) |
-| `PREHEADER` | `"Een nieuw tijdperk van AI..."` (≤ 90 tekens) | ja |
-| `LOGO_URL` | `"https://nina-ai.nl/logo.png"` | indien `SHOW_HEADER` |
-| `LOGO_ALT` | `"NinA AI logo"` | indien `SHOW_HEADER` |
-| `LOGO_HREF` | `"https://nina-ai.nl"` | indien `SHOW_HEADER` |
-| `TAGLINE` | `"AI AGENCY · AMSTERDAM"` | optioneel |
+Wanneer je niet de editor maar JSON gebruikt:
 
-### Hero
-| Variabele | Voorbeeld |
-|---|---|
-| `HERO_TITLE` | `"AI die voor jouw business werkt."` |
-| `HERO_BODY` | `"Wij bouwen op maat gemaakte..."` |
-| `HERO_IMAGE_URL` | `"https://.../hero.png"` (leeg = verbergen) |
-| `HERO_IMAGE_ALT` | `"Screenshot van de NinA dashboard"` |
-
-### Content (herhaalbaar)
-`CONTENT_BLOCKS` is een **array**. Elk item heeft `HEADING` en `BODY`.
-`BODY` ondersteunt onbescaaped HTML (triple-stash `{{{...}}}`) zodat je
-links en `<strong>` tags mag gebruiken.
-
-```json
+```jsonc
 "CONTENT_BLOCKS": [
-  { "HEADING": "Waarom NinA?", "BODY": "We combineren <strong>strategie</strong>..." },
-  { "HEADING": "Wat krijg je?", "BODY": "Een dedicated AI-agent..." }
+  { "HEADING": "...", "BODY": "..." }
+],
+"STATS": [
+  { "VALUE": "312%", "LABEL": "ROI binnen 6mnd" }
+],
+"PRESS_LOGOS": [
+  { "URL": "...", "ALT": "Forbes", "HREF": "" }
+],
+"ARTICLES": [
+  { "IMAGE_URL": "...", "IMAGE_ALT": "...",
+    "TAG": "INSIGHT · 6 MIN", "HEADING": "...",
+    "EXCERPT": "...", "URL": "..." }
+],
+"SERVICES": [   // max 4 — rendert als 2×2 grid
+  { "ICON_URL": "...", "ICON_ALT": "...",
+    "TITLE": "...", "BODY": "..." }
+],
+"TEAM": [
+  { "PHOTO_URL": "...", "ALT": "...",
+    "NAME": "...", "ROLE": "...", "LINK_URL": "..." }
+],
+"LOGO_WALL": [
+  { "URL": "...", "ALT": "..." }
+],
+"CASE_STUDY_METRICS": [
+  { "VALUE": "40u", "LABEL": "Bespaard per week" }
+],
+"FOOTER_LINK_GROUPS": [   // max 3 kolommen
+  { "TITLE": "DIENSTEN",
+    "LINKS": [ { "TEXT": "AI Strategy", "URL": "..." } ]
+  }
 ]
 ```
 
-### Quote
-| Variabele | Voorbeeld |
-|---|---|
-| `QUOTE_TEXT` | `"Binnen zes weken bespaarde..."` |
-| `QUOTE_AUTHOR` | `"Mark de Vries, COO bij Lumen B.V."` (optioneel) |
-
-### CTA
-| Variabele | Voorbeeld |
-|---|---|
-| `CTA_TEXT` | `"Plan een strategiegesprek"` |
-| `CTA_URL` | `"https://nina-ai.nl/contact"` |
-| `CTA_SUBTEXT` | `"30 minuten · gratis"` (optioneel) |
-
-### Image
-| Variabele | Voorbeeld |
-|---|---|
-| `IMAGE_URL` | `"https://.../feature.png"` |
-| `IMAGE_ALT` | `"Beschrijving van de afbeelding"` (verplicht) |
-| `IMAGE_CAPTION` | `"Onderschrift"` (optioneel) |
-
-### Two-column
-| Variabele | Voorbeeld |
-|---|---|
-| `COL1_IMAGE_URL` / `COL2_IMAGE_URL` | URL of `""` om te verbergen |
-| `COL1_IMAGE_ALT` / `COL2_IMAGE_ALT` | alt-text |
-| `COL1_TITLE` / `COL2_TITLE` | `"Snel live"` |
-| `COL1_BODY` / `COL2_BODY` | paragraaf tekst |
-
-### Footer
-| Variabele | Voorbeeld |
-|---|---|
-| `FOOTER_COMPANY` | `"NinA AI"` |
-| `FOOTER_ADDRESS` | `"Herengracht 100, 1015 BS Amsterdam"` |
-| `LINKEDIN_URL` | `"https://linkedin.com/company/nina-ai"` |
-| `TIKTOK_URL` | `"https://tiktok.com/@nina.ai"` |
-| `UNSUBSCRIBE_URL` | `"https://nina-ai.nl/unsubscribe?token=%%TOKEN%%"` |
-| `COPYRIGHT_YEAR` | `"2026"` |
-
-## Brand kleuren (vastgelegd in `src/template.mjml`)
+## Brand kleuren
 
 | Token | Hex | Gebruik |
 |---|---|---|
 | Achtergrond | `#0c0e18` | body |
-| Kaart | `#151828` | content cards, hero |
-| Primair accent | `#9952e0` | knoppen, links |
-| Licht paars | `#bf80ff` | hover/secondary |
+| Kaart | `#151828` | content cards, hero, services |
+| Primair accent | `#9952e0` | knoppen, links, badges |
+| Licht paars | `#bf80ff` | eyebrows, hover, accent text |
 | Hoofdtekst | `#f2f2f2` | body copy |
 | Muted tekst | `#a6a6a6` | captions, footer |
 | Border | `#33374d` | dividers |
-| Goud accent | `#fde68b` | optionele highlight (nog niet in default modules) |
+| Goud accent | `#fde68b` | manifesto label, event pill, gradient eind |
 
-Wil je het goud accent ergens gebruiken? Override de relevante MJML
-class of voeg een nieuw blok toe met `color="#fde68b"`.
+De gradient (paars → goud) wordt gebruikt op de hero titel, manifesto
+en op number-badges in content blocks. Werkt in Apple Mail, iOS Mail,
+Gmail web. Outlook desktop valt netjes terug op vlakke `color`.
 
-## Een nieuw blok toevoegen
+## Personalisatie (merge tags)
 
-1. Open `src/template.mjml`.
-2. Plak een nieuw `<mj-section>` op de plek waar je hem wilt hebben.
-3. Wikkel hem desgewenst in `<mj-raw>{{#if SHOW_MIJN_BLOK}}</mj-raw>`
-   ... `<mj-raw>{{/if}}</mj-raw>` zodat hij optioneel wordt.
-4. Voeg nieuwe placeholders toe in `{{HANDLEBARS}}` syntax.
-5. Run `node build.js --data sample-data.json` en check het resultaat.
+Je kunt ESP merge tags zoals `{{FIRST_NAME}}`, `%%TOKEN%%` of
+`{{FNAME}}` direct in elk text-veld zetten. De Handlebars-compile
+laat dubbele tags die niet matchen met je data ongemoeid (`noEscape`
+is uit, dus gewone HTML-escaping). Voor merge tags die conflicteren
+met Handlebars-syntax kun je op string-niveau `[[FIRST_NAME]]` of
+`%%TOKEN%%` gebruiken — die negeert Handlebars volledig.
 
-## Email-client compatibiliteit (checklist)
+## Email-client compatibiliteit
 
-- [x] Gmail (web, iOS, Android)
-- [x] Apple Mail (macOS + iOS)
-- [x] Outlook Windows (2016/2019/365) — VML buttons + mso fallbacks
+- [x] Gmail (web, iOS, Android) — clipt boven 102KB, design is intact
+- [x] Apple Mail (macOS + iOS) — gradient text rendert
+- [x] Outlook Windows (2016/2019/365) — VML buttons + mso fallbacks,
+      vlakke kleur ipv gradient, geen border-radius (rechte hoeken)
 - [x] Outlook Mac
 - [x] Outlook web / Outlook.com — `[data-ogsc]` dark-mode hardening
 - [x] Yahoo Mail
-- [x] Mobile breakpoint @ 480px
+- [x] Mobile breakpoint @ 480px (typografie, padding, kolommen stacken)
 
-## Bekende dingen
+## Een eigen blok toevoegen
 
-- **Webfonts**: bewust niet geladen. We vallen terug op Inter (indien
-  lokaal geïnstalleerd, bv. macOS Sequoia/Windows 11) → systeem-stack.
-- **Donker thema in Gmail Android**: Gmail kan kleuren licht
-  inverteren. Door `meta name="color-scheme"` + `!important` op de body
-  background houden we het donker in 95% van de gevallen.
-- **Outlook desktop**: rendert geen `border-radius` op knoppen. De VML
-  fallback gebruikt rechte hoeken — bewuste trade-off, accepteer 'm.
+1. Open `src/template.mjml`, plak een nieuwe `<mj-section>` op de
+   gewenste positie, wikkel hem in `<mj-raw>{{#if SHOW_X}}</mj-raw>` …
+   `<mj-raw>{{/if}}</mj-raw>`.
+2. Voeg het blok toe in het `SCHEMA` array van `editor.html`.
+3. Voeg sample-content toe aan `sample-data.json`.
+4. Run `node build.js --data sample-data.json` — klaar.
+
+## Bekende keuzes
+
+- **Geen webfonts**: bewust niet geladen. We vertrouwen op system
+  Inter (macOS Sequoia, Windows 11) → systeem-stack fallback.
+- **Gradient text**: niet ondersteund in Outlook desktop. Dat is OK —
+  we vallen terug op de vlakke `color` die in MJML staat ingesteld.
+- **`border-radius`**: Outlook desktop negeert dit. Knoppen en cards
+  zijn dus rechthoekig in Outlook. Bewuste trade-off.
+- **Image hosting**: alle `*_URL` velden zijn placeholder URLs
+  (`via.placeholder.com`) in de sample data. Vervang door je eigen
+  CDN/asset host voor productie.
+- **Filled output ~140KB**: ruim onder Outlook's 200KB-limiet. Gmail
+  clipt boven 102KB met "View entire message" link, design blijft
+  perfect. Voor critical-path emails kun je modules uitschakelen.
