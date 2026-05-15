@@ -1,0 +1,78 @@
+#!/usr/bin/env node
+/**
+ * NinA AI — email template build script
+ * ---------------------------------------------------------------
+ * Usage:
+ *   node build.js                          → compiles src/template.mjml
+ *                                            to dist/template.html
+ *                                            (placeholders intact)
+ *
+ *   node build.js --data sample-data.json  → compiles + applies the
+ *                                            Handlebars data file
+ *                                            and writes
+ *                                            dist/template-filled.html
+ *
+ * Why two outputs?
+ *   - template.html       — the reusable artifact you ship to your
+ *                           ESP/CRM with {{PLACEHOLDERS}} intact.
+ *   - template-filled.html — a fully rendered preview you can open
+ *                            directly in a browser to QA the design.
+ */
+
+const fs = require('fs');
+const path = require('path');
+const mjml2html = require('mjml');
+const Handlebars = require('handlebars');
+
+// --- arg parsing (tiny, dependency-free) ---------------------------
+const args = process.argv.slice(2);
+const dataIdx = args.indexOf('--data');
+const dataFile = dataIdx !== -1 ? args[dataIdx + 1] : null;
+
+// --- paths ---------------------------------------------------------
+const ROOT = __dirname;
+const SRC = path.join(ROOT, 'src', 'template.mjml');
+const DIST_DIR = path.join(ROOT, 'dist');
+const DIST_TPL = path.join(DIST_DIR, 'template.html');
+const DIST_FILLED = path.join(DIST_DIR, 'template-filled.html');
+
+if (!fs.existsSync(SRC)) {
+  console.error(`✗ MJML source not found at ${SRC}`);
+  process.exit(1);
+}
+if (!fs.existsSync(DIST_DIR)) fs.mkdirSync(DIST_DIR, { recursive: true });
+
+// --- 1. compile MJML → HTML ---------------------------------------
+const mjmlSrc = fs.readFileSync(SRC, 'utf8');
+const compiled = mjml2html(mjmlSrc, {
+  validationLevel: 'soft', // warn but don't crash on unknown attrs
+  minify: false,
+  keepComments: false,
+  fonts: {}, // intentionally empty: no Google Fonts injection
+});
+
+if (compiled.errors && compiled.errors.length) {
+  for (const err of compiled.errors) {
+    console.warn('[MJML]', err.formattedMessage || err.message);
+  }
+}
+
+fs.writeFileSync(DIST_TPL, compiled.html, 'utf8');
+console.log(`✓ MJML compiled → ${path.relative(ROOT, DIST_TPL)}`);
+
+// --- 2. optional Handlebars render --------------------------------
+if (dataFile) {
+  const dataPath = path.resolve(process.cwd(), dataFile);
+  if (!fs.existsSync(dataPath)) {
+    console.error(`✗ Data file not found: ${dataPath}`);
+    process.exit(1);
+  }
+  const data = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
+  // noEscape: false keeps & → &amp; in URLs, which is HTML-correct
+  // and matches what mail clients expect inside href/src attributes.
+  const tpl = Handlebars.compile(compiled.html);
+  const filled = tpl(data);
+  fs.writeFileSync(DIST_FILLED, filled, 'utf8');
+  console.log(`✓ Data merged   → ${path.relative(ROOT, DIST_FILLED)}`);
+  console.log(`  Open in browser: file://${DIST_FILLED}`);
+}

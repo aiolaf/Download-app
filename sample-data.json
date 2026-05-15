@@ -1,0 +1,62 @@
+{
+  "EMAIL_TITLE": "Welkom bij NinA AI — laat ons je workflow automatiseren",
+  "PREHEADER": "Een nieuw tijdperk van AI-gedreven groei begint vandaag.",
+
+  "SHOW_HEADER": true,
+  "LOGO_URL": "https://nina-ai.nl/logo.png",
+  "LOGO_ALT": "NinA AI logo",
+  "LOGO_HREF": "https://nina-ai.nl",
+  "TAGLINE": "AI AGENCY · AMSTERDAM",
+
+  "SHOW_HERO": true,
+  "HERO_TITLE": "AI die voor jouw business werkt.",
+  "HERO_BODY": "Wij bouwen op maat gemaakte AI-agents die je sales, support en operations naar een hoger niveau tillen. Geen hype, alleen meetbare resultaten.",
+  "HERO_IMAGE_URL": "",
+  "HERO_IMAGE_ALT": "Dashboard van een NinA AI agent",
+
+  "SHOW_CONTENT": true,
+  "CONTENT_BLOCKS": [
+    {
+      "HEADING": "Waarom NinA?",
+      "BODY": "We combineren strategie, engineering en design in één team. Binnen 30 dagen draait er een werkende AI-pilot in jouw stack — geconnect met je CRM, je data en je tone of voice."
+    },
+    {
+      "HEADING": "Wat krijg je?",
+      "BODY": "Een dedicated AI-agent, volledige integratie, training van je team en een dashboard waarin je elke euro ROI ziet terugkomen."
+    }
+  ],
+
+  "SHOW_QUOTE": true,
+  "QUOTE_TEXT": "Binnen zes weken bespaarde onze support afdeling 40 uur per week. NinA bouwde precies wat we nodig hadden — niet meer, niet minder.",
+  "QUOTE_AUTHOR": "Mark de Vries, COO bij Lumen B.V.",
+
+  "SHOW_CTA": true,
+  "CTA_TEXT": "Plan een strategiegesprek",
+  "CTA_URL": "https://nina-ai.nl/contact",
+  "CTA_SUBTEXT": "30 minuten · gratis · geen verplichtingen",
+
+  "SHOW_IMAGE": false,
+  "IMAGE_URL": "",
+  "IMAGE_ALT": "",
+  "IMAGE_CAPTION": "",
+
+  "SHOW_DIVIDER": true,
+
+  "SHOW_TWO_COLUMN": true,
+  "COL1_IMAGE_URL": "",
+  "COL1_IMAGE_ALT": "",
+  "COL1_TITLE": "Snel live",
+  "COL1_BODY": "Van kick-off tot productie in 30 dagen. Geen pilot purgatorium — direct waarde leveren.",
+  "COL2_IMAGE_URL": "",
+  "COL2_IMAGE_ALT": "",
+  "COL2_TITLE": "Eigenaarschap",
+  "COL2_BODY": "Code, prompts en data blijven van jou. Vendor lock-in is wat ons betreft een vies woord.",
+
+  "SHOW_FOOTER": true,
+  "FOOTER_COMPANY": "NinA AI",
+  "FOOTER_ADDRESS": "Herengracht 100, 1015 BS Amsterdam",
+  "LINKEDIN_URL": "https://linkedin.com/company/nina-ai",
+  "TIKTOK_URL": "https://tiktok.com/@nina.ai",
+  "UNSUBSCRIBE_URL": "https://nina-ai.nl/unsubscribe?token=%%TOKEN%%",
+  "COPYRIGHT_YEAR": "2026"
+}
