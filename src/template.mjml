@@ -218,6 +218,19 @@
     </mj-section>
     <mj-raw>{{/if}}</mj-raw>
 
+    <!-- ░░ 2b. SCARCITY — deadline / limited spots banner ░░░░░░░ -->
+    <mj-raw>{{#if SHOW_SCARCITY}}</mj-raw>
+    <mj-section padding="16px 24px 0 24px" css-class="pad-mobile">
+      <mj-column>
+        <mj-text align="center" padding="0">
+          <span style="display:inline-block;background:rgba(253,230,139,0.12);color:#fde68b;font-size:12px;font-weight:700;letter-spacing:1.5px;padding:8px 14px;border-radius:999px;border:1px solid rgba(253,230,139,0.3);">
+            {{#if SCARCITY_ICON}}{{SCARCITY_ICON}}&nbsp;&nbsp;{{else}}● &nbsp;{{/if}}{{SCARCITY_TEXT}}
+          </span>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-raw>{{/if}}</mj-raw>
+
     <!-- ░░ 3. HERO ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
     <mj-raw>{{#if SHOW_HERO}}</mj-raw>
     <mj-section mj-class="card" css-class="card-bg pad-mobile" padding="44px 36px 36px 36px">
@@ -517,6 +530,29 @@
     </mj-section>
     <mj-raw>{{/if}}</mj-raw>
 
+    <!-- ░░ 9c. GUARANTEE — risk reversal ░░░░░░░░░░░░░░░░░░░░░░░ -->
+    <mj-raw>{{#if SHOW_GUARANTEE}}</mj-raw>
+    <mj-wrapper padding="32px 32px 0 32px" css-class="pad-mobile">
+      <mj-section background-color="#151828" border-radius="12px" padding="20px 16px" css-class="card-bg">
+        <mj-column width="18%" vertical-align="middle" padding="0">
+          <mj-text align="center" padding="0">
+            <span style="display:inline-block;width:44px;height:44px;line-height:44px;border-radius:50%;background:rgba(153,82,224,0.18);color:#bf80ff;font-size:22px;text-align:center;font-weight:700;">
+              ✓
+            </span>
+          </mj-text>
+        </mj-column>
+        <mj-column width="82%" vertical-align="middle" padding="0">
+          <mj-text css-class="text-main" font-size="15px" font-weight="600" line-height="1.35" padding="0 0 4px 0">
+            {{GUARANTEE_TITLE}}
+          </mj-text>
+          <mj-text mj-class="muted" css-class="text-muted" font-size="13px" line-height="1.5" padding="0">
+            {{GUARANTEE_BODY}}
+          </mj-text>
+        </mj-column>
+      </mj-section>
+    </mj-wrapper>
+    <mj-raw>{{/if}}</mj-raw>
+
     <!-- ░░ 10. ARTICLES — 3-up newsletter roundup ░░░░░░░░░░░░░░░ -->
     <mj-raw>{{#if SHOW_ARTICLES}}</mj-raw>
     <mj-section padding="40px 24px 8px 24px" css-class="pad-mobile">
@@ -747,6 +783,34 @@
         <mj-text mj-class="muted" css-class="text-muted" padding="0">{{COL2_BODY}}</mj-text>
       </mj-column>
     </mj-section>
+    <mj-raw>{{/if}}</mj-raw>
+
+    <!-- ░░ 16b. FAQ — friction-reducing Q&A ░░░░░░░░░░░░░░░░░░░░░ -->
+    <mj-raw>{{#if SHOW_FAQ}}</mj-raw>
+    <mj-section padding="40px 32px 8px 32px" css-class="pad-mobile">
+      <mj-column>
+        <mj-raw>{{#if FAQ_EYEBROW}}</mj-raw>
+        <mj-text css-class="eyebrow text-accent" color="#bf80ff" align="center" font-size="11px" letter-spacing="2px" font-weight="600" padding="0 0 10px 0">
+          {{FAQ_EYEBROW}}
+        </mj-text>
+        <mj-raw>{{/if}}</mj-raw>
+        <mj-text mj-class="h2" css-class="text-main h2-mobile" align="center" padding="0 0 20px 0">
+          {{FAQ_HEADING}}
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-raw>{{#each FAQS}}</mj-raw>
+    <mj-section padding="0 32px 16px 32px" css-class="pad-mobile">
+      <mj-column>
+        <mj-text mj-class="h3" css-class="text-main" font-size="15px" font-weight="600" padding="0 0 6px 0">
+          {{this.Q}}
+        </mj-text>
+        <mj-text mj-class="muted" css-class="text-muted" font-size="14px" line-height="1.55" padding="0">
+          {{{this.A}}}
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-raw>{{/each}}</mj-raw>
     <mj-raw>{{/if}}</mj-raw>
 
     <!-- ░░ 17. DIVIDER ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->

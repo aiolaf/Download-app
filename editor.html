@@ -495,6 +495,111 @@
     .pane { display: none; height: calc(100% - 57px); }
     .pane.active { display: flex; flex-direction: column; }
 
+    /* ===== AUDIT panel ============================================= */
+    .audit-wrap {
+      flex: 1;
+      overflow: auto;
+      padding: 28px 32px 80px;
+    }
+    .audit-score {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+    .score-circle {
+      position: relative;
+      width: 96px; height: 96px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 2px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .score-circle.good { border-color: #4ade80; }
+    .score-circle.ok   { border-color: #fde68b; }
+    .score-circle.bad  { border-color: var(--danger); }
+    .score-num {
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1;
+    }
+    .score-max {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .score-summary { flex: 1; }
+    .score-label {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .score-meta {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .score-meta strong { color: var(--text); }
+
+    .audit-section-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin: 24px 0 10px;
+    }
+
+    .check {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--card);
+      margin-bottom: 8px;
+    }
+    .check-icon {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .check.pass .check-icon { background: rgba(74, 222, 128, 0.18); color: #4ade80; }
+    .check.warn .check-icon { background: rgba(253, 230, 139, 0.18); color: #fde68b; }
+    .check.fail .check-icon { background: rgba(224, 82, 106, 0.18); color: var(--danger); }
+    .check-body { flex: 1; min-width: 0; }
+    .check-title {
+      font-weight: 600;
+      color: var(--text);
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+    .check-detail {
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.5;
+    }
+    .check-detail code {
+      background: var(--bg);
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-size: 11.5px;
+      color: var(--accent-light);
+    }
+
     /* scrollbar */
     ::-webkit-scrollbar { width: 10px; height: 10px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
@@ -531,6 +636,10 @@
         <div class="tab-group">
           <button class="tab active" data-tab="preview">Preview</button>
           <button class="tab" data-tab="code">Code</button>
+          <button class="tab" data-tab="audit">
+            Audit
+            <span id="audit-badge" style="display:none;background:#fff;color:#9952e0;font-size:10px;font-weight:700;padding:1px 6px;border-radius:999px;margin-left:6px;">0</span>
+          </button>
         </div>
         <div class="device-group" id="device-group">
           <button class="device active" data-device="desktop">Desktop</button>
@@ -565,6 +674,10 @@
           </div>
           <pre><code id="code-view"></code></pre>
         </div>
+      </div>
+
+      <div class="pane" data-pane="audit">
+        <div class="audit-wrap" id="audit-wrap"></div>
       </div>
     </section>
   </div>
@@ -641,6 +754,15 @@
           { key: 'HREF', label: 'Linkt naar (optioneel)', type: 'url' },
         ],
       },
+    },
+    {
+      id: 'scarcity',
+      title: 'Scarcity badge (boven hero)',
+      toggleKey: 'SHOW_SCARCITY',
+      fields: [
+        { key: 'SCARCITY_ICON', label: 'Icoon (1-2 tekens)', type: 'text', hint: 'bv. "●", "⏱", "🔥" — emoji of teken' },
+        { key: 'SCARCITY_TEXT', label: 'Tekst', type: 'text', hint: 'Gebruik concrete getallen + deadline. Bv. "Nog 3 plekken · sluit vrijdag 31 mei"' },
+      ],
     },
     {
       id: 'hero',
@@ -772,6 +894,15 @@
       ],
     },
     {
+      id: 'guarantee',
+      title: 'Guarantee / risk reversal',
+      toggleKey: 'SHOW_GUARANTEE',
+      fields: [
+        { key: 'GUARANTEE_TITLE', label: 'Sterke claim (max ~50 chars)', type: 'text', hint: 'bv. "Niet tevreden na week 1? Geen factuur."' },
+        { key: 'GUARANTEE_BODY', label: 'Onderbouwing (1-2 zinnen)', type: 'textarea' },
+      ],
+    },
+    {
       id: 'video',
       title: 'Video thumbnail',
       toggleKey: 'SHOW_VIDEO',
@@ -861,6 +992,23 @@
         { key: 'EVENT_CTA_TEXT', label: 'Button tekst', type: 'text' },
         { key: 'EVENT_CTA_URL', label: 'Button URL', type: 'url' },
       ],
+    },
+    {
+      id: 'faq',
+      title: 'FAQ — friction reducers',
+      toggleKey: 'SHOW_FAQ',
+      fields: [
+        { key: 'FAQ_EYEBROW', label: 'Eyebrow', type: 'text' },
+        { key: 'FAQ_HEADING', label: 'Heading', type: 'text', hint: 'bv. "De 4 vragen die ze ons stelden voordat ze tekenden"' },
+      ],
+      repeat: {
+        key: 'FAQS',
+        itemLabel: 'Vraag',
+        fields: [
+          { key: 'Q', label: 'Vraag', type: 'text' },
+          { key: 'A', label: 'Antwoord (HTML toegestaan)', type: 'textarea' },
+        ],
+      },
     },
     {
       id: 'logos',
@@ -1236,6 +1384,282 @@
     codeView.textContent = renderedHtml;
     syncInboxRow();
     syncModuleCounter();
+    renderAudit();
+  }
+
+  /* ===========================================================
+     AUDIT — what world-class email marketers check before send.
+     Each check returns { id, level: 'pass'|'warn'|'fail',
+                          title, detail }.
+     =========================================================== */
+
+  // Dutch + English spam triggers. Casing ignored. Bewust kort
+  // gehouden — false positives schaden meer dan ze opleveren.
+  const SPAM_WORDS = [
+    'gratis!!!', '!!!', '!!!!', '$$$', '€€€',
+    '100% gegarandeerd', 'geld terug garantie!', 'win nu',
+    'klik hier nu', 'koop nu nu', 'beperkte tijd!', 'urgent!!',
+    'act now', 'free!!!', 'click here now', 'risk-free!',
+    'snel rijk', 'verdubbel je inkomen', 'miljonair', 'guaranteed!',
+    'meld je nu aan', 'mis dit niet', 'laatste kans!!'
+  ];
+
+  function audit() {
+    const checks = [];
+    const ETIQ = (id, level, title, detail) =>
+      checks.push({ id, level, title, detail });
+
+    // ----- 1. Subject line length ---------------------------------
+    const subj = (state.EMAIL_TITLE || '').trim();
+    if (!subj) {
+      ETIQ('subj', 'fail', 'Onderwerpregel ontbreekt',
+        'Zonder onderwerp wordt je open-rate vrijwel nul.');
+    } else if (subj.length > 70) {
+      ETIQ('subj', 'fail', 'Onderwerp is te lang (' + subj.length + ' chars)',
+        'Gmail en Apple Mail cutten op ~50-70 chars. Belangrijkste woord vooraan.');
+    } else if (subj.length > 50) {
+      ETIQ('subj', 'warn', 'Onderwerp loopt op mobile af (' + subj.length + ' chars)',
+        'Mobile inboxes tonen ~50 chars. Test of de kern in de eerste 40 staat.');
+    } else if (subj.length < 20) {
+      ETIQ('subj', 'warn', 'Onderwerp is erg kort (' + subj.length + ' chars)',
+        'Sweet spot is 30-50 chars. Te kort kan generiek aanvoelen.');
+    } else {
+      ETIQ('subj', 'pass', 'Onderwerp lengte ' + subj.length + ' chars',
+        'Past mobile + desktop inbox preview.');
+    }
+
+    // ----- 2. Preheader length -----------------------------------
+    const pre = (state.PREHEADER || '').trim();
+    if (!pre) {
+      ETIQ('pre', 'fail', 'Preheader ontbreekt',
+        'Anders trekt je client de eerste regel HTML in de inbox-preview — meestal niet wat je wilt.');
+    } else if (pre.length > 90) {
+      ETIQ('pre', 'warn', 'Preheader > 90 chars',
+        'Wordt afgekapt in Gmail. Zet de hook in de eerste 70 chars.');
+    } else if (pre.length < 30) {
+      ETIQ('pre', 'warn', 'Preheader < 30 chars',
+        'Je laat inbox-real-estate liggen. Sweet spot is 50-90.');
+    } else {
+      ETIQ('pre', 'pass', 'Preheader lengte ' + pre.length + ' chars', 'Vult de inbox preview.');
+    }
+
+    // ----- 3. Single primary CTA --------------------------------
+    const ctas = [];
+    if (state.SHOW_CTA && state.CTA_URL) ctas.push('CTA');
+    if (state.SHOW_PROMO_STRIP && state.PROMO_STRIP_CTA_URL) ctas.push('Promo strip');
+    if (state.SHOW_HERO && /href=/i.test(state.HERO_BODY || '')) ctas.push('Hero body link');
+    if (state.SHOW_SPOTLIGHT && state.SPOTLIGHT_CTA_URL) ctas.push('Spotlight');
+    if (state.SHOW_CASE_STUDY && state.CASE_STUDY_CTA_URL) ctas.push('Case study');
+    if (state.SHOW_EVENT && state.EVENT_CTA_URL) ctas.push('Event');
+    if (ctas.length === 0) {
+      ETIQ('cta', 'fail', 'Geen enkele CTA gevonden',
+        'Een mail zonder CTA is alleen ruis. Voeg minstens één duidelijke actie toe.');
+    } else if (ctas.length > 3) {
+      ETIQ('cta', 'warn', ctas.length + ' actieve CTA\'s',
+        'Top-performers hebben 1-2 CTA\'s, niet 4+. Lezers kiezen niet — ze haken af. Overweeg: ' + ctas.join(', ') + '.');
+    } else {
+      ETIQ('cta', 'pass', ctas.length + ' CTA' + (ctas.length === 1 ? '' : '\'s'),
+        'Geconcentreerde aandacht — ' + ctas.join(' + ') + '.');
+    }
+
+    // ----- 4. Alt-text on images --------------------------------
+    const missingAlt = [];
+    function check(urlKey, altKey, label) {
+      if (state[urlKey] && state[urlKey].trim() && !(state[altKey] || '').trim()) {
+        missingAlt.push(label);
+      }
+    }
+    check('LOGO_URL', 'LOGO_ALT', 'Logo');
+    check('HERO_IMAGE_URL', 'HERO_IMAGE_ALT', 'Hero image');
+    check('CASE_STUDY_IMAGE_URL', 'CASE_STUDY_IMAGE_ALT', 'Case study cover');
+    check('IMAGE_URL', 'IMAGE_ALT', 'Full-width image');
+    check('VIDEO_THUMBNAIL_URL', 'VIDEO_THUMBNAIL_ALT', 'Video thumbnail');
+    check('SIGNATURE_PHOTO_URL', 'SIGNATURE_PHOTO_ALT', 'Signature photo');
+    // Repeating arrays
+    (state.PRESS_LOGOS || []).forEach((x, i) => { if (x.URL && !x.ALT) missingAlt.push('Press logo ' + (i + 1)); });
+    (state.LOGO_WALL || []).forEach((x, i) => { if (x.URL && !x.ALT) missingAlt.push('Logo wall ' + (i + 1)); });
+    (state.ARTICLES || []).forEach((x, i) => { if (x.IMAGE_URL && !x.IMAGE_ALT) missingAlt.push('Article ' + (i + 1)); });
+    (state.SERVICES || []).forEach((x, i) => { if (x.ICON_URL && !x.ICON_ALT) missingAlt.push('Service ' + (i + 1)); });
+    (state.TEAM || []).forEach((x, i) => { if (x.PHOTO_URL && !x.ALT) missingAlt.push('Team ' + (i + 1)); });
+
+    if (missingAlt.length === 0) {
+      ETIQ('alt', 'pass', 'Alt-text op alle afbeeldingen',
+        'Belangrijk voor accessibility + image-blocking inboxes.');
+    } else {
+      ETIQ('alt', 'warn', missingAlt.length + ' afbeelding(en) zonder alt-text',
+        'Ontbreekt op: ' + missingAlt.slice(0, 4).join(', ') + (missingAlt.length > 4 ? ' …' : ''));
+    }
+
+    // ----- 5. Unsubscribe ---------------------------------------
+    if (state.SHOW_FOOTER && state.UNSUBSCRIBE_URL && state.UNSUBSCRIBE_URL.trim()) {
+      ETIQ('unsub', 'pass', 'Unsubscribe link aanwezig', 'Verplicht onder GDPR/CAN-SPAM.');
+    } else {
+      ETIQ('unsub', 'fail', 'Unsubscribe link ontbreekt',
+        'Wettelijk verplicht (AVG art. 13) + verlaagt spam-klachten met factor 4.');
+    }
+
+    // ----- 6. File size ----------------------------------------
+    const sizeKb = Math.round(renderedHtml.length / 1024);
+    if (sizeKb > 200) {
+      ETIQ('size', 'fail', 'Bestandsgrootte ' + sizeKb + ' KB',
+        'Outlook desktop knipt boven 200KB. Schakel modules uit of minify.');
+    } else if (sizeKb > 102) {
+      ETIQ('size', 'warn', 'Bestandsgrootte ' + sizeKb + ' KB',
+        'Gmail clipt boven 102KB met "View entire message" link. Tracking pixels worden niet geladen onder de clip-line.');
+    } else {
+      ETIQ('size', 'pass', 'Bestandsgrootte ' + sizeKb + ' KB',
+        'Ruim onder de Gmail-clip (102KB) en Outlook-knip (200KB) thresholds.');
+    }
+
+    // ----- 7. Reading time + word count ------------------------
+    const visibleText = renderedHtml
+      .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+      .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+      .replace(/<!--[\s\S]*?-->/g, ' ')
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/&[a-z#0-9]+;/gi, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+    const words = visibleText ? visibleText.split(' ').length : 0;
+    const minutes = words / 220;
+    const minLabel = minutes < 1
+      ? '< 1 min'
+      : (minutes < 1.7 ? '~1 min' : Math.round(minutes) + ' min');
+
+    if (words === 0) {
+      ETIQ('len', 'fail', 'Geen leesbare tekst', 'Vul minstens hero + 1 content blok in.');
+    } else if (minutes > 5) {
+      ETIQ('len', 'warn', minLabel + ' lezen · ' + words + ' woorden',
+        'Een nieuwsbrief leest niemand af boven 5 min. Knip 30-40% en zet de rest op je site.');
+    } else if (minutes > 3) {
+      ETIQ('len', 'warn', minLabel + ' lezen · ' + words + ' woorden',
+        'Aan de lange kant — controleer of elke alinea een functie heeft.');
+    } else {
+      ETIQ('len', 'pass', minLabel + ' lezen · ' + words + ' woorden',
+        'Past binnen de attention-span van een gemiddelde inbox-sessie.');
+    }
+
+    // ----- 8. Spam-trigger words --------------------------------
+    const allCopy = collectAllStrings(state).join(' \n ').toLowerCase();
+    const hits = SPAM_WORDS.filter(w => allCopy.indexOf(w.toLowerCase()) !== -1);
+    if (hits.length === 0) {
+      ETIQ('spam', 'pass', 'Geen spam-trigger woorden',
+        'Geen "GRATIS!!!", "klik hier nu", etc. Spam filters blijven rustig.');
+    } else {
+      ETIQ('spam', 'warn', 'Mogelijke spam-triggers gevonden',
+        'Termen die filters lichten: ' + hits.slice(0, 5).map(h => '<code>' + escapeHtml(h) + '</code>').join(', ') + '. Niet altijd erg, maar overweeg subtieler te formuleren.');
+    }
+
+    // ----- 9. Personalization -----------------------------------
+    const hasMergeTag = /\{\{[A-Z_]+\}\}|%%[A-Z_]+%%/.test(
+      (state.HERO_GREETING || '') + ' ' + (state.HERO_BODY || '') + ' ' + subj,
+    );
+    if (hasMergeTag) {
+      ETIQ('pers', 'pass', 'Personalisatie aanwezig',
+        'Merge tag gedetecteerd — gemiddelde lift in CTR: 14% (Litmus 2024).');
+    } else {
+      ETIQ('pers', 'warn', 'Geen merge tag gevonden',
+        'Geen <code>{{FIRST_NAME}}</code> of vergelijkbaar. Een persoonlijke aanhef bovenaan verhoogt de lezer-investering meetbaar.');
+    }
+
+    // ----- 10. Plain-text fallback hint -------------------------
+    if (state.SHOW_FOOTER && state.UNSUBSCRIBE_URL && state.FOOTER_ADDRESS) {
+      ETIQ('legit', 'pass', 'Fysiek adres aanwezig in footer',
+        'CAN-SPAM compliance + signaal van legitimiteit.');
+    } else {
+      ETIQ('legit', 'warn', 'Bedrijfsadres ontbreekt',
+        'Wettelijk vereist in NL/EU en VS. Voeg straat + plaats toe in de footer.');
+    }
+
+    return checks;
+  }
+
+  function collectAllStrings(v) {
+    const acc = [];
+    (function walk(x) {
+      if (typeof x === 'string') acc.push(x);
+      else if (Array.isArray(x)) x.forEach(walk);
+      else if (x && typeof x === 'object') for (const k in x) walk(x[k]);
+    })(v);
+    return acc;
+  }
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+  }
+
+  function renderAudit() {
+    const wrap = document.getElementById('audit-wrap');
+    if (!wrap) return;
+    const checks = audit();
+
+    const passes = checks.filter(c => c.level === 'pass').length;
+    const warns  = checks.filter(c => c.level === 'warn').length;
+    const fails  = checks.filter(c => c.level === 'fail').length;
+    const score  = Math.round((passes + warns * 0.5) / checks.length * 100);
+    const klass  = score >= 85 ? 'good' : (score >= 60 ? 'ok' : 'bad');
+    const label  = score >= 85 ? 'Klaar om te versturen' :
+                   score >= 60 ? 'Bijna goed — los warnings op' :
+                   'Niet versturen';
+
+    // Audit badge in the tab (only if there are issues)
+    const badge = document.getElementById('audit-badge');
+    const issues = warns + fails;
+    if (issues > 0) {
+      badge.style.display = 'inline-block';
+      badge.textContent = String(issues);
+      badge.style.background = fails > 0 ? '#e0526a' : '#fde68b';
+      badge.style.color = fails > 0 ? '#fff' : '#0c0e18';
+    } else {
+      badge.style.display = 'none';
+    }
+
+    // Build HTML
+    const html = [];
+    html.push(
+      '<div class="audit-score">' +
+        '<div class="score-circle ' + klass + '">' +
+          '<div class="score-num">' + score + '</div>' +
+          '<div class="score-max">/ 100</div>' +
+        '</div>' +
+        '<div class="score-summary">' +
+          '<div class="score-label">' + escapeHtml(label) + '</div>' +
+          '<div class="score-meta">' +
+            '<strong>' + passes + '</strong> goed · ' +
+            '<strong>' + warns + '</strong> waarschuwing' + (warns === 1 ? '' : 'en') + ' · ' +
+            '<strong>' + fails + '</strong> blokkerend' +
+          '</div>' +
+        '</div>' +
+      '</div>'
+    );
+
+    // Group by failing > warn > pass
+    const order = { fail: 0, warn: 1, pass: 2 };
+    const sorted = [...checks].sort((a, b) => order[a.level] - order[b.level]);
+
+    let lastLevel = null;
+    sorted.forEach(c => {
+      if (c.level !== lastLevel) {
+        lastLevel = c.level;
+        const sec = c.level === 'fail' ? 'Blokkerend — fix eerst'
+                  : c.level === 'warn' ? 'Aandachtspunten'
+                  : 'Goed';
+        html.push('<div class="audit-section-title">' + sec + '</div>');
+      }
+      const icon = c.level === 'pass' ? '✓' : (c.level === 'warn' ? '!' : '✕');
+      html.push(
+        '<div class="check ' + c.level + '">' +
+          '<div class="check-icon">' + icon + '</div>' +
+          '<div class="check-body">' +
+            '<div class="check-title">' + escapeHtml(c.title) + '</div>' +
+            '<div class="check-detail">' + c.detail + '</div>' +
+          '</div>' +
+        '</div>'
+      );
+    });
+
+    wrap.innerHTML = html.join('');
   }
 
   function syncInboxRow() {

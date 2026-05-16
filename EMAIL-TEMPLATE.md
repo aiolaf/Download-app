@@ -48,7 +48,29 @@ node build.js --data sample-data.json --watch
 node build.js --data prod-data.json --minify
 ```
 
-## De 24 modulaire blokken
+## Pre-send Audit — wat top-marketeers checken
+
+De **Audit-tab** in de editor draait elke keer dat je iets aanpast een
+checklist van 10 conversie-kritische vinkjes. Score 0-100, gegroepeerd
+in **Blokkerend / Aandachtspunten / Goed**:
+
+| Check | Wat het detecteert |
+|---|---|
+| Onderwerp lengte | Optimaal 30-50 chars · Gmail mobile cutoff bij ~50 |
+| Preheader lengte | Sweet spot 50-90 chars · vult de inbox-preview |
+| Aantal CTA's | Top-performers hebben 1-2 · 4+ is warning |
+| Alt-text afbeeldingen | Scans alle `*_URL` of corresponderende `*_ALT` gevuld is |
+| Unsubscribe link | Wettelijk vereist (AVG art. 13) |
+| Bestandsgrootte | Gmail clipt > 102KB · Outlook knipt > 200KB |
+| Leestijd / word count | > 3 min = warning · > 5 min = serieus knippen |
+| Spam-trigger woorden | "GRATIS!!!", "klik hier nu", "$$$", etc. (NL+EN) |
+| Personalisatie | Detecteert `{{FIRST_NAME}}` / `%%TOKEN%%` merge tags |
+| Bedrijfsadres | CAN-SPAM + AVG legitimiteit |
+
+De **tab toont een badge** met het aantal openstaande issues, dus je
+ziet direct in de topbar of de mail klaar is voor versturen.
+
+## De 27 modulaire blokken
 
 Elk blok is opt-in via `SHOW_*` flag. Volgorde in de email:
 
@@ -57,6 +79,7 @@ Elk blok is opt-in via `SHOW_*` flag. Volgorde in de email:
 | 0 | Promo strip | `SHOW_PROMO_STRIP` | Dunne paarse banner boven header met announcement + link |
 | 1 | Header | `SHOW_HEADER` | Logo links, optionele tagline rechts |
 | 2 | Press bar | `SHOW_PRESS_BAR` | "Featured in" + 3–5 media logo's |
+| 2b | **Scarcity badge** | `SHOW_SCARCITY` | Pill met deadline of beperkt aantal plekken |
 | 3 | Hero | `SHOW_HERO` | Eyebrow + (gradient) H1 + groet + intro + optionele image |
 | 4 | Stats | `SHOW_STATS` | 3-up KPI row (huge numbers + labels) |
 | 5 | Manifesto | `SHOW_MANIFESTO` | Oversized gradient pull-quote met attributie |
@@ -66,11 +89,13 @@ Elk blok is opt-in via `SHOW_*` flag. Volgorde in de email:
 | 9 | **Spotlight** | `SHOW_SPOTLIGHT` | Gold-accent prominent callout met CTA |
 | 10 | Quote | `SHOW_QUOTE` | Klassiek testimonial blok met paars accent |
 | 11 | CTA | `SHOW_CTA` | Bulletproof primary button (VML voor Outlook) |
+| 11b | **Guarantee** | `SHOW_GUARANTEE` | Risk-reversal card met ✓ icon — "Niet tevreden? Geen factuur." |
 | 12 | **Video** | `SHOW_VIDEO` | Thumbnail met play-button overlay |
 | 13 | Articles | `SHOW_ARTICLES` | 3-column newsletter roundup |
 | 14 | Services | `SHOW_SERVICES` | 2×2 service grid met icons |
 | 15 | Team | `SHOW_TEAM` | Team spotlight met ronde avatars |
 | 16 | Event | `SHOW_EVENT` | Webinar/talk card met datum-pijl + RSVP |
+| 16b | **FAQ** | `SHOW_FAQ` | "De 4 vragen die ze ons stelden voordat ze tekenden" — friction-reducers |
 | 17 | Logo wall | `SHOW_LOGO_WALL` | "Trusted by" client logo strip |
 | 18 | Image | `SHOW_IMAGE` | Full-width image + caption |
 | 19 | Two-column | `SHOW_TWO_COLUMN` | Twee features naast elkaar (stackt mobile) |
@@ -102,6 +127,25 @@ Elk blok is opt-in via `SHOW_*` flag. Volgorde in de email:
   - `⌘D` / `Ctrl+D` — Download .html
   - `⌘1` / `Ctrl+1` — Preview tab
   - `⌘2` / `Ctrl+2` — Code tab
+
+## Sample data — geschreven zoals een Nederlandse top-marketeer 'm zou schrijven
+
+De `sample-data.json` is bewust herschreven volgens NL B2B best
+practices, zodat je een geloofwaardig vertrekpunt hebt:
+
+- **Concrete getallen** (68% tickets, 3,4 min, € 184K) — geen ronde
+  marketing-cijfers zoals "300% ROI"
+- **Bronvermelding** onder elke stat ("Bron: Lumen's dashboard, mrt-apr 2026")
+- **"Je" niet "u"** — NL B2B-norm sinds ~2015
+- **Self-deprecation** in content: "Wat we eerlijk niet wisten vooraf"
+- **Friction reducers** in subtekst: "je hoeft niets voor te bereiden"
+- **Risk reversal** als blok: "Niet tevreden na week 1? Geen factuur."
+- **Scarcity met datum** (niet "act now!"): "Nog 3 plekken · sluit vrij 31 mei"
+- **FAQ-blok** dat de echte koop-blokkers adresseert (vendor lock-in,
+  veiligheid, prijs, bestaande systemen)
+- **Subject + preheader** vormen samen één coherente boodschap:
+  "Hoe Lumen 70% van zijn support-tickets automatiseerde" +
+  "Concrete cijfers + de 4 vragen die ze ons stelden voordat ze tekenden."
 
 ## Repeatable arrays — JSON formaat
 
