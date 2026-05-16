@@ -164,6 +164,22 @@
 
   <mj-body background-color="#0c0e18" css-class="body-bg" width="600px">
 
+    <!-- ░░ 0. PROMO STRIP — thin announcement bar above header ░░░ -->
+    <mj-raw>{{#if SHOW_PROMO_STRIP}}</mj-raw>
+    <mj-section background-color="#9952e0" padding="10px 16px" css-class="pad-mobile">
+      <mj-column>
+        <mj-text color="#ffffff" font-size="13px" font-weight="600" align="center" line-height="1.4" letter-spacing="0.3px" padding="0">
+          {{{PROMO_STRIP_TEXT}}}
+          <mj-raw>{{#if PROMO_STRIP_CTA_URL}}</mj-raw>
+          &nbsp;&nbsp;<a href="{{PROMO_STRIP_CTA_URL}}" style="color:#fde68b;text-decoration:underline;font-weight:700;">
+            {{PROMO_STRIP_CTA_TEXT}} &rarr;
+          </a>
+          <mj-raw>{{/if}}</mj-raw>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-raw>{{/if}}</mj-raw>
+
     <!-- ░░ 1. HEADER ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
     <mj-raw>{{#if SHOW_HEADER}}</mj-raw>
     <mj-section padding="32px 24px 8px 24px">
@@ -295,6 +311,46 @@
     </mj-section>
     <mj-raw>{{/if}}</mj-raw>
 
+    <!-- ░░ 5b. STEPS — numbered timeline (1 → 2 → 3) ░░░░░░░░░░░░ -->
+    <mj-raw>{{#if SHOW_STEPS}}</mj-raw>
+    <mj-section padding="40px 32px 12px 32px" css-class="pad-mobile">
+      <mj-column>
+        <mj-raw>{{#if STEPS_EYEBROW}}</mj-raw>
+        <mj-text css-class="eyebrow text-accent" color="#bf80ff" align="center" font-size="11px" letter-spacing="2px" font-weight="600" padding="0 0 10px 0">
+          {{STEPS_EYEBROW}}
+        </mj-text>
+        <mj-raw>{{/if}}</mj-raw>
+        <mj-text mj-class="h2" css-class="text-main h2-mobile" align="center" padding="0 0 6px 0">
+          {{STEPS_HEADING}}
+        </mj-text>
+        <mj-raw>{{#if STEPS_SUBHEADING}}</mj-raw>
+        <mj-text mj-class="muted" css-class="text-muted" align="center" padding="0 0 24px 0">
+          {{STEPS_SUBHEADING}}
+        </mj-text>
+        <mj-raw>{{/if}}</mj-raw>
+      </mj-column>
+    </mj-section>
+    <mj-raw>{{#each STEPS}}</mj-raw>
+    <mj-section padding="0 32px 14px 32px" css-class="pad-mobile">
+      <mj-column width="15%" vertical-align="top" padding="0">
+        <mj-text align="center" padding="0">
+          <span style="display:inline-block;width:42px;height:42px;line-height:42px;text-align:center;border-radius:50%;background:linear-gradient(135deg,#9952e0,#bf80ff);color:#fff;font-weight:700;font-size:16px;">
+            {{add @index 1}}
+          </span>
+        </mj-text>
+      </mj-column>
+      <mj-column width="85%" vertical-align="top" padding="0 0 0 6px">
+        <mj-text mj-class="h3" css-class="text-main" font-size="17px" padding="6px 0 4px 0">
+          {{this.TITLE}}
+        </mj-text>
+        <mj-text mj-class="muted" css-class="text-muted" font-size="14px" line-height="1.5" padding="0">
+          {{this.BODY}}
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-raw>{{/each}}</mj-raw>
+    <mj-raw>{{/if}}</mj-raw>
+
     <!-- ░░ 6. CONTENT — numbered editorial paragraphs ░░░░░░░░░░░ -->
     <mj-raw>{{#if SHOW_CONTENT}}{{#each CONTENT_BLOCKS}}</mj-raw>
     <mj-section background-color="#0c0e18" padding="24px 32px 0 32px" css-class="pad-mobile">
@@ -350,6 +406,35 @@
     </mj-section>
     <mj-raw>{{/if}}</mj-raw>
 
+    <!-- ░░ 7b. SPOTLIGHT — gold-accent prominent callout ░░░░░░░░ -->
+    <mj-raw>{{#if SHOW_SPOTLIGHT}}</mj-raw>
+    <mj-section padding="40px 32px 8px 32px" css-class="pad-mobile">
+      <mj-column
+        background-color="#151828"
+        border="1px solid #fde68b"
+        border-radius="14px"
+        padding="28px 26px"
+        css-class="card-bg">
+        <mj-text css-class="text-gold" color="#fde68b" font-size="11px" letter-spacing="2px" font-weight="700" padding="0 0 10px 0">
+          ★ &nbsp; {{SPOTLIGHT_LABEL}}
+        </mj-text>
+        <mj-text mj-class="h2" css-class="text-main h2-mobile" font-size="22px" padding="0 0 10px 0">
+          {{SPOTLIGHT_TITLE}}
+        </mj-text>
+        <mj-text css-class="text-main" font-size="15px" line-height="1.55" padding="0 0 16px 0">
+          {{{SPOTLIGHT_BODY}}}
+        </mj-text>
+        <mj-raw>{{#if SPOTLIGHT_CTA_URL}}</mj-raw>
+        <mj-text padding="0">
+          <a href="{{SPOTLIGHT_CTA_URL}}" style="display:inline-block;background:#fde68b;color:#0c0e18;font-weight:700;font-size:14px;padding:10px 18px;border-radius:6px;text-decoration:none;letter-spacing:0.3px;">
+            {{SPOTLIGHT_CTA_TEXT}} &rarr;
+          </a>
+        </mj-text>
+        <mj-raw>{{/if}}</mj-raw>
+      </mj-column>
+    </mj-section>
+    <mj-raw>{{/if}}</mj-raw>
+
     <!-- ░░ 8. QUOTE — testimonial with purple left accent ░░░░░░░ -->
     <mj-raw>{{#if SHOW_QUOTE}}</mj-raw>
     <mj-section padding="40px 32px 8px 32px" css-class="pad-mobile">
@@ -389,6 +474,43 @@
         <mj-raw>{{#if CTA_SUBTEXT}}</mj-raw>
         <mj-text mj-class="muted" css-class="text-muted" align="center" padding="14px 0 0 0">
           {{CTA_SUBTEXT}}
+        </mj-text>
+        <mj-raw>{{/if}}</mj-raw>
+      </mj-column>
+    </mj-section>
+    <mj-raw>{{/if}}</mj-raw>
+
+    <!-- ░░ 9b. VIDEO — thumbnail with play-button overlay ░░░░░░░ -->
+    <mj-raw>{{#if SHOW_VIDEO}}</mj-raw>
+    <mj-section padding="40px 32px 8px 32px" css-class="pad-mobile">
+      <mj-column>
+        <mj-raw>{{#if VIDEO_EYEBROW}}</mj-raw>
+        <mj-text css-class="eyebrow text-accent" color="#bf80ff" align="center" font-size="11px" letter-spacing="2px" font-weight="600" padding="0 0 10px 0">
+          {{VIDEO_EYEBROW}}
+        </mj-text>
+        <mj-raw>{{/if}}</mj-raw>
+        <mj-raw>{{#if VIDEO_TITLE}}</mj-raw>
+        <mj-text mj-class="h2" css-class="text-main h2-mobile" align="center" padding="0 0 18px 0">
+          {{VIDEO_TITLE}}
+        </mj-text>
+        <mj-raw>{{/if}}</mj-raw>
+
+        <!-- Thumbnail wrapped in <a>, with play-button image overlaid via VML/HTML.
+             Outlook gets the thumbnail + link only (no overlay button). -->
+        <mj-text padding="0">
+          <a href="{{VIDEO_URL}}" style="display:block;position:relative;line-height:0;text-decoration:none;border-radius:10px;overflow:hidden;">
+            <img src="{{VIDEO_THUMBNAIL_URL}}" alt="{{VIDEO_THUMBNAIL_ALT}}" width="536" style="display:block;width:100%;height:auto;border-radius:10px;border:0;" />
+            <!--[if !mso]><!-->
+            <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:72px;height:72px;line-height:72px;border-radius:50%;background:rgba(12,14,24,0.78);color:#fff;font-size:24px;text-align:center;border:2px solid #fff;">
+              &#9658;
+            </span>
+            <!--<![endif]-->
+          </a>
+        </mj-text>
+
+        <mj-raw>{{#if VIDEO_CAPTION}}</mj-raw>
+        <mj-text mj-class="muted" css-class="text-muted" align="center" font-size="13px" padding="12px 0 0 0">
+          {{VIDEO_CAPTION}}
         </mj-text>
         <mj-raw>{{/if}}</mj-raw>
       </mj-column>

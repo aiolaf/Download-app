@@ -32,44 +32,76 @@ node build.js --data sample-data.json
 #    → vul velden in, switch tussen Preview en Code, klik Copy HTML
 ```
 
-## De 20 modulaire blokken
+### Build flags
+
+| Flag | Wat het doet |
+|---|---|
+| `--data sample-data.json` | Render Handlebars template met deze data → `dist/template-filled.html` |
+| `--minify` | Minify HTML output (~22% kleiner: 122KB → 96KB) |
+| `--watch` | Auto-rebuild bij elke save van `src/template.mjml` of `sample-data.json` |
+
+```bash
+# Watch + auto-render sample (handig tijdens design-werk)
+node build.js --data sample-data.json --watch
+
+# Production build (minified)
+node build.js --data prod-data.json --minify
+```
+
+## De 24 modulaire blokken
 
 Elk blok is opt-in via `SHOW_*` flag. Volgorde in de email:
 
 | # | Module | Toggle | Wat het is |
 |---|---|---|---|
+| 0 | Promo strip | `SHOW_PROMO_STRIP` | Dunne paarse banner boven header met announcement + link |
 | 1 | Header | `SHOW_HEADER` | Logo links, optionele tagline rechts |
 | 2 | Press bar | `SHOW_PRESS_BAR` | "Featured in" + 3–5 media logo's |
-| 3 | Hero | `SHOW_HERO` | Eyebrow label + (gradient) H1 + groet + intro + optionele image |
+| 3 | Hero | `SHOW_HERO` | Eyebrow + (gradient) H1 + groet + intro + optionele image |
 | 4 | Stats | `SHOW_STATS` | 3-up KPI row (huge numbers + labels) |
 | 5 | Manifesto | `SHOW_MANIFESTO` | Oversized gradient pull-quote met attributie |
-| 6 | Content | `SHOW_CONTENT` | Numbered editorial paragraphs (repeatable) |
-| 7 | Case study | `SHOW_CASE_STUDY` | Cover image + metric pills + CTA link |
-| 8 | Quote | `SHOW_QUOTE` | Klassiek testimonial blok met paars accent |
-| 9 | CTA | `SHOW_CTA` | Bulletproof primary button (VML voor Outlook) |
-| 10 | Articles | `SHOW_ARTICLES` | 3-column newsletter roundup |
-| 11 | Services | `SHOW_SERVICES` | 2×2 service grid met icons |
-| 12 | Team | `SHOW_TEAM` | Team spotlight met ronde avatars |
-| 13 | Event | `SHOW_EVENT` | Webinar/talk card met datum-pijl + RSVP |
-| 14 | Logo wall | `SHOW_LOGO_WALL` | "Trusted by" client logo strip |
-| 15 | Image | `SHOW_IMAGE` | Full-width image + caption |
-| 16 | Two-column | `SHOW_TWO_COLUMN` | Twee features naast elkaar (stackt mobile) |
-| 17 | Divider | `SHOW_DIVIDER` | Dunne lijn |
-| 18 | Signature | `SHOW_SIGNATURE` | Foto + naam + rol + optionele handgeschreven sig |
-| 19 | Footer links | `SHOW_FOOTER_LINKS` | Multi-column nav (Diensten / Bedrijf / Resources) |
-| 20 | Footer | `SHOW_FOOTER` | Bedrijf, adres, socials, unsubscribe, copyright |
+| 6 | **Steps** | `SHOW_STEPS` | Genummerde timeline van proces-stappen |
+| 7 | Content | `SHOW_CONTENT` | Numbered editorial paragraphs (repeatable) |
+| 8 | Case study | `SHOW_CASE_STUDY` | Cover image + metric pills + CTA link |
+| 9 | **Spotlight** | `SHOW_SPOTLIGHT` | Gold-accent prominent callout met CTA |
+| 10 | Quote | `SHOW_QUOTE` | Klassiek testimonial blok met paars accent |
+| 11 | CTA | `SHOW_CTA` | Bulletproof primary button (VML voor Outlook) |
+| 12 | **Video** | `SHOW_VIDEO` | Thumbnail met play-button overlay |
+| 13 | Articles | `SHOW_ARTICLES` | 3-column newsletter roundup |
+| 14 | Services | `SHOW_SERVICES` | 2×2 service grid met icons |
+| 15 | Team | `SHOW_TEAM` | Team spotlight met ronde avatars |
+| 16 | Event | `SHOW_EVENT` | Webinar/talk card met datum-pijl + RSVP |
+| 17 | Logo wall | `SHOW_LOGO_WALL` | "Trusted by" client logo strip |
+| 18 | Image | `SHOW_IMAGE` | Full-width image + caption |
+| 19 | Two-column | `SHOW_TWO_COLUMN` | Twee features naast elkaar (stackt mobile) |
+| 20 | Divider | `SHOW_DIVIDER` | Dunne lijn |
+| 21 | Signature | `SHOW_SIGNATURE` | Foto + naam + rol + optionele handgeschreven sig |
+| 22 | Footer links | `SHOW_FOOTER_LINKS` | Multi-column nav (Diensten / Bedrijf / Resources) |
+| 23 | Footer | `SHOW_FOOTER` | Bedrijf, adres, socials, unsubscribe, copyright |
 
 ## Editor — workflow
 
 `editor.html` is een complete in-browser editor:
-- **Live preview** rechts (desktop + mobile switch)
-- **Code tab** met copy-button
+- **Inbox-preview mockup** bovenin: zie sender, onderwerp en preheader
+  zoals ze in Gmail/Apple Mail zichtbaar zijn voordat je de mail opent
+- **Live preview** rechts met desktop/mobile switch
+- **Code tab** met copy-button (toont volledige bulletproof HTML)
 - **Download .html** voor offline gebruik
 - **Load sample** om alles direct gevuld te zien
-- **Persist** naar localStorage (refresh-safe)
-- Elke section heeft een **toggle** om hem aan/uit te zetten in de mail
-- Arrays (content blocks, stats, articles, services, team, links, logo's)
-  zijn vrij toe te voegen of te verwijderen
+- **Image thumbnails** verschijnen automatisch onder URL-velden zodra
+  je een geldige link plakt
+- **Character counters** op preheader (90), email title (70), CTA (28)
+  en promo strip (60) — kleurt geel bij 85%, rood boven limit
+- **↑/↓ reorder arrows** op elk repeatable item (content, stats,
+  articles, services, team, etc.)
+- **Module counter** in de topbar: "12 / 24 modules aan"
+- **Status dot** naast elke section title: paars als aan, grijs als uit
+- **Persist** naar localStorage — refresh-safe
+- Sneltoetsen:
+  - `⌘K` / `Ctrl+K` — Copy HTML
+  - `⌘D` / `Ctrl+D` — Download .html
+  - `⌘1` / `Ctrl+1` — Preview tab
+  - `⌘2` / `Ctrl+2` — Code tab
 
 ## Repeatable arrays — JSON formaat
 

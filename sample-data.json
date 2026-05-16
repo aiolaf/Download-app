@@ -2,6 +2,11 @@
   "EMAIL_TITLE": "NinA AI — De staat van AI in NL · Q2 2026",
   "PREHEADER": "Onze impact in cijfers + 3 nieuwe inzichten van het lab — open binnen 30 sec.",
 
+  "SHOW_PROMO_STRIP": true,
+  "PROMO_STRIP_TEXT": "<strong>Q2 Edition</strong> · State of AI Report nu beschikbaar",
+  "PROMO_STRIP_CTA_TEXT": "Download gratis",
+  "PROMO_STRIP_CTA_URL": "https://nina-ai.nl/report-q2-2026",
+
   "SHOW_HEADER": true,
   "LOGO_URL": "https://nina-ai.nl/logo.png",
   "LOGO_ALT": "NinA AI logo",
@@ -40,6 +45,17 @@
   "MANIFESTO_TEXT": "De winnaars van het volgende decennium worden niet bepaald door wie het meeste model traint, maar door wie ze het beste inzet.",
   "MANIFESTO_ATTRIBUTION": "Nina Smit, Founder",
 
+  "SHOW_STEPS": true,
+  "STEPS_EYEBROW": "ZO WERKEN WIJ",
+  "STEPS_HEADING": "Van eerste gesprek tot productie in 30 dagen",
+  "STEPS_SUBHEADING": "Vier stappen. Geen verrassingen. Vaste prijs.",
+  "STEPS": [
+    { "TITLE": "Strategie sprint (week 1)", "BODY": "We brengen je use cases, data en KPI's in kaart. Aan het einde: een roadmap met meetbare doelen." },
+    { "TITLE": "Build (week 2-3)", "BODY": "Onze engineers bouwen je eerste agent, geïntegreerd met je CRM en datawarehouse." },
+    { "TITLE": "Pilot (week 4)", "BODY": "Live met een controlegroep. We meten alles en passen aan op basis van real-world data." },
+    { "TITLE": "Schalen (vanaf maand 2)", "BODY": "Uitrol naar je hele organisatie + training van je team. Monitoring blijft staan." }
+  ],
+
   "SHOW_CONTENT": true,
   "CONTENT_NUMBERED": true,
   "CONTENT_BLOCKS": [
@@ -73,6 +89,13 @@
   "CASE_STUDY_CTA_TEXT": "Lees de volledige case",
   "CASE_STUDY_CTA_URL": "https://nina-ai.nl/cases/lumen",
 
+  "SHOW_SPOTLIGHT": true,
+  "SPOTLIGHT_LABEL": "EDITOR'S PICK",
+  "SPOTLIGHT_TITLE": "Onze State of AI Report 2026 — gratis voor jou",
+  "SPOTLIGHT_BODY": "47 pagina's data, gebaseerd op interviews met <strong>200+ Nederlandse mid-market bedrijven</strong>. Welke AI-tools werken écht, wat ze kosten en wat ze opleveren. Geen marketing-fluff.",
+  "SPOTLIGHT_CTA_TEXT": "Download het rapport",
+  "SPOTLIGHT_CTA_URL": "https://nina-ai.nl/report-q2-2026",
+
   "SHOW_QUOTE": true,
   "QUOTE_TEXT": "NinA leverde wat drie andere bureaus in een jaar niet voor elkaar kregen — in zes weken. Dit is het meest serieuze AI-team in Nederland.",
   "QUOTE_AUTHOR": "Mark de Vries, COO Lumen B.V.",
@@ -81,6 +104,14 @@
   "CTA_TEXT": "Plan een strategiegesprek",
   "CTA_URL": "https://nina-ai.nl/contact",
   "CTA_SUBTEXT": "30 minuten · gratis · geen verplichtingen",
+
+  "SHOW_VIDEO": true,
+  "VIDEO_EYEBROW": "WATCH · 3 MIN",
+  "VIDEO_TITLE": "Hoe Lumen 40 uur per week bespaarde — in 3 minuten",
+  "VIDEO_URL": "https://nina-ai.nl/video/lumen-case",
+  "VIDEO_THUMBNAIL_URL": "https://via.placeholder.com/536x300/151828/9952e0?text=NinA+%C3%97+Lumen+%E2%96%B6",
+  "VIDEO_THUMBNAIL_ALT": "Video thumbnail: Nina interviews Lumen's COO",
+  "VIDEO_CAPTION": "Geen formele case study — een eerlijk gesprek met de COO van Lumen.",
 
   "SHOW_ARTICLES": true,
   "ARTICLES_EYEBROW": "VERS UIT HET LAB",

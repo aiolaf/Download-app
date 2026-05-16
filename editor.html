@@ -296,19 +296,152 @@
       overflow: auto;
       padding: 24px;
       display: flex;
-      justify-content: center;
-      align-items: flex-start;
+      flex-direction: column;
+      align-items: center;
     }
-    .preview-frame {
+    .preview-inner {
       width: 100%;
       max-width: 600px;
+      transition: max-width 0.2s ease;
+    }
+    .preview-inner.mobile { max-width: 380px; }
+
+    /* Inbox preview mockup — sender / subject / preheader */
+    .inbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px 12px 0 0;
+      border-bottom: none;
+      font-size: 13px;
+    }
+    .inbox-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .inbox-text { flex: 1; min-width: 0; }
+    .inbox-sender {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .inbox-from { font-weight: 600; color: var(--text); }
+    .inbox-time { color: var(--muted); font-size: 11px; white-space: nowrap; }
+    .inbox-subject {
+      color: var(--text);
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-weight: 500;
+    }
+    .inbox-preview-text {
+      color: var(--muted);
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .preview-frame {
+      width: 100%;
       min-height: 600px;
       background: #fff;
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-top: none;
+      border-radius: 0 0 12px 12px;
       box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      display: block;
     }
-    .preview-frame.mobile { max-width: 380px; }
+
+    /* Image thumbnail under URL fields */
+    .img-thumb {
+      margin-top: 6px;
+      display: block;
+      max-width: 100%;
+      max-height: 80px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      object-fit: contain;
+    }
+
+    /* Character counter */
+    .char-count {
+      display: flex;
+      justify-content: flex-end;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+    .char-count.over { color: var(--danger); font-weight: 600; }
+    .char-count.near { color: #fde68b; }
+
+    /* Reorder arrow buttons */
+    .reorder-btns {
+      display: inline-flex;
+      gap: 2px;
+      margin-right: 6px;
+    }
+    .reorder-btns button {
+      padding: 2px 6px;
+      font-size: 11px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .reorder-btns button:hover:not(:disabled) {
+      color: var(--accent-light);
+      border-color: var(--accent);
+    }
+    .reorder-btns button:disabled { opacity: 0.3; cursor: not-allowed; }
+
+    /* Module status indicator next to section title */
+    .status-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--border);
+      margin-left: 8px;
+      flex-shrink: 0;
+    }
+    .status-dot.on {
+      background: var(--accent);
+      box-shadow: 0 0 6px var(--accent);
+    }
+
+    .modules-counter {
+      color: var(--muted);
+      font-size: 12px;
+      margin-right: 8px;
+    }
+    .modules-counter strong { color: var(--accent-light); }
+
+    /* Keyboard shortcut hints */
+    kbd {
+      display: inline-block;
+      padding: 1px 5px;
+      font-family: inherit;
+      font-size: 10px;
+      color: var(--muted);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      margin: 0 1px;
+    }
 
     .code-wrap {
       flex: 1;
@@ -376,10 +509,11 @@
       <span>NinA AI <small>Email Editor</small></span>
     </div>
     <div class="topbar-actions">
+      <span class="modules-counter" id="modules-counter"></span>
       <button id="btn-sample" class="ghost">Load sample</button>
       <button id="btn-clear" class="ghost">Clear all</button>
-      <button id="btn-download" class="ghost">Download .html</button>
-      <button id="btn-copy" class="primary">Copy HTML</button>
+      <button id="btn-download" class="ghost">Download <kbd>⌘D</kbd></button>
+      <button id="btn-copy" class="primary">Copy HTML <kbd style="color:#fff;border-color:rgba(255,255,255,0.3);">⌘K</kbd></button>
     </div>
   </div>
 
@@ -406,7 +540,21 @@
 
       <div class="pane active" data-pane="preview">
         <div class="preview-wrap">
-          <iframe class="preview-frame" id="preview-frame" title="Email preview"></iframe>
+          <div class="preview-inner" id="preview-inner">
+            <!-- Fake inbox row showing sender, subject, preheader -->
+            <div class="inbox-row">
+              <div class="inbox-avatar" id="inbox-avatar">N</div>
+              <div class="inbox-text">
+                <div class="inbox-sender">
+                  <span class="inbox-from" id="inbox-from">NinA AI</span>
+                  <span class="inbox-time">nu</span>
+                </div>
+                <div class="inbox-subject" id="inbox-subject">—</div>
+                <div class="inbox-preview-text" id="inbox-preview-text">—</div>
+              </div>
+            </div>
+            <iframe class="preview-frame" id="preview-frame" title="Email preview"></iframe>
+          </div>
         </div>
       </div>
 
@@ -428,7 +576,35 @@
      SCHEMA — drives the dynamically rendered form.
      Each section maps directly to a module in src/template.mjml.
      =========================================================== */
+  /* Fields with maxLength get an inline counter under the input. */
+  const CHAR_LIMITS = {
+    PREHEADER: 90,
+    EMAIL_TITLE: 70,
+    HERO_TITLE: 80,
+    CTA_TEXT: 28,
+    PROMO_STRIP_TEXT: 60,
+  };
+
+  /* These field-keys render an image thumbnail underneath when filled.
+     Matches keys ending with one of these suffixes. */
+  const IMAGE_KEY_SUFFIXES = ['_URL', '_IMAGE_URL', '_PHOTO_URL', '_THUMBNAIL_URL'];
+  const IMAGE_KEY_NEEDLES  = ['IMAGE', 'LOGO', 'PHOTO', 'ICON', 'THUMBNAIL'];
+  function isImageField(f) {
+    if (f.type !== 'url') return false;
+    return IMAGE_KEY_NEEDLES.some(n => f.key.indexOf(n) !== -1);
+  }
+
   const SCHEMA = [
+    {
+      id: 'promo',
+      title: 'Promo strip (above header)',
+      toggleKey: 'SHOW_PROMO_STRIP',
+      fields: [
+        { key: 'PROMO_STRIP_TEXT', label: 'Tekst (HTML ok)', type: 'text', hint: 'bv. "<strong>Q2 Edition</strong> · Report nu live"' },
+        { key: 'PROMO_STRIP_CTA_TEXT', label: 'Link tekst', type: 'text' },
+        { key: 'PROMO_STRIP_CTA_URL', label: 'Link URL', type: 'url' },
+      ],
+    },
     {
       id: 'meta',
       title: 'Email meta',
@@ -508,6 +684,24 @@
       ],
     },
     {
+      id: 'steps',
+      title: 'Steps / process timeline',
+      toggleKey: 'SHOW_STEPS',
+      fields: [
+        { key: 'STEPS_EYEBROW', label: 'Eyebrow', type: 'text' },
+        { key: 'STEPS_HEADING', label: 'Heading', type: 'text' },
+        { key: 'STEPS_SUBHEADING', label: 'Subheading', type: 'text' },
+      ],
+      repeat: {
+        key: 'STEPS',
+        itemLabel: 'Stap',
+        fields: [
+          { key: 'TITLE', label: 'Titel', type: 'text' },
+          { key: 'BODY', label: 'Beschrijving', type: 'textarea' },
+        ],
+      },
+    },
+    {
       id: 'content',
       title: 'Content blokken',
       toggleKey: 'SHOW_CONTENT',
@@ -547,6 +741,18 @@
       },
     },
     {
+      id: 'spotlight',
+      title: 'Spotlight callout (gold accent)',
+      toggleKey: 'SHOW_SPOTLIGHT',
+      fields: [
+        { key: 'SPOTLIGHT_LABEL', label: 'Label', type: 'text', hint: 'bv. "EDITOR\'S PICK"' },
+        { key: 'SPOTLIGHT_TITLE', label: 'Titel', type: 'text' },
+        { key: 'SPOTLIGHT_BODY', label: 'Tekst (HTML ok)', type: 'textarea' },
+        { key: 'SPOTLIGHT_CTA_TEXT', label: 'Button tekst', type: 'text' },
+        { key: 'SPOTLIGHT_CTA_URL', label: 'Button URL', type: 'url' },
+      ],
+    },
+    {
       id: 'quote',
       title: 'Quote / testimonial',
       toggleKey: 'SHOW_QUOTE',
@@ -563,6 +769,19 @@
         { key: 'CTA_TEXT', label: 'Button tekst', type: 'text' },
         { key: 'CTA_URL', label: 'Button URL', type: 'url' },
         { key: 'CTA_SUBTEXT', label: 'Subtekst (optioneel)', type: 'text' },
+      ],
+    },
+    {
+      id: 'video',
+      title: 'Video thumbnail',
+      toggleKey: 'SHOW_VIDEO',
+      fields: [
+        { key: 'VIDEO_EYEBROW', label: 'Eyebrow (bv. "WATCH · 3 MIN")', type: 'text' },
+        { key: 'VIDEO_TITLE', label: 'Titel', type: 'text' },
+        { key: 'VIDEO_URL', label: 'Video URL (waar de play-button heen leidt)', type: 'url' },
+        { key: 'VIDEO_THUMBNAIL_URL', label: 'Thumbnail URL', type: 'url' },
+        { key: 'VIDEO_THUMBNAIL_ALT', label: 'Thumbnail alt', type: 'text' },
+        { key: 'VIDEO_CAPTION', label: 'Onderschrift', type: 'text' },
       ],
     },
     {
@@ -776,6 +995,9 @@
       const $title = el('div', { class: 'section-title' });
       $title.appendChild(el('span', { class: 'num' }, String(idx + 1)));
       $title.appendChild(el('span', {}, sec.title));
+      if (sec.toggleKey) {
+        $title.appendChild(el('span', { class: 'status-dot ' + (isToggled ? 'on' : '') }));
+      }
       $head.appendChild($title);
 
       const $right = el('div', { style: 'display:flex;align-items:center;gap:10px;' });
@@ -908,12 +1130,46 @@
         $input = el('input', { type: f.type === 'url' ? 'url' : 'text' });
         $input.value = value;
       }
+      $field.appendChild($input);
+
+      // Character counter (when defined for this key)
+      const limit = CHAR_LIMITS[f.key];
+      const $count = limit ? el('div', { class: 'char-count' }) : null;
+      const updateCount = () => {
+        if (!$count) return;
+        const len = $input.value.length;
+        $count.textContent = len + ' / ' + limit;
+        $count.classList.toggle('over', len > limit);
+        $count.classList.toggle('near', len > limit * 0.85 && len <= limit);
+      };
+      if ($count) { $field.appendChild($count); updateCount(); }
+
+      // Image thumbnail (only for image-like URL fields)
+      const $thumb = isImageField(f) ? el('img', { class: 'img-thumb', alt: '' }) : null;
+      const updateThumb = () => {
+        if (!$thumb) return;
+        const v = $input.value.trim();
+        if (v && /^(https?:|data:)/.test(v)) {
+          $thumb.src = v;
+          $thumb.style.display = 'block';
+        } else {
+          $thumb.removeAttribute('src');
+          $thumb.style.display = 'none';
+        }
+      };
+      if ($thumb) {
+        $field.appendChild($thumb);
+        updateThumb();
+        $thumb.onerror = () => { $thumb.style.display = 'none'; };
+      }
+
       $input.addEventListener('input', () => {
         target[f.key] = $input.value;
         saveState();
+        updateCount();
+        updateThumb();
         renderPreview();
       });
-      $field.appendChild($input);
     }
 
     if (f.hint) $field.appendChild(el('div', { class: 'hint' }, f.hint));
@@ -923,7 +1179,20 @@
   function renderRepeatItem(repeatDef, arrKey, idx) {
     const $wrap = el('div', { class: 'repeat-item' });
     const $head = el('div', { class: 'repeat-item-head' });
-    $head.appendChild(el('span', {}, repeatDef.itemLabel + ' ' + (idx + 1)));
+
+    const $left = el('div', { style: 'display:flex;align-items:center;' });
+    const $reorder = el('div', { class: 'reorder-btns' });
+    const $up = el('button', { type: 'button', title: 'Omhoog' }, '↑');
+    const $down = el('button', { type: 'button', title: 'Omlaag' }, '↓');
+    if (idx === 0) $up.disabled = true;
+    if (idx === state[arrKey].length - 1) $down.disabled = true;
+    $up.addEventListener('click', () => moveItem(arrKey, idx, -1));
+    $down.addEventListener('click', () => moveItem(arrKey, idx, +1));
+    $reorder.appendChild($up); $reorder.appendChild($down);
+    $left.appendChild($reorder);
+    $left.appendChild(el('span', {}, repeatDef.itemLabel + ' ' + (idx + 1)));
+    $head.appendChild($left);
+
     const $rm = el('button', { class: 'danger ghost', type: 'button' }, 'Verwijder');
     $rm.addEventListener('click', () => {
       state[arrKey].splice(idx, 1);
@@ -938,6 +1207,16 @@
       $wrap.appendChild(renderField(f, state[arrKey][idx]));
     });
     return $wrap;
+  }
+
+  function moveItem(arrKey, idx, delta) {
+    const arr = state[arrKey];
+    const j = idx + delta;
+    if (j < 0 || j >= arr.length) return;
+    const tmp = arr[idx]; arr[idx] = arr[j]; arr[j] = tmp;
+    saveState();
+    renderForm();
+    renderPreview();
   }
 
   /* ===========================================================
@@ -955,6 +1234,28 @@
     }
     previewFrame.srcdoc = renderedHtml;
     codeView.textContent = renderedHtml;
+    syncInboxRow();
+    syncModuleCounter();
+  }
+
+  function syncInboxRow() {
+    const from = state.FOOTER_COMPANY || 'NinA AI';
+    const subject = state.EMAIL_TITLE || '(geen onderwerp)';
+    const preheader = state.PREHEADER || '';
+    document.getElementById('inbox-from').textContent = from;
+    document.getElementById('inbox-subject').textContent = subject;
+    document.getElementById('inbox-preview-text').textContent = preheader;
+    document.getElementById('inbox-avatar').textContent =
+      (from.trim()[0] || 'N').toUpperCase();
+  }
+
+  function syncModuleCounter() {
+    let total = 0, on = 0;
+    SCHEMA.forEach(s => {
+      if (s.toggleKey) { total++; if (state[s.toggleKey]) on++; }
+    });
+    document.getElementById('modules-counter').innerHTML =
+      '<strong>' + on + '</strong> / ' + total + ' modules aan';
   }
 
   /* ===========================================================
@@ -974,8 +1275,31 @@
     d.addEventListener('click', () => {
       document.querySelectorAll('.device').forEach(x => x.classList.remove('active'));
       d.classList.add('active');
-      previewFrame.classList.toggle('mobile', d.dataset.device === 'mobile');
+      document.getElementById('preview-inner')
+        .classList.toggle('mobile', d.dataset.device === 'mobile');
     });
+  });
+
+  /* Keyboard shortcuts */
+  document.addEventListener('keydown', (e) => {
+    const mod = e.metaKey || e.ctrlKey;
+    if (!mod) return;
+    // Skip when user is typing in inputs/textareas
+    const tag = (document.activeElement && document.activeElement.tagName) || '';
+    const inField = tag === 'INPUT' || tag === 'TEXTAREA';
+    if (e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      copyHtml();
+    } else if (e.key.toLowerCase() === 'd' && !inField) {
+      e.preventDefault();
+      document.getElementById('btn-download').click();
+    } else if (e.key === '1' && !inField) {
+      e.preventDefault();
+      document.querySelector('.tab[data-tab="preview"]').click();
+    } else if (e.key === '2' && !inField) {
+      e.preventDefault();
+      document.querySelector('.tab[data-tab="code"]').click();
+    }
   });
 
   /* ===========================================================

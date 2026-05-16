@@ -33,9 +33,11 @@
     
     <style type="text/css">
       @media only screen and (min-width:480px) {
-        .mj-column-per-60 { width:60% !important; max-width: 60%; }
+        .mj-column-per-100 { width:100% !important; max-width: 100%; }
+.mj-column-per-60 { width:60% !important; max-width: 60%; }
 .mj-column-per-40 { width:40% !important; max-width: 40%; }
-.mj-column-per-100 { width:100% !important; max-width: 100%; }
+.mj-column-per-15 { width:15% !important; max-width: 15%; }
+.mj-column-per-85 { width:85% !important; max-width: 85%; }
 .mj-column-per-50 { width:50% !important; max-width: 50%; }
 .mj-column-per-30 { width:30% !important; max-width: 30%; }
 .mj-column-per-70 { width:70% !important; max-width: 70%; }
@@ -44,9 +46,11 @@
       }
     </style>
     <style media="screen and (min-width:480px)">
-      .moz-text-html .mj-column-per-60 { width:60% !important; max-width: 60%; }
+      .moz-text-html .mj-column-per-100 { width:100% !important; max-width: 100%; }
+.moz-text-html .mj-column-per-60 { width:60% !important; max-width: 60%; }
 .moz-text-html .mj-column-per-40 { width:40% !important; max-width: 40%; }
-.moz-text-html .mj-column-per-100 { width:100% !important; max-width: 100%; }
+.moz-text-html .mj-column-per-15 { width:15% !important; max-width: 15%; }
+.moz-text-html .mj-column-per-85 { width:85% !important; max-width: 85%; }
 .moz-text-html .mj-column-per-50 { width:50% !important; max-width: 50%; }
 .moz-text-html .mj-column-per-30 { width:30% !important; max-width: 30%; }
 .moz-text-html .mj-column-per-70 { width:70% !important; max-width: 70%; }
@@ -167,7 +171,54 @@
   
     
       <div aria-label="{{EMAIL_TITLE}}" aria-roledescription="email" class="body-bg" style="background-color:#0c0e18;" role="article" lang="und" dir="auto">
-        {{#if SHOW_HEADER}}
+        {{#if SHOW_PROMO_STRIP}}
+      
+      <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="pad-mobile-outlook" role="presentation" style="width:600px;" width="600" bgcolor="#9952e0" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div class="pad-mobile" style="background:#9952e0;background-color:#9952e0;margin:0px auto;max-width:600px;">
+        
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#9952e0;background-color:#9952e0;width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:10px 16px;text-align:center;">
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:568px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="center" style="font-size:0px;padding:0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;font-weight:600;letter-spacing:0.3px;line-height:1.4;text-align:center;color:#ffffff;">{{{PROMO_STRIP_TEXT}}}
+          <mj-raw>{{#if PROMO_STRIP_CTA_URL}}</mj-raw>
+          &nbsp;&nbsp;<a href="{{PROMO_STRIP_CTA_URL}}" style="color: #fde68b; text-decoration: underline; font-weight: 700;">
+            {{PROMO_STRIP_CTA_TEXT}} &rarr;
+          </a>
+          <mj-raw>{{/if}}</mj-raw></div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><![endif]-->
+    
+    {{/if}}{{#if SHOW_HEADER}}
       
       <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" bgcolor="#0c0e18" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
     
@@ -610,7 +661,157 @@
       
       <!--[if mso | IE]></td></tr></table><![endif]-->
     
-    {{/if}}{{#if SHOW_CONTENT}}{{#each CONTENT_BLOCKS}}
+    {{/if}}{{#if SHOW_STEPS}}
+      
+      <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="pad-mobile-outlook" role="presentation" style="width:600px;" width="600" bgcolor="#0c0e18" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div class="pad-mobile" style="background:#0c0e18;background-color:#0c0e18;margin:0px auto;max-width:600px;">
+        
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#0c0e18;background-color:#0c0e18;width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:40px 32px 12px 32px;text-align:center;">
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:536px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+        <tbody>
+          {{#if STEPS_EYEBROW}}
+              <tr>
+                <td align="center" class="eyebrow text-accent" style="font-size:0px;padding:0 0 10px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;line-height:1.5;text-align:center;color:#bf80ff;">{{STEPS_EYEBROW}}</div>
+    
+                </td>
+              </tr>
+            {{/if}}
+              <tr>
+                <td align="center" class="text-main h2-mobile" style="font-size:0px;padding:0 0 6px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:22px;font-weight:600;line-height:1.25;text-align:center;color:#f2f2f2;">{{STEPS_HEADING}}</div>
+    
+                </td>
+              </tr>
+            {{#if STEPS_SUBHEADING}}
+              <tr>
+                <td align="center" class="text-muted" style="font-size:0px;padding:0 0 24px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:14px;line-height:1.5;text-align:center;color:#a6a6a6;">{{STEPS_SUBHEADING}}</div>
+    
+                </td>
+              </tr>
+            {{/if}}
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><![endif]-->
+    
+    {{#each STEPS}}
+      
+      <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="pad-mobile-outlook" role="presentation" style="width:600px;" width="600" bgcolor="#0c0e18" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div class="pad-mobile" style="background:#0c0e18;background-color:#0c0e18;margin:0px auto;max-width:600px;">
+        
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#0c0e18;background-color:#0c0e18;width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:0 32px 14px 32px;text-align:center;">
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:80.4px;" ><![endif]-->
+            
+      <div class="mj-column-per-15 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+        <tbody>
+          <tr>
+            <td style="vertical-align:top;padding:0;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="center" style="font-size:0px;padding:0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:16px;line-height:1.5;text-align:center;color:#f2f2f2;"><span style="display:inline-block;width:42px;height:42px;line-height:42px;text-align:center;border-radius:50%;background:linear-gradient(135deg,#9952e0,#bf80ff);color:#fff;font-weight:700;font-size:16px;">
+            {{add @index 1}}
+          </span></div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td><td class="" style="vertical-align:top;width:455.6px;" ><![endif]-->
+            
+      <div class="mj-column-per-85 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+        <tbody>
+          <tr>
+            <td style="vertical-align:top;padding:0 0 0 6px;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="left" class="text-main" style="font-size:0px;padding:6px 0 4px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:17px;font-weight:600;line-height:1.3;text-align:left;color:#f2f2f2;">{{this.TITLE}}</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="left" class="text-muted" style="font-size:0px;padding:0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:14px;line-height:1.5;text-align:left;color:#a6a6a6;">{{this.BODY}}</div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><![endif]-->
+    
+    {{/each}}{{/if}}{{#if SHOW_CONTENT}}{{#each CONTENT_BLOCKS}}
       
       <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="pad-mobile-outlook" role="presentation" style="width:600px;" width="600" bgcolor="#0c0e18" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
     
@@ -766,6 +967,84 @@
       
       <!--[if mso | IE]></td></tr></table><![endif]-->
     
+    {{/if}}{{#if SHOW_SPOTLIGHT}}
+      
+      <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="pad-mobile-outlook" role="presentation" style="width:600px;" width="600" bgcolor="#0c0e18" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div class="pad-mobile" style="background:#0c0e18;background-color:#0c0e18;margin:0px auto;max-width:600px;">
+        
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#0c0e18;background-color:#0c0e18;width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:40px 32px 8px 32px;text-align:center;">
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="card-bg-outlook" style="vertical-align:top;width:536px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix card-bg" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%" style="border-collapse:separate;">
+        <tbody>
+          <tr>
+            <td style="background-color:#151828;border:1px solid #fde68b;border-radius:14px;vertical-align:top;border-collapse:separate;padding:28px 26px;">
+              
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
+        <tbody>
+          
+              <tr>
+                <td align="left" class="text-gold" style="font-size:0px;padding:0 0 10px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;line-height:1.5;text-align:left;color:#fde68b;">★ &nbsp; {{SPOTLIGHT_LABEL}}</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="left" class="text-main h2-mobile" style="font-size:0px;padding:0 0 10px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:22px;font-weight:600;line-height:1.25;text-align:left;color:#f2f2f2;">{{SPOTLIGHT_TITLE}}</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td align="left" class="text-main" style="font-size:0px;padding:0 0 16px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:15px;line-height:1.55;text-align:left;color:#f2f2f2;">{{{SPOTLIGHT_BODY}}}</div>
+    
+                </td>
+              </tr>
+            {{#if SPOTLIGHT_CTA_URL}}
+              <tr>
+                <td align="left" style="font-size:0px;padding:0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:16px;line-height:1.5;text-align:left;color:#f2f2f2;"><a href="{{SPOTLIGHT_CTA_URL}}" style="display: inline-block; background: #fde68b; color: #0c0e18; font-weight: 700; font-size: 14px; padding: 10px 18px; border-radius: 6px; text-decoration: none; letter-spacing: 0.3px;">
+            {{SPOTLIGHT_CTA_TEXT}} &rarr;
+          </a></div>
+    
+                </td>
+              </tr>
+            {{/if}}
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><![endif]-->
+    
     {{/if}}{{#if SHOW_QUOTE}}
       
       <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="pad-mobile-outlook" role="presentation" style="width:600px;" width="600" bgcolor="#0c0e18" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
@@ -866,6 +1145,76 @@
                 <td align="center" class="text-muted" style="font-size:0px;padding:14px 0 0 0;word-break:break-word;">
                   
       <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:14px;line-height:1.5;text-align:center;color:#a6a6a6;">{{CTA_SUBTEXT}}</div>
+    
+                </td>
+              </tr>
+            {{/if}}
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><![endif]-->
+    
+    {{/if}}{{#if SHOW_VIDEO}}
+      
+      <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="pad-mobile-outlook" role="presentation" style="width:600px;" width="600" bgcolor="#0c0e18" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div class="pad-mobile" style="background:#0c0e18;background-color:#0c0e18;margin:0px auto;max-width:600px;">
+        
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#0c0e18;background-color:#0c0e18;width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:40px 32px 8px 32px;text-align:center;">
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:536px;" ><![endif]-->
+            
+      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+        
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+        <tbody>
+          {{#if VIDEO_EYEBROW}}
+              <tr>
+                <td align="center" class="eyebrow text-accent" style="font-size:0px;padding:0 0 10px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;line-height:1.5;text-align:center;color:#bf80ff;">{{VIDEO_EYEBROW}}</div>
+    
+                </td>
+              </tr>
+            {{/if}}{{#if VIDEO_TITLE}}
+              <tr>
+                <td align="center" class="text-main h2-mobile" style="font-size:0px;padding:0 0 18px 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:22px;font-weight:600;line-height:1.25;text-align:center;color:#f2f2f2;">{{VIDEO_TITLE}}</div>
+    
+                </td>
+              </tr>
+            {{/if}}
+              <tr>
+                <td align="left" style="font-size:0px;padding:0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:16px;line-height:1.5;text-align:left;color:#f2f2f2;"><a href="{{VIDEO_URL}}" style="color: #9952e0; display: block; position: relative; line-height: 0; text-decoration: none; border-radius: 10px; overflow: hidden;">
+            <img src="{{VIDEO_THUMBNAIL_URL}}" alt="{{VIDEO_THUMBNAIL_ALT}}" width="536" style="display:block;width:100%;height:auto;border-radius:10px;border:0;">
+            <!--[if !mso]><!--><span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:72px;height:72px;line-height:72px;border-radius:50%;background:rgba(12,14,24,0.78);color:#fff;font-size:24px;text-align:center;border:2px solid #fff;"> &#9658;
+</span><!--<![endif]-->
+          </a></div>
+    
+                </td>
+              </tr>
+            {{#if VIDEO_CAPTION}}
+              <tr>
+                <td align="center" class="text-muted" style="font-size:0px;padding:12px 0 0 0;word-break:break-word;">
+                  
+      <div style="font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.5;text-align:center;color:#a6a6a6;">{{VIDEO_CAPTION}}</div>
     
                 </td>
               </tr>
