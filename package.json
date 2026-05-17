@@ -7,7 +7,8 @@
     "start": "node server/index.js",
     "dev": "nodemon server/index.js",
     "build:email": "node build.js",
-    "build:email:sample": "node build.js --data sample-data.json"
+    "build:email:sample": "node build.js --data sample-data.json",
+    "preview:email": "node scripts/preview.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

@@ -18,6 +18,31 @@ Mobile-first, dark-mode aware, en getest in alle gangbare clients.
 | `sample-data.json` | Dummy content die alle modules toont |
 | `editor.html` | Visuele in-browser editor — vul velden in, live preview + code |
 
+## Claude Code skill — laat Claude de email schrijven
+
+In deze repo zit een Claude Code-skill op `.claude/skills/nina-email/`.
+Wanneer je Claude Code gebruikt (CLI, web, of IDE-extension) op een
+checkout van deze repo, kun je gewoon zeggen:
+
+> "Schrijf een email aan onze enterprise prospects over de Lumen case"
+> "Maak een webinar invite voor 21 mei over AI for Enterprise"
+> "Draft een launch email voor onze State of AI report"
+
+Claude pakt de skill automatisch op, kiest de juiste modules, schrijft
+de copy in NL B2B-stijl (geen hype, concrete getallen, "je" niet "u"),
+schrijft een data JSON naar `data/<topic>.json`, draait
+`node build.js --data data/<topic>.json` en `node scripts/preview.js`,
+en stuurt je de PNG + HTML terug klaar om te plakken in je ESP.
+
+De skill includeert:
+- Module-presets per intent (case study / newsletter / launch / webinar /
+  outreach / re-engagement)
+- Voice rules (NL B2B do's en don'ts)
+- Sweet-spot lengtes per veld (subject 30-50, preheader 50-90 etc.)
+- Self-audit checklist voordat hij oplevert
+
+Geen ESP-koppeling — je krijgt de HTML, jij plakt en verstuurt zelf.
+
 ## Snel starten
 
 ```bash
